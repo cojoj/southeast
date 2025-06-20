@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 ---
 
 <html lang="pl">
@@ -11,8 +13,14 @@ import '../styles/global.css'
 		<title>Southeast Jiu-Jitsu</title>
 		<meta name="description" content="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania." />
 	</head>
-	<body class="bg-additional p-8">
-		<h1 class="text-4xl font-bold text-primary mb-4">Southeast Jiu-Jitsu</h1>
-		<p class="text-lg text-secondary">Brazylijskie Jiu-Jitsu w Krakowie</p>
+	<body class="bg-additional">
+		<Header currentLang="pl" />
+		<main class="pt-20 min-h-screen flex items-center justify-center">
+			<div class="text-center">
+				<h1 class="text-4xl font-bold text-primary mb-4">Southeast Jiu-Jitsu</h1>
+				<p class="text-lg text-secondary">Brazylijskie Jiu-Jitsu w Krakowie</p>
+			</div>
+		</main>
+		<Footer currentLang="pl" />
 	</body>
 </html>
