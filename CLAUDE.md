@@ -6,6 +6,7 @@ This is a multilingual website for **Southeast Jiu-Jitsu**, a Brazilian Jiu-Jits
 ## Technology Stack
 - **Framework**: Astro v5.10.0
 - **Language**: TypeScript (strict configuration)
+- **CSS Framework**: Tailwind CSS v4 (via Astro integration)
 - **Build Tool**: Astro's built-in build system
 - **Deployment**: Static site generation
 
@@ -29,9 +30,9 @@ This is a multilingual website for **Southeast Jiu-Jitsu**, a Brazilian Jiu-Jits
 
 ## Current State
 - Basic Astro minimal template setup
-- Single index page with placeholder content
-- No internationalization (i18n) configured yet
-- No styling framework configured
+- Multilingual pages (Polish/English) with placeholder content
+- No internationalization (i18n) routing configured yet
+- Tailwind CSS v4 configured and integrated
 - No components created yet
 
 ## Key Requirements for BJJ Gym Website
