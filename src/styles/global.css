@@ -52,4 +52,8 @@
 @theme {
   --font-sans: 'AreaNormal', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'AreaNormal', 'serif';
+  
+  --color-additional: #E8E7E6;
+  --color-primary: #BCC6D9;
+  --color-secondary: #353535;
 }
