@@ -57,3 +57,9 @@
   --color-primary: #BCC6D9;
   --color-secondary: #353535;
 }
+
+/* Custom underline spacing */
+.hover\:underline:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
