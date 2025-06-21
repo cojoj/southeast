@@ -19,19 +19,36 @@ const isPolish = currentLang === 'pl';
 
     <!-- Navigation Menu -->
     <nav class="hidden md:flex items-center space-x-8">
-      <a href={isPolish ? "/" : "/en"} class="text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Strona główna" : "Home"}
-      </a>
-      <a href={isPolish ? "/treningi" : "/en/training"} class="text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Treningi" : "Training"}
-      </a>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <!-- Training Dropdown -->
+      <div class="relative group">
+        <button class="flex items-center space-x-1 text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
+          <span>{isPolish ? "Treningi" : "Training"}</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 mt-2 w-48 bg-primary/95 backdrop-blur-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <a href={isPolish ? "/jiu-jitsu" : "/en/jiu-jitsu"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
+            Jiu-Jitsu
+          </a>
+          <a href={isPolish ? "/mma" : "/en/mma"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
+            MMA
+          </a>
+          <a href={isPolish ? "/kickboxing" : "/en/kickboxing"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
+            Kickboxing
+          </a>
+          <a href={isPolish ? "/dla-dzieci" : "/en/for-kids"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
+            {isPolish ? "Dla Dzieci" : "For Kids"}
+          </a>
+        </div>
+      </div>
+      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "Harmonogram" : "Schedule"}
       </a>
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <a href={isPolish ? "/o-nas" : "/en/about"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "O nas" : "About"}
       </a>
-      <a href={isPolish ? "/kontakt" : "/en/contact"} class="text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <a href={isPolish ? "/kontakt" : "/en/contact"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "Kontakt" : "Contact"}
       </a>
     </nav>
@@ -84,19 +101,33 @@ const isPolish = currentLang === 'pl';
   <!-- Mobile Menu -->
   <div class="md:hidden bg-primary/95 backdrop-blur-sm border-t border-white/10 hidden" id="mobile-menu">
     <nav class="container mx-auto px-4 py-4 space-y-4">
-      <a href={isPolish ? "/" : "/en"} class="block text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Strona główna" : "Home"}
-      </a>
-      <a href={isPolish ? "/treningi" : "/en/training"} class="block text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Treningi" : "Training"}
-      </a>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="block text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <!-- Training Section -->
+      <div class="space-y-2">
+        <div class="text-secondary font-semibold uppercase text-base tracking-wider">
+          {isPolish ? "Treningi" : "Training"}
+        </div>
+        <div class="pl-4 space-y-2">
+          <a href={isPolish ? "/jiu-jitsu" : "/en/jiu-jitsu"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
+            Jiu-Jitsu
+          </a>
+          <a href={isPolish ? "/mma" : "/en/mma"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
+            MMA
+          </a>
+          <a href={isPolish ? "/kickboxing" : "/en/kickboxing"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
+            Kickboxing
+          </a>
+          <a href={isPolish ? "/dla-dzieci" : "/en/for-kids"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
+            {isPolish ? "Dla Dzieci" : "For Kids"}
+          </a>
+        </div>
+      </div>
+      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "Harmonogram" : "Schedule"}
       </a>
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "O nas" : "About"}
       </a>
-      <a href={isPolish ? "/kontakt" : "/en/contact"} class="block text-secondary hover:text-white hover:underline transition-colors uppercase text-base font-normal tracking-wider">
+      <a href={isPolish ? "/kontakt" : "/en/contact"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
         {isPolish ? "Kontakt" : "Contact"}
       </a>
     </nav>
