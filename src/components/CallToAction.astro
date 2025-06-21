@@ -1,0 +1,183 @@
+---
+interface Props {
+  currentLang: 'pl' | 'en';
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    heading: "Dołącz do nas!",
+    description: "Poznaj nasze innowacyjne metody treningowe i trenuj Jiu-Jitsu, MMA i Kickboxing pod okiem trenerów z wieloletnim doświadczeniem!",
+    freeTraining: "Pierwszy darmowy trening",
+    buyMembership: "Kup karnet"
+  },
+  en: {
+    heading: "Join us!",
+    description: "Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced coaches!",
+    freeTraining: "First free training",
+    buyMembership: "Buy membership"
+  }
+};
+
+const text = content[currentLang];
+---
+
+<div class="call-to-action-container">
+  <div class="call-to-action-content">
+    <h2 class="call-to-action-heading">
+      {text.heading}
+    </h2>
+    
+    <p class="call-to-action-description">
+      {text.description}
+    </p>
+    
+    <div class="call-to-action-buttons">
+      <a 
+        href="https://southeastjiujitsu.wod.guru/rejestracja"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="call-to-action-button call-to-action-button-primary"
+      >
+        {text.freeTraining}
+      </a>
+      
+      <a 
+        href="https://southeastjiujitsu.wod.guru/wizytowka"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="call-to-action-button call-to-action-button-secondary"
+      >
+        {text.buyMembership}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .call-to-action-container {
+    position: absolute;
+    z-index: 10;
+    
+    /* Mobile: center bottom of hero section */
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 24rem;
+  }
+  
+  .call-to-action-content {
+    /* No background effects - pure text on image */
+    padding: 1.5rem;
+  }
+  
+  .call-to-action-heading {
+    font-size: 2rem;
+    font-weight: 200;
+    color: white;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .call-to-action-description {
+    font-size: 1rem;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 200;
+  }
+  
+  .call-to-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .call-to-action-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    border: none;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .call-to-action-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(188, 198, 217, 0.5);
+  }
+  
+  .call-to-action-button:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .call-to-action-button-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  .call-to-action-button-primary:hover {
+    background-color: rgba(188, 198, 217, 0.9);
+  }
+  
+  .call-to-action-button-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  
+  .call-to-action-button-secondary:hover {
+    background-color: rgba(53, 53, 53, 0.9);
+  }
+  
+  
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .call-to-action-container {
+      /* Desktop: left side center of hero section - 1/3 of screen width */
+      left: 2rem;
+      right: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      width: calc(33.333vw - 4rem);
+      max-width: none;
+    }
+    
+    .call-to-action-content {
+      padding: 3rem 2rem;
+      /* No background effects - pure text on image */
+    }
+    
+    .call-to-action-heading {
+      font-size: 3rem;
+      text-align: left;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+    
+    .call-to-action-description {
+      font-size: 1.25rem;
+      text-align: left;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+    
+    .call-to-action-button {
+      font-size: 1.125rem;
+      padding: 1.25rem 2.5rem;
+    }
+    
+    .call-to-action-buttons {
+      gap: 1rem;
+    }
+  }
+</style>
