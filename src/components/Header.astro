@@ -8,7 +8,7 @@ const { currentLang = 'pl' } = Astro.props;
 const isPolish = currentLang === 'pl';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-additional h-[75px]">
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary h-[75px]">
   <div class="container mx-auto px-4 h-full flex items-center justify-between">
     <!-- Logo -->
     <div class="flex items-center">
@@ -40,27 +40,27 @@ const isPolish = currentLang === 'pl';
     <div class="flex items-center space-x-3">
       <!-- Social Media Icons -->
       <div class="flex items-center space-x-3">
-        <a href="https://www.instagram.com/southeast.jiujitsu/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors duration-200">
-          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <a href="https://www.instagram.com/southeast.jiujitsu/" target="_blank" rel="noopener noreferrer" class="text-secondary transition-all duration-200">
+          <svg class="w-[22px] h-[22px] hover:stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
-        <a href="https://www.facebook.com/southeast.jiujitsu" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors duration-200">
-          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <a href="https://www.facebook.com/southeast.jiujitsu" target="_blank" rel="noopener noreferrer" class="text-secondary transition-all duration-200">
+          <svg class="w-[22px] h-[22px] hover:stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
       </div>
 
       <!-- Language Switcher -->
-      <div class="flex items-center space-x-1 text-sm font-normal">
-        <a href="/" class={`transition-colors duration-200 ${isPolish ? 'text-secondary font-semibold' : 'text-primary'}`}>
+      <div class="flex items-center space-x-1 text-sm text-secondary">
+        <a href="/" class={`transition-all duration-200 hover:font-semibold ${isPolish ? 'font-semibold' : 'font-normal'}`}>
           PL
         </a>
-        <span class="text-primary">|</span>
-        <a href="/en" class={`transition-colors duration-200 ${!isPolish ? 'text-secondary font-semibold' : 'text-primary'}`}>
+        <span>|</span>
+        <a href="/en" class={`transition-all duration-200 hover:font-semibold ${!isPolish ? 'font-semibold' : 'font-normal'}`}>
           EN
         </a>
       </div>
@@ -78,7 +78,7 @@ const isPolish = currentLang === 'pl';
   </div>
 
   <!-- Mobile Menu -->
-  <div class="lg:hidden bg-additional bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 hidden transition-all duration-300 ease-out" id="mobile-menu">
+  <div class="lg:hidden bg-primary bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 hidden transition-all duration-300 ease-out" id="mobile-menu">
     <nav class="container mx-auto px-4 py-6 space-y-6 mobile-menu">
       <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "O NAS" : "ABOUT"}
