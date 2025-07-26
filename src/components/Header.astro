@@ -8,127 +8,92 @@ const { currentLang = 'pl' } = Astro.props;
 const isPolish = currentLang === 'pl';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-primary">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<header class="fixed top-0 left-0 right-0 z-50 bg-additional h-[75px]">
+  <div class="container mx-auto px-4 h-full flex items-center justify-between">
     <!-- Logo -->
     <div class="flex items-center">
-      <a href={isPolish ? "/" : "/en"} class="text-secondary font-bold text-xl">
-        <img src="/logos/logo_black.svg" alt="Southeast Jiu-Jitsu" class="h-8 w-auto" />
+      <a href={isPolish ? "/" : "/en"} class="block">
+        <img src="/logos/logo_black.svg" alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" />
       </a>
     </div>
 
-    <!-- Navigation Menu -->
-    <nav class="hidden md:flex items-center space-x-8">
-      <!-- Training Dropdown -->
-      <div class="relative group">
-        <button class="flex items-center space-x-1 text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-          <span>{isPolish ? "Treningi" : "Training"}</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        <div class="absolute left-0 mt-2 w-48 bg-primary/95 backdrop-blur-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <a href={isPolish ? "/jiu-jitsu" : "/en/jiu-jitsu"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
-            Jiu-Jitsu
-          </a>
-          <a href={isPolish ? "/mma" : "/en/mma"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
-            MMA
-          </a>
-          <a href={isPolish ? "/kickboxing" : "/en/kickboxing"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
-            Kickboxing
-          </a>
-          <a href={isPolish ? "/dla-dzieci" : "/en/for-kids"} class="block px-4 py-3 text-secondary hover:text-white hover:bg-white/10 transition-colors uppercase text-sm font-normal tracking-wider">
-            {isPolish ? "Dla Dzieci" : "For Kids"}
-          </a>
-        </div>
-      </div>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Harmonogram" : "Schedule"}
+    <!-- Desktop Navigation Menu -->
+    <nav class="hidden lg:flex items-center space-x-10">
+      <a href={isPolish ? "/o-nas" : "/en/about"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        {isPolish ? "O NAS" : "ABOUT"}
       </a>
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "O nas" : "About"}
+      <a href={isPolish ? "/treningi" : "/en/training"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        {isPolish ? "TRENINGI" : "TRAINING"}
       </a>
-      <a href={isPolish ? "/kontakt" : "/en/contact"} class="text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Kontakt" : "Contact"}
+      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
+      </a>
+      <a href={isPolish ? "/karnety" : "/en/memberships"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        {isPolish ? "KARNETY" : "MEMBERSHIPS"}
+      </a>
+      <a href={isPolish ? "/moje-konto" : "/en/my-account"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        {isPolish ? "MOJE KONTO" : "MY ACCOUNT"}
       </a>
     </nav>
 
     <!-- Right Side: Social & Language -->
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-3">
       <!-- Social Media Icons -->
       <div class="flex items-center space-x-3">
-        <a href="https://www.instagram.com/southeast.jiujitsu/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-white hover:underline transition-colors">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        <a href="https://www.instagram.com/southeast.jiujitsu/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors duration-200">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
-        <a href="https://www.facebook.com/southeast.jiujitsu" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-white hover:underline transition-colors">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        <a href="https://www.facebook.com/southeast.jiujitsu" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors duration-200">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
       </div>
 
-      <!-- Language Dropdown -->
-      <div class="relative group">
-        <button class="flex items-center space-x-2 text-secondary hover:text-white transition-colors">
-          <span class="text-xl">{isPolish ? "🇵🇱" : "🇬🇧"}</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        <div class="absolute right-0 mt-2 w-32 bg-primary/95 backdrop-blur-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <a href="/" class="flex items-center space-x-2 px-4 py-2 text-secondary hover:text-white font-semibold">
-            <span class="text-lg">🇵🇱</span>
-            <span class="text-sm">Polski</span>
-          </a>
-          <a href="/en" class="flex items-center space-x-2 px-4 py-2 text-secondary hover:text-white font-semibold">
-            <span class="text-lg">🇬🇧</span>
-            <span class="text-sm">English</span>
-          </a>
-        </div>
+      <!-- Language Switcher -->
+      <div class="flex items-center space-x-1 text-sm font-normal">
+        <a href="/" class={`transition-colors duration-200 ${isPolish ? 'text-secondary font-semibold' : 'text-primary'}`}>
+          PL
+        </a>
+        <span class="text-primary">|</span>
+        <a href="/en" class={`transition-colors duration-200 ${!isPolish ? 'text-secondary font-semibold' : 'text-primary'}`}>
+          EN
+        </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-secondary hover:text-white transition-colors" id="mobile-menu-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      <button class="lg:hidden text-secondary hover:text-primary transition-colors duration-200 ml-3" id="mobile-menu-button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" id="hamburger-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" id="close-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div class="md:hidden bg-primary/95 backdrop-blur-sm border-t border-white/10 hidden" id="mobile-menu">
-    <nav class="container mx-auto px-4 py-4 space-y-4">
-      <!-- Training Section -->
-      <div class="space-y-2">
-        <div class="text-secondary font-semibold uppercase text-base tracking-wider">
-          {isPolish ? "Treningi" : "Training"}
-        </div>
-        <div class="pl-4 space-y-2">
-          <a href={isPolish ? "/jiu-jitsu" : "/en/jiu-jitsu"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
-            Jiu-Jitsu
-          </a>
-          <a href={isPolish ? "/mma" : "/en/mma"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
-            MMA
-          </a>
-          <a href={isPolish ? "/kickboxing" : "/en/kickboxing"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
-            Kickboxing
-          </a>
-          <a href={isPolish ? "/dla-dzieci" : "/en/for-kids"} class="block text-secondary hover:text-white transition-colors uppercase text-sm font-normal tracking-wider">
-            {isPolish ? "Dla Dzieci" : "For Kids"}
-          </a>
-        </div>
-      </div>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Harmonogram" : "Schedule"}
+  <div class="lg:hidden bg-additional bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 hidden transition-all duration-300 ease-out" id="mobile-menu">
+    <nav class="container mx-auto px-4 py-6 space-y-6 mobile-menu">
+      <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+        {isPolish ? "O NAS" : "ABOUT"}
       </a>
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "O nas" : "About"}
+      <a href={isPolish ? "/treningi" : "/en/training"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+        {isPolish ? "TRENINGI" : "TRAINING"}
       </a>
-      <a href={isPolish ? "/kontakt" : "/en/contact"} class="block text-secondary hover:text-white transition-colors uppercase text-base font-normal tracking-wider">
-        {isPolish ? "Kontakt" : "Contact"}
+      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+        {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
+      </a>
+      <a href={isPolish ? "/karnety" : "/en/memberships"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+        {isPolish ? "KARNETY" : "MEMBERSHIPS"}
+      </a>
+      <a href={isPolish ? "/moje-konto" : "/en/my-account"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3">
+        {isPolish ? "MOJE KONTO" : "MY ACCOUNT"}
       </a>
     </nav>
   </div>
@@ -137,8 +102,37 @@ const isPolish = currentLang === 'pl';
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
   
   mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    
+    if (isHidden) {
+      mobileMenu?.classList.remove('hidden');
+      hamburgerIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenu?.classList.add('opacity-100');
+      }, 10);
+    } else {
+      mobileMenu?.classList.remove('opacity-100');
+      hamburgerIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      setTimeout(() => {
+        mobileMenu?.classList.add('hidden');
+      }, 250);
+    }
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!mobileMenuButton?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+      if (!mobileMenu?.classList.contains('hidden')) {
+        mobileMenu?.classList.add('hidden');
+        hamburgerIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      }
+    }
   });
 </script>

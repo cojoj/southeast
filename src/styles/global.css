@@ -63,3 +63,19 @@
   text-decoration: underline;
   text-underline-offset: 6px;
 }
+
+/* Mobile responsive logo sizing */
+@media (max-width: 767px) {
+  .navbar-logo {
+    width: 140px !important;
+  }
+}
+
+/* Touch targets for mobile */
+@media (max-width: 1023px) {
+  .mobile-menu a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
