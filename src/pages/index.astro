@@ -22,62 +22,52 @@ import CallToAction from '../components/CallToAction.astro'
 				<!-- Background Image -->
 				<div 
 					class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-					style="background-image: url('/hero.jpg');"
+					style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
 				></div>
 				
-				<!-- Logo with Smooth Blur Effect -->
+				<!-- Dark Overlay for Contrast -->
+				<div class="absolute inset-0 bg-black/40"></div>
+				
+				<!-- Logo and Content -->
 				<div class="absolute inset-0 flex items-center justify-center">
-					<!-- Smooth Blur Background using CSS Mask -->
-					<div class="absolute inset-0 flex items-center justify-center">
-						<div 
-							class="w-[120vw] h-[120vh] backdrop-blur-xl"
-							style="
-								mask: radial-gradient(circle at center, 
-									rgba(0,0,0,1) 0%, 
-									rgba(0,0,0,0.95) 10%, 
-									rgba(0,0,0,0.85) 20%, 
-									rgba(0,0,0,0.7) 30%, 
-									rgba(0,0,0,0.5) 40%, 
-									rgba(0,0,0,0.3) 50%, 
-									rgba(0,0,0,0.15) 60%, 
-									rgba(0,0,0,0.05) 70%, 
-									rgba(0,0,0,0.01) 80%, 
-									transparent 90%
-								);
-								-webkit-mask: radial-gradient(circle at center, 
-									rgba(0,0,0,1) 0%, 
-									rgba(0,0,0,0.95) 10%, 
-									rgba(0,0,0,0.85) 20%, 
-									rgba(0,0,0,0.7) 30%, 
-									rgba(0,0,0,0.5) 40%, 
-									rgba(0,0,0,0.3) 50%, 
-									rgba(0,0,0,0.15) 60%, 
-									rgba(0,0,0,0.05) 70%, 
-									rgba(0,0,0,0.01) 80%, 
-									transparent 90%
-								);
-								background: radial-gradient(circle, rgba(188,198,217,0.1) 0%, transparent 60%);
-							"
-						></div>
-					</div>
-					
-					<!-- Logo -->
-					<div class="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl px-4">
-						<img 
-							src="/logos/logo_blue.svg" 
-							alt="Southeast Jiu-Jitsu Logo" 
-							class="w-full h-auto"
-							style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)) drop-shadow(0 0 4px rgba(53,53,53,0.7)) drop-shadow(0 0 8px rgba(53,53,53,0.4)) drop-shadow(0 0 12px rgba(53,53,53,0.15));"
-						/>
+					<div class="relative z-10 w-full max-w-4xl px-4 text-center">
+						<!-- Logo -->
+						<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
+							<img 
+								src="/logos/logo_white_jj.svg" 
+								alt="Southeast Jiu-Jitsu Logo" 
+								class="w-full h-auto"
+							/>
+						</div>
+						
+						<!-- Description -->
+						<p class="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+							Poznaj nasze innowacyjne metody treningowe i trenuj Jiu-Jitsu, MMA i Kickboxing pod okiem trenerów z wieloletnim doświadczeniem!
+						</p>
+						
+						<!-- CTA Buttons -->
+						<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+							<a 
+								href="https://southeastjiujitsu.wod.guru/rejestracja"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
+							>
+								Pierwszy darmowy trening
+							</a>
+							
+							<a 
+								href="https://southeastjiujitsu.wod.guru/wizytowka"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
+							>
+								Kup karnet
+							</a>
+						</div>
 					</div>
 				</div>
 				
-			</section>
-			<!-- CTA Section -->
-			<section class="bg-additional py-16 lg:py-24">
-				<div class="container mx-auto px-4">
-					<CallToAction currentLang="pl" />
-				</div>
 			</section>
 		</main>
 		<Footer currentLang="pl" />
