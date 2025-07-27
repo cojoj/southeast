@@ -58,7 +58,15 @@
   --color-secondary: #353535;
 }
 
-/* Custom underline spacing */
+/* Global underline styling - all underlined text becomes semibold with thin line */
+u, .underline {
+  font-weight: 600; /* semibold */
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+}
+
+/* Custom underline spacing for hover states */
 .hover\:underline:hover {
   text-decoration: underline;
   text-underline-offset: 6px;

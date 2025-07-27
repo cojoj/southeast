@@ -18,13 +18,154 @@ import Footer from '../../components/Footer.astro'
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->
 			<section class="relative min-h-screen overflow-hidden">
-				<!-- Background Image -->
+				<!-- Mobile Background Image -->
 				<div 
-					class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-					style="background-image: url('/hero_blue.png');"
+					class="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
+					style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
 				></div>
+				
+				<!-- Desktop Background Video -->
+				<video 
+					id="hero-video"
+					class="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_35%]"
+					style="filter: grayscale(100%) contrast(120%) brightness(90%);"
+					autoplay 
+					muted 
+					loop 
+					playsinline
+					preload="metadata"
+					poster="/hero.jpg"
+				>
+					<source src="/alan_seminar_highlights.webm" type="video/webm">
+					<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
+				</video>
+				
+				<!-- Dark Overlay for Contrast -->
+				<div class="absolute inset-0 bg-black/40"></div>
+				
+				<!-- Logo and Content -->
+				<div class="absolute inset-0 flex items-center justify-center">
+					<div class="relative z-10 w-full max-w-4xl px-4 text-center">
+						<!-- Logo -->
+						<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
+							<img 
+								src="/logos/logo_white_jj.svg" 
+								alt="Southeast Jiu-Jitsu Logo" 
+								class="w-full h-auto"
+							/>
+						</div>
+						
+						<!-- Description -->
+						<p class="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+							Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced trainers!
+						</p>
+						
+						<!-- CTA Buttons -->
+						<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+							<a 
+								href="https://southeastjiujitsu.wod.guru/rejestracja"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
+							>
+								First free training
+							</a>
+							
+							<a 
+								href="https://southeastjiujitsu.wod.guru/wizytowka"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
+							>
+								Buy membership
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Scroll indicator -->
+				<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+					<svg 
+						class="w-6 h-6 text-white opacity-60 animate-bounce" 
+						fill="none" 
+						stroke="currentColor" 
+						viewBox="0 0 24 24"
+					>
+						<path 
+							stroke-linecap="round" 
+							stroke-linejoin="round" 
+							stroke-width="2" 
+							d="M19 14l-7 7m0 0l-7-7m7 7V3"
+						/>
+					</svg>
+				</div>
+				
 			</section>
 		</main>
 		<Footer currentLang="en" />
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const video = document.getElementById('hero-video');
+				if (!video) return;
+
+				// Check connection speed if available
+				const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+				let isSlowConnection = false;
+
+				if (connection) {
+					// Consider 2G, slow-2g, or effectiveType slow-2g as slow connections
+					isSlowConnection = connection.effectiveType === 'slow-2g' || 
+									 connection.effectiveType === '2g' ||
+									 (connection.downlink && connection.downlink < 1.5);
+				}
+
+				// For slow connections, keep just the poster image
+				if (isSlowConnection) {
+					video.style.display = 'none';
+					console.log('Slow connection detected, video disabled');
+					return;
+				}
+
+				// Add loading feedback
+				video.addEventListener('loadstart', function() {
+					console.log('Video loading started');
+				});
+
+				video.addEventListener('canplay', function() {
+					console.log('Video can start playing');
+				});
+
+				video.addEventListener('waiting', function() {
+					console.log('Video buffering...');
+				});
+
+				video.addEventListener('playing', function() {
+					console.log('Video playing');
+				});
+
+				// Error handling
+				video.addEventListener('error', function(e) {
+					console.error('Video error:', e);
+					// Fallback to poster image
+					video.style.display = 'none';
+				});
+
+				// Progressive enhancement: Start loading when video enters viewport
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							// Video is in viewport, ensure it starts loading
+							if (video.readyState === 0) {
+								video.load();
+							}
+							observer.unobserve(video);
+						}
+					});
+				});
+
+				observer.observe(video);
+			});
+		</script>
 	</body>
 </html>

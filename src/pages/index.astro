@@ -28,15 +28,18 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 				
 				<!-- Desktop Background Video -->
 				<video 
+					id="hero-video"
 					class="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_35%]"
 					style="filter: grayscale(100%) contrast(120%) brightness(90%);"
 					autoplay 
 					muted 
 					loop 
 					playsinline
+					preload="metadata"
 					poster="/hero.jpg"
 				>
-					<source src="/alan_seminar_highlights.mp4" type="video/mp4">
+					<source src="/alan_seminar_highlights.webm" type="video/webm">
+					<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
 				</video>
 				
 				<!-- Dark Overlay for Contrast -->
@@ -105,5 +108,69 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 			<MarketingOverview currentLang="pl" />
 		</main>
 		<Footer currentLang="pl" />
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const video = document.getElementById('hero-video');
+				if (!video) return;
+
+				// Check connection speed if available
+				const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+				let isSlowConnection = false;
+
+				if (connection) {
+					// Consider 2G, slow-2g, or effectiveType slow-2g as slow connections
+					isSlowConnection = connection.effectiveType === 'slow-2g' || 
+									 connection.effectiveType === '2g' ||
+									 (connection.downlink && connection.downlink < 1.5);
+				}
+
+				// For slow connections, keep just the poster image
+				if (isSlowConnection) {
+					video.style.display = 'none';
+					console.log('Slow connection detected, video disabled');
+					return;
+				}
+
+				// Add loading feedback
+				video.addEventListener('loadstart', function() {
+					console.log('Video loading started');
+				});
+
+				video.addEventListener('canplay', function() {
+					console.log('Video can start playing');
+				});
+
+				video.addEventListener('waiting', function() {
+					console.log('Video buffering...');
+				});
+
+				video.addEventListener('playing', function() {
+					console.log('Video playing');
+				});
+
+				// Error handling
+				video.addEventListener('error', function(e) {
+					console.error('Video error:', e);
+					// Fallback to poster image
+					video.style.display = 'none';
+				});
+
+				// Progressive enhancement: Start loading when video enters viewport
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							// Video is in viewport, ensure it starts loading
+							if (video.readyState === 0) {
+								video.load();
+							}
+							observer.unobserve(video);
+						}
+					});
+				});
+
+				observer.observe(video);
+			});
+		</script>
 	</body>
 </html>
