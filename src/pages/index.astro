@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import CallToAction from '../components/CallToAction.astro'
+import MarketingOverview from '../components/MarketingOverview.astro'
 ---
 
 <html lang="pl">
@@ -19,11 +20,24 @@ import CallToAction from '../components/CallToAction.astro'
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->
 			<section class="relative min-h-screen overflow-hidden">
-				<!-- Background Image -->
+				<!-- Mobile Background Image -->
 				<div 
-					class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+					class="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
 					style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
 				></div>
+				
+				<!-- Desktop Background Video -->
+				<video 
+					class="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_35%]"
+					style="filter: grayscale(100%) contrast(120%) brightness(90%);"
+					autoplay 
+					muted 
+					loop 
+					playsinline
+					poster="/hero.jpg"
+				>
+					<source src="/alan_seminar_highlights.mp4" type="video/mp4">
+				</video>
 				
 				<!-- Dark Overlay for Contrast -->
 				<div class="absolute inset-0 bg-black/40"></div>
@@ -68,7 +82,27 @@ import CallToAction from '../components/CallToAction.astro'
 					</div>
 				</div>
 				
+				<!-- Scroll indicator -->
+				<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+					<svg 
+						class="w-6 h-6 text-white opacity-60 animate-bounce" 
+						fill="none" 
+						stroke="currentColor" 
+						viewBox="0 0 24 24"
+					>
+						<path 
+							stroke-linecap="round" 
+							stroke-linejoin="round" 
+							stroke-width="2" 
+							d="M19 14l-7 7m0 0l-7-7m7 7V3"
+						/>
+					</svg>
+				</div>
+				
 			</section>
+			
+			<!-- Marketing Overview Section -->
+			<MarketingOverview currentLang="pl" />
 		</main>
 		<Footer currentLang="pl" />
 	</body>
