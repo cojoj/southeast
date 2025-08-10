@@ -66,33 +66,32 @@ const isPolish = currentLang === 'pl';
       </div>
 
       <!-- Mobile Menu Button -->
-      <button class="lg:hidden text-secondary hover:text-primary transition-colors duration-200 ml-3" id="mobile-menu-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" id="hamburger-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" id="close-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
+      <button class="lg:hidden text-secondary hover:text-gray-700 transition-colors duration-200 ml-3" id="mobile-menu-button">
+        <div class="hamburger-icon" id="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div class="lg:hidden bg-primary bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 hidden transition-all duration-300 ease-out" id="mobile-menu">
+  <div class="lg:hidden bg-primary bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 mobile-menu-container" id="mobile-menu">
     <nav class="container mx-auto px-4 py-6 space-y-6 mobile-menu">
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? "/o-nas" : "/en/about"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "O NAS" : "ABOUT"}
       </a>
-      <a href={isPolish ? "/treningi" : "/en/training"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? "/treningi" : "/en/training"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "TRENINGI" : "TRAINING"}
       </a>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
       </a>
-      <a href={isPolish ? "/karnety" : "/en/memberships"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? "/karnety" : "/en/memberships"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "KARNETY" : "MEMBERSHIPS"}
       </a>
-      <a href={isPolish ? "/moje-konto" : "/en/my-account"} class="block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3">
+      <a href={isPolish ? "/moje-konto" : "/en/my-account"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3">
         {isPolish ? "MOJE KONTO" : "MY ACCOUNT"}
       </a>
     </nav>
@@ -103,36 +102,41 @@ const isPolish = currentLang === 'pl';
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
+  
+  let isMenuOpen = false;
   
   mobileMenuButton?.addEventListener('click', () => {
-    const isHidden = mobileMenu?.classList.contains('hidden');
+    isMenuOpen = !isMenuOpen;
     
-    if (isHidden) {
-      mobileMenu?.classList.remove('hidden');
-      hamburgerIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
-      setTimeout(() => {
-        mobileMenu?.classList.add('opacity-100');
-      }, 10);
+    if (isMenuOpen) {
+      // Open menu
+      hamburgerIcon?.classList.add('open');
+      mobileMenu?.classList.add('open');
     } else {
-      mobileMenu?.classList.remove('opacity-100');
-      hamburgerIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      setTimeout(() => {
-        mobileMenu?.classList.add('hidden');
-      }, 250);
+      // Close menu
+      hamburgerIcon?.classList.remove('open');
+      mobileMenu?.classList.remove('open');
     }
   });
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!mobileMenuButton?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
-      if (!mobileMenu?.classList.contains('hidden')) {
-        mobileMenu?.classList.add('hidden');
-        hamburgerIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
+      if (isMenuOpen) {
+        isMenuOpen = false;
+        hamburgerIcon?.classList.remove('open');
+        mobileMenu?.classList.remove('open');
       }
     }
+  });
+
+  // Close mobile menu when clicking on menu items
+  const menuItems = mobileMenu?.querySelectorAll('.mobile-menu-item');
+  menuItems?.forEach(item => {
+    item.addEventListener('click', () => {
+      isMenuOpen = false;
+      hamburgerIcon?.classList.remove('open');
+      mobileMenu?.classList.remove('open');
+    });
   });
 </script>

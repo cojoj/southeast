@@ -87,3 +87,78 @@ u, .underline {
     align-items: center;
   }
 }
+
+/* Hamburger Icon Animation */
+.hamburger-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hamburger-icon span {
+  width: 22px;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  transform-origin: center;
+  border-radius: 1px;
+  display: block;
+}
+
+.hamburger-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(0px, 0px);
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+.hamburger-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(0px, 0px);
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+}
+
+/* Mobile Menu Animation */
+.mobile-menu-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.mobile-menu-container.open {
+  max-height: 400px;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Enhanced mobile menu items animation */
+.mobile-menu-item {
+  transition: all 0.2s ease-out;
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.mobile-menu-container.open .mobile-menu-item {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Staggered animation for menu items */
+.mobile-menu-container.open .mobile-menu-item:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu-container.open .mobile-menu-item:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu-container.open .mobile-menu-item:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu-container.open .mobile-menu-item:nth-child(4) { transition-delay: 0.2s; }
+.mobile-menu-container.open .mobile-menu-item:nth-child(5) { transition-delay: 0.25s; }
