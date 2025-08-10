@@ -20,23 +20,16 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->
 			<section class="relative min-h-screen overflow-hidden">
-				<!-- Mobile Background Image -->
-				<div 
-					class="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
-					style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
-				></div>
-				
-				<!-- Desktop Background Video -->
+				<!-- Hero Background Video with Image Fallback -->
 				<video 
 					id="hero-video"
-					class="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_35%]"
-					style="filter: grayscale(100%) contrast(120%) brightness(90%);"
+					class="absolute inset-0 w-full h-full object-cover object-[center_35%]"
+					style="background-image: url('/hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);"
 					autoplay 
 					muted 
 					loop 
 					playsinline
 					preload="metadata"
-					poster="/hero.jpg"
 				>
 					<source src="/alan_seminar_highlights.webm" type="video/webm">
 					<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
@@ -125,7 +118,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 									 (connection.downlink && connection.downlink < 1.5);
 				}
 
-				// For slow connections, keep just the poster image
+				// For slow connections, keep just the background image
 				if (isSlowConnection) {
 					video.style.display = 'none';
 					console.log('Slow connection detected, video disabled');
@@ -152,7 +145,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 				// Error handling
 				video.addEventListener('error', function(e) {
 					console.error('Video error:', e);
-					// Fallback to poster image
+					// Fallback to background image
 					video.style.display = 'none';
 				});
 
