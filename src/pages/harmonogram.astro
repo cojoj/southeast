@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import ScheduleIframe from '../components/ScheduleIframe.astro'
+import ScheduleWidget from '../components/ScheduleWidget.astro'
 ---
 
 <html lang="pl">
@@ -17,10 +17,8 @@ import ScheduleIframe from '../components/ScheduleIframe.astro'
 	<body class="bg-additional">
 		<Header currentLang="pl" />
 		<main class="pt-[75px]">
-			<ScheduleIframe title="Harmonogram zajęć Southeast Jiu-Jitsu" />
+			<ScheduleWidget />
 		</main>
 		<Footer currentLang="pl" />
-	</body>
-</html>
 	</body>
 </html>
