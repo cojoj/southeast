@@ -1,0 +1,70 @@
+---
+export interface Props {
+  currentLang: 'pl' | 'en';
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    heading: "Dołącz do Southeast Jiu-Jitsu",
+    description: "Oferujemy zajęcia dla dzieci i dorosłych przez 6 dni w tygodniu o różnych porach dnia, aby każdy mógł znaleźć czas na trening.",
+    cta: {
+      primary: "Pierwszy darmowy trening",
+      secondary: "Sprawdź harmonogram"
+    }
+  },
+  en: {
+    heading: "Join Southeast Jiu-Jitsu",
+    description: "We offer classes for children and adults 6 days a week at different times of the day, so everyone can find time to train.",
+    cta: {
+      primary: "First free training",
+      secondary: "Check schedule"
+    }
+  }
+};
+
+const currentContent = content[currentLang];
+---
+
+<section class="bg-secondary py-16 lg:py-24">
+  <div class="max-w-4xl mx-auto px-4 lg:px-8 text-center">
+    <!-- Section Heading -->
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-additional mb-6 leading-tight">
+      {currentContent.heading}
+    </h2>
+    
+    <!-- Description -->
+    <p class="text-additional/90 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+      {currentContent.description}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+      <a 
+        href="https://southeastjiujitsu.wod.guru/rejestracja"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200 rounded-sm"
+      >
+        {currentContent.cta.primary}
+      </a>
+      
+      <a 
+        href={currentLang === 'pl' ? '/harmonogram' : '/en/schedule'}
+        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-transparent border-2 border-additional text-additional font-normal text-base uppercase tracking-wide hover:bg-additional hover:text-secondary transition-all duration-200 rounded-sm"
+      >
+        {currentContent.cta.secondary}
+      </a>
+    </div>
+
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <!-- Subtle background shapes -->
+      <div class="absolute top-1/4 left-10 w-16 h-16 bg-primary/10 rounded-full"></div>
+      <div class="absolute bottom-1/4 right-10 w-12 h-12 bg-additional/10 rounded-full"></div>
+      <div class="absolute top-1/2 left-1/4 w-8 h-8 bg-primary/15 transform rotate-45"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-6 h-6 bg-additional/15 rounded-full"></div>
+    </div>
+  </div>
+</section>

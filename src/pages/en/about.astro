@@ -1,0 +1,55 @@
+---
+import '../../styles/global.css'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import AboutHero from '../../components/AboutHero.astro'
+import AboutIntro from '../../components/AboutIntro.astro'
+import FeaturesGrid from '../../components/FeaturesGrid.astro'
+import TrainerProfiles from '../../components/TrainerProfiles.astro'
+import CommunitySection from '../../components/CommunitySection.astro'
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>About Us - Southeast Jiu-Jitsu | Kraków</title>
+		<meta name="description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts. Training for all skill levels." />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://southeastjj.pl/en/about" />
+		<meta property="og:title" content="About Us - Southeast Jiu-Jitsu | Kraków" />
+		<meta property="og:description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts." />
+		<meta property="og:image" content="https://southeastjj.pl/training-session.jpg" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://southeastjj.pl/en/about" />
+		<meta property="twitter:title" content="About Us - Southeast Jiu-Jitsu | Kraków" />
+		<meta property="twitter:description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts." />
+		<meta property="twitter:image" content="https://southeastjj.pl/training-session.jpg" />
+	</head>
+	<body class="bg-additional">
+		<Header currentLang="en" />
+		<main class="relative">
+			<!-- Hero Section -->
+			<AboutHero currentLang="en" />
+			
+			<!-- Intro Section -->
+			<AboutIntro currentLang="en" />
+			
+			<!-- Features Grid Section -->
+			<FeaturesGrid currentLang="en" />
+			
+			<!-- Trainer Profiles Section -->
+			<TrainerProfiles currentLang="en" />
+			
+			<!-- Community and CTA Section -->
+			<CommunitySection currentLang="en" />
+		</main>
+		<Footer currentLang="en" />
+	</body>
+</html>

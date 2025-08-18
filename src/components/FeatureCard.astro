@@ -1,0 +1,44 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  index: number;
+}
+
+const { icon, title, description, index } = Astro.props;
+---
+
+<div class="relative group">
+  <!-- Background accent for hover -->
+  <div class="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  
+  <div class="relative z-10 p-6 h-full flex flex-col">
+    <!-- Icon and Number -->
+    <div class="flex items-center space-x-4 mb-4">
+      <!-- Animated number badge -->
+      <div class="flex-shrink-0 w-12 h-8 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-additional font-bold text-lg shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3">
+        {index + 1}
+      </div>
+      
+      <!-- Icon -->
+      <div class="text-3xl" role="img" aria-label={`Icon for ${title}`}>
+        {icon}
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1">
+      <!-- Header accent bar (hidden by default, shown on hover) -->
+      <div class="absolute -left-4 top-6 bottom-6 w-1 bg-primary opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-full"></div>
+      
+      <h3 class="font-bold text-secondary text-xl mb-3 transition-all duration-300 group-hover:font-extrabold leading-tight">
+        {title}
+      </h3>
+      
+      <p class="text-secondary/80 leading-relaxed text-base">
+        {description}
+      </p>
+    </div>
+  </div>
+</div>

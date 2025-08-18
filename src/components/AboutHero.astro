@@ -1,0 +1,67 @@
+---
+export interface Props {
+  currentLang: 'pl' | 'en';
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    title: "O NAS",
+    subtitle: "Miejsce stworzone dla pasjonatów sportów walki – bez względu na wiek, doświadczenie i cel."
+  },
+  en: {
+    title: "ABOUT US",
+    subtitle: "A place created for martial arts enthusiasts – regardless of age, experience, and goals."
+  }
+};
+
+const currentContent = content[currentLang];
+---
+
+<section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden">
+  <!-- Hero Background Image -->
+  <div 
+    class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+    style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
+  >
+  </div>
+  
+  <!-- Dark Overlay for Contrast -->
+  <div class="absolute inset-0 bg-black/40"></div>
+  
+  <!-- Content -->
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="relative z-10 w-full max-w-4xl px-4 text-center">
+      <!-- Main Title -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wide">
+        {currentContent.title}
+      </h1>
+      
+      <!-- Subtitle -->
+      <p class="text-white text-lg md:text-xl lg:text-2xl font-light leading-relaxed max-w-3xl mx-auto">
+        {currentContent.subtitle}
+      </p>
+      
+      <!-- Decorative line -->
+      <div class="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <svg 
+      class="w-6 h-6 text-white opacity-60 animate-bounce" 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        stroke-width="2" 
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+      />
+    </svg>
+  </div>
+</section>

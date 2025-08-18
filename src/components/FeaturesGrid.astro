@@ -1,0 +1,127 @@
+---
+import FeatureCard from './FeatureCard.astro';
+
+export interface Props {
+  currentLang: 'pl' | 'en';
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    heading: "Co wyróżnia Southeast Jiu-Jitsu?",
+    features: [
+      {
+        icon: "👥",
+        title: "Indywidualne podejście",
+        description: "Treningi odbywają się w małych grupach, co pozwala nam skupić się na każdym uczestniku. Dzięki temu nasi trenerzy mogą dostosować poziom zajęć do Twoich umiejętności i celów treningowych."
+      },
+      {
+        icon: "📅",
+        title: "Usystematyzowany plan treningowy",
+        description: "Nasze zajęcia prowadzone są według stworzonego przez naszych trenerów i aktualizowanego na bieżąco planu, który krok po kroku pozwala rozwijać wasze umiejętności w danym sporcie. Każda sesja jest starannie zaplanowana, aby zapewnić optymalny rozwój zarówno dla początkujących, jak i zaawansowanych zawodników."
+      },
+      {
+        icon: "🎯",
+        title: "Innowacyjne metody treningowe",
+        description: "W Southeast Jiu-Jitsu w treningu nie wykorzystujemy statycznego powtarzania technik na nieoporującym przeciwniku. Stawiamy na naukę poprzez praktykę – w naszych treningach główną rolę odgrywają gry zadaniowe wykonywane na oporującym przeciwniku. Dzięki temu szybciej rozwijasz swoje umiejętności i uczysz się adaptacji do dynamicznych sytuacji występujących w walce."
+      },
+      {
+        icon: "💪",
+        title: "Efektywne i intensywne treningi",
+        description: "Nasze metody gwarantują szybkie postępy oraz poprawę kondycji fizycznej. Każdy trening jest dynamiczny i angażujący, co pozwala rozwijać siłę, wytrzymałość oraz niezbędną koordynację ruchową."
+      },
+      {
+        icon: "🌍",
+        title: "Treningi dla każdego",
+        description: "Niezależnie od tego, czy trenujesz rekreacyjnie, czy przygotowujesz się do zawodów, pomożemy Ci osiągnąć Twoje cele. Wspieramy zarówno osoby, które chcą poprawić swoją sprawność, jak i tych, którzy dążą do sukcesów na zawodach."
+      }
+    ]
+  },
+  en: {
+    heading: "What makes Southeast Jiu-Jitsu special?",
+    features: [
+      {
+        icon: "👥",
+        title: "Individual approach",
+        description: "Training takes place in small groups, allowing us to focus on each participant. This way, our trainers can adapt the level of classes to your skills and training goals."
+      },
+      {
+        icon: "📅",
+        title: "Systematic training plan",
+        description: "Our classes are conducted according to a plan created by our trainers and continuously updated, which step by step allows you to develop your skills in a given sport. Each session is carefully planned to ensure optimal development for both beginners and advanced athletes."
+      },
+      {
+        icon: "🎯",
+        title: "Innovative training methods",
+        description: "At Southeast Jiu-Jitsu, we don't use static repetition of techniques on non-resisting opponents. We focus on learning through practice – in our training, the main role is played by task-based games performed against resisting opponents. This way, you develop your skills faster and learn to adapt to dynamic situations occurring in combat."
+      },
+      {
+        icon: "💪",
+        title: "Effective and intensive training",
+        description: "Our methods guarantee rapid progress and improvement in physical fitness. Every training session is dynamic and engaging, allowing you to develop strength, endurance, and necessary motor coordination."
+      },
+      {
+        icon: "🌍",
+        title: "Training for everyone",
+        description: "Whether you train recreationally or are preparing for competitions, we will help you achieve your goals. We support both people who want to improve their fitness and those who strive for success in competitions."
+      }
+    ]
+  }
+};
+
+const currentContent = content[currentLang];
+---
+
+<section class="bg-white py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <!-- Section Heading -->
+    <div class="text-center mb-12 lg:mb-16">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-secondary mb-6 leading-tight">
+        {currentContent.heading}
+      </h2>
+      
+      <!-- Decorative line -->
+      <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid gap-8 md:gap-10 lg:gap-12">
+      <!-- First row: 2 features -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+        {currentContent.features.slice(0, 2).map((feature, index) => (
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+            index={index}
+          />
+        ))}
+      </div>
+      
+      <!-- Second row: 1 feature (centered) -->
+      <div class="grid justify-center">
+        <div class="max-w-2xl">
+          <FeatureCard
+            icon={currentContent.features[2].icon}
+            title={currentContent.features[2].title}
+            description={currentContent.features[2].description}
+            index={2}
+          />
+        </div>
+      </div>
+      
+      <!-- Third row: 2 features -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+        {currentContent.features.slice(3, 5).map((feature, index) => (
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+            index={index + 3}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
