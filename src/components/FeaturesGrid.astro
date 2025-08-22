@@ -7,6 +7,22 @@ export interface Props {
 
 const { currentLang } = Astro.props;
 
+const iconMap: Record<string, string> = {
+  // PL
+  "Indywidualne podejście": "user-check",
+  "Usystematyzowany plan treningowy": "list-checks",
+  "Innowacyjne metody treningowe": "lightbulb",
+  "Efektywne i intensywne treningi": "activity",
+  "Treningi dla każdego": "users",
+
+  // EN
+  "Individual approach": "user-check",
+  "Systematic training plan": "list-checks",
+  "Innovative training methods": "lightbulb",
+  "Effective and intensive training": "activity",
+  "Training for everyone": "users"
+};
+
 const content = {
   pl: {
     heading: "Co wyróżnia Southeast Jiu-Jitsu?",
@@ -14,27 +30,27 @@ const content = {
       {
         title: "Indywidualne podejście",
         description: "Treningi odbywają się w małych grupach, co pozwala nam skupić się na każdym uczestniku. Dzięki temu nasi trenerzy mogą dostosować poziom zajęć do Twoich umiejętności i celów treningowych.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>'
+        icon: iconMap["Indywidualne podejście"]
       },
       {
         title: "Usystematyzowany plan treningowy",
         description: "Nasze zajęcia prowadzone są według stworzonego przez naszych trenerów i aktualizowanego na bieżąco planu, który krok po kroku pozwala rozwijać wasze umiejętności w danym sporcie. Każda sesja jest starannie zaplanowana, aby zapewnić optymalny rozwój zarówno dla początkujących, jak i zaawansowanych zawodników.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Usystematyzowany plan treningowy"]
       },
       {
         title: "Innowacyjne metody treningowe",
         description: "W Southeast Jiu-Jitsu w treningu nie wykorzystujemy statycznego powtarzania technik na nieoporującym przeciwniku. Stawiamy na naukę poprzez praktykę – w naszych treningach główną rolę odgrywają gry zadaniowe wykonywane na oporującym przeciwniku. Dzięki temu szybciej rozwijasz swoje umiejętności i uczysz się adaptacji do dynamicznych sytuacji występujących w walce.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Innowacyjne metody treningowe"]
       },
       {
         title: "Efektywne i intensywne treningi",
         description: "Nasze metody gwarantują szybkie postępy oraz poprawę kondycji fizycznej. Każdy trening jest dynamiczny i angażujący, co pozwala rozwijać siłę, wytrzymałość oraz niezbędną koordynację ruchową.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Efektywne i intensywne treningi"]
       },
       {
         title: "Treningi dla każdego",
         description: "Niezależnie od tego, czy trenujesz rekreacyjnie, czy przygotowujesz się do zawodów, pomożemy Ci osiągnąć Twoje cele. Wspieramy zarówno osoby, które chcą poprawić swoją sprawność, jak i tych, którzy dążą do sukcesów na zawodach.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>'
+        icon: iconMap["Treningi dla każdego"]
       }
     ]
   },
@@ -44,27 +60,27 @@ const content = {
       {
         title: "Individual approach",
         description: "Training takes place in small groups, allowing us to focus on each participant. This way, our trainers can adapt the level of classes to your skills and training goals.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>'
+        icon: iconMap["Individual approach"]
       },
       {
         title: "Systematic training plan",
         description: "Our classes are conducted according to a plan created by our trainers and continuously updated, which step by step allows you to develop your skills in a given sport. Each session is carefully planned to ensure optimal development for both beginners and advanced athletes.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Systematic training plan"]
       },
       {
         title: "Innovative training methods",
         description: "At Southeast Jiu-Jitsu, we don't use static repetition of techniques on non-resisting opponents. We focus on learning through practice – in our training, the main role is played by task-based games performed against resisting opponents. This way, you develop your skills faster and learn to adapt to dynamic situations occurring in combat.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Innovative training methods"]
       },
       {
         title: "Effective and intensive training",
         description: "Our methods guarantee rapid progress and improvement in physical fitness. Every training session is dynamic and engaging, allowing you to develop strength, endurance, and necessary motor coordination.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd"/></svg>'
+        icon: iconMap["Effective and intensive training"]
       },
       {
         title: "Training for everyone",
         description: "Whether you train recreationally or are preparing for competitions, we will help you achieve your goals. We support both people who want to improve their fitness and those who strive for success in competitions.",
-        icon: '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>'
+        icon: iconMap["Training for everyone"]
       }
     ]
   }

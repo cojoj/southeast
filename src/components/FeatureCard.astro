@@ -1,4 +1,10 @@
 ---
+import UserCheck from '@lucide/astro/icons/user-check';
+import ListChecks from '@lucide/astro/icons/list-checks';
+import Lightbulb from '@lucide/astro/icons/lightbulb';
+import Activity from '@lucide/astro/icons/activity';
+import Users from '@lucide/astro/icons/users';
+
 export interface Props {
   title: string;
   description: string;
@@ -6,7 +12,18 @@ export interface Props {
   icon: string;
 }
 
-const { title, description, index, icon } = Astro.props;
+const { title, description, icon } = Astro.props;
+
+// Map icon names to icon components
+const iconComponents = {
+  'user-check': UserCheck,
+  'list-checks': ListChecks,
+  'lightbulb': Lightbulb,
+  'activity': Activity,
+  'users': Users,
+};
+
+const IconComponent = iconComponents[icon as keyof typeof iconComponents] || Users;
 ---
 
 <div class="relative group">
@@ -14,8 +31,9 @@ const { title, description, index, icon } = Astro.props;
   <div class="relative z-10 p-6 h-full flex flex-col">
     <!-- Icon -->
     <div class="flex items-center mb-4">
-      <!-- Monochrome icon -->
-      <div class="flex-shrink-0 w-12 h-12 bg-primary/10 flex items-center justify-center text-primary transform transition-all duration-300 group-hover:bg-primary group-hover:text-white" set:html={icon}>
+      <!-- Circular icon with gradient background similar to MarketingOverview -->
+      <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-additional shadow-lg transform transition-all duration-300 group-hover:scale-110">
+        <IconComponent size={28} />
       </div>
     </div>
 
