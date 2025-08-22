@@ -45,14 +45,14 @@ const currentContent = content[currentLang];
         href="https://southeastjiujitsu.wod.guru/rejestracja"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200 rounded-sm"
+        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
       >
         {currentContent.cta.primary}
       </a>
       
       <a 
         href={currentLang === 'pl' ? '/harmonogram' : '/en/schedule'}
-        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-transparent border-2 border-additional text-additional font-normal text-base uppercase tracking-wide hover:bg-additional hover:text-secondary transition-all duration-200 rounded-sm"
+        class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-transparent border-2 border-additional text-additional font-normal text-base uppercase tracking-wide hover:bg-additional hover:text-secondary transition-all duration-200"
       >
         {currentContent.cta.secondary}
       </a>
