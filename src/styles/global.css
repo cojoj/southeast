@@ -56,6 +56,11 @@
   --color-additional: #E8E7E6;
   --color-primary: #BCC6D9;
   --color-secondary: #353535;
+  
+  /* Southeast Brand Tokens */
+  --color-se-bg: #E8E7E6;
+  --color-se-accent: #BCC6D9;
+  --color-se-ink: #353535;
 }
 
 /* Global underline styling - all underlined text becomes semibold with thin line */
@@ -162,3 +167,38 @@ u, .underline {
 .mobile-menu-container.open .mobile-menu-item:nth-child(3) { transition-delay: 0.15s; }
 .mobile-menu-container.open .mobile-menu-item:nth-child(4) { transition-delay: 0.2s; }
 .mobile-menu-container.open .mobile-menu-item:nth-child(5) { transition-delay: 0.25s; }
+
+/* Southeast Brand Utilities */
+.bg-se { background-color: var(--color-se-bg); }
+.text-se-ink { color: var(--color-se-ink); }
+.border-se-accent { border-color: var(--color-se-accent); }
+
+/* Geometric line motifs */
+.se-divider {
+  height: 1px;
+  background-color: var(--color-se-accent);
+  margin: 1rem 0;
+}
+
+.se-line-sequence::after {
+  content: '•';
+  color: var(--color-se-accent);
+  margin-left: 0.5rem;
+}
+
+/* Class cards styling */
+.class-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--color-se-accent);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.level-chip {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-se-accent);
+  background-color: rgba(188, 198, 217, 0.1);
+  color: var(--color-se-ink);
+}

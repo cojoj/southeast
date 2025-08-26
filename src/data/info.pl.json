@@ -1,0 +1,56 @@
+{
+  "info": [
+    {
+      "id": "personal",
+      "copy": {
+        "pl": {
+          "title": "Treningi personalne",
+          "body": [
+            "Szybszy progres, skupienie na konkretnych technikach, elastyczny grafik.",
+            "Indywidualnie lub w kameralnych grupach. Napisz: southeast.jiujitsu@gmail.com"
+          ]
+        },
+        "en": {
+          "title": "Personal training",
+          "body": [
+            "Progress faster with tailored sessions and flexible scheduling.",
+            "One‑to‑one or small groups. Email: southeast.jiujitsu@gmail.com"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cla",
+      "copy": {
+        "pl": {
+          "title": "Metoda treningowa: Constraints‑Led Approach (CLA)",
+          "body": [
+            "Wykorzystujemy walki zadaniowe z dobranymi ograniczeniami, aby uczyć w środowisku zbliżonym do walki.",
+            "Szybsze przyswajanie umiejętności, więcej zabawy i większa pewność siebie."
+          ],
+          "bullets": [
+            "Trening z oporującym przeciwnikiem",
+            "Szybkie reagowanie i rozwiązywanie problemów",
+            "Przestrzeń do wypracowania własnego stylu",
+            "Kreatywność i indywidualność",
+            "Lepsza adaptacja do stylów przeciwników"
+          ]
+        },
+        "en": {
+          "title": "Training method: Constraints‑Led Approach (CLA)",
+          "body": [
+            "We use task‑based sparring with specific constraints so you learn in competition‑like contexts.",
+            "Faster skill pickup, more engagement, greater confidence."
+          ],
+          "bullets": [
+            "Train against resisting partners",
+            "Develop rapid decision‑making",
+            "Room to form your own style",
+            "Promotes creativity and individuality",
+            "Adapt faster to changing opponents"
+          ]
+        }
+      }
+    }
+  ]
+}

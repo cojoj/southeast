@@ -1,0 +1,87 @@
+---
+import type { Locale } from '../types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const heroContent = {
+  pl: {
+    title: 'Treningi',
+    subtitle: 'Znajdź swój styl walki w naszej różnorodnej ofercie zajęć'
+  },
+  en: {
+    title: 'Training',
+    subtitle: 'Find your fighting style in our diverse class offerings'
+  }
+};
+
+const content = heroContent[locale];
+---
+
+<section class="classes-hero bg-se py-16 md:py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Main Title -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-se-ink mb-4">
+        {content.title}
+      </h1>
+      
+      <!-- Decorative lines -->
+      <div class="flex items-center justify-center mb-6">
+        <div class="w-12 h-px bg-se-accent"></div>
+        <div class="w-2 h-2 rounded-full bg-se-accent mx-4"></div>
+        <div class="w-12 h-px bg-se-accent"></div>
+      </div>
+      
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-neutral-700 font-light leading-relaxed max-w-2xl mx-auto">
+        {content.subtitle}
+      </p>
+      
+      <!-- Additional decorative line sequence -->
+      <div class="mt-8 flex justify-center">
+        <div class="flex items-center space-x-2">
+          <div class="w-1 h-1 rounded-full bg-se-accent"></div>
+          <div class="w-3 h-px bg-se-accent"></div>
+          <div class="w-1 h-1 rounded-full bg-se-accent"></div>
+          <div class="w-6 h-px bg-se-accent"></div>
+          <div class="w-1.5 h-1.5 rounded-full bg-se-accent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .classes-hero {
+    background: linear-gradient(135deg, 
+      var(--color-se-bg) 0%, 
+      rgba(232, 231, 230, 0.8) 100%
+    );
+    position: relative;
+  }
+  
+  /* Subtle texture overlay */
+  .classes-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 80%, 
+      rgba(188, 198, 217, 0.1) 0%, 
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+  
+  /* Ensure content is above overlay */
+  .classes-hero > .container {
+    position: relative;
+    z-index: 1;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import '../../styles/global.css'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import CallToAction from '../../components/CallToAction.astro'
+import ClassesHero from '../../components/ClassesHero.astro'
+import ClassesGrid from '../../components/ClassesGrid.astro'
+import InfoBlock from '../../components/InfoBlock.astro'
+
+// Import data
+import classesData from '../../data/classes.en.json'
+import infoData from '../../data/info.en.json'
+import type { ClassesData, InfoData } from '../../types'
+
+const classes = (classesData as ClassesData).classes
+const info = (infoData as InfoData).info
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Training - Southeast Jiu-Jitsu</title>
+		<meta name="description" content="Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial." />
+		
+		<!-- Open Graph -->
+		<meta property="og:title" content="Training - Southeast Jiu-Jitsu" />
+		<meta property="og:description" content="Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://southeastjj.pl/en/training" />
+		
+		<!-- Canonical -->
+		<link rel="canonical" href="https://southeastjj.pl/en/training" />
+		
+		<!-- Alternate language -->
+		<link rel="alternate" hreflang="pl" href="https://southeastjj.pl/treningi" />
+		<link rel="alternate" hreflang="en" href="https://southeastjj.pl/en/training" />
+	</head>
+	<body class="bg-se">
+		<Header currentLang="en" />
+		
+		<main class="relative min-h-screen">
+			<!-- Hero Section -->
+			<ClassesHero locale="en" />
+			
+			<!-- Classes Grid Section -->
+			<section class="py-16 md:py-20">
+				<div class="container mx-auto px-4">
+					<ClassesGrid classes={classes} locale="en" />
+				</div>
+			</section>
+			
+			<!-- Info Sections -->
+			{info.map((block) => (
+				<InfoBlock block={block} locale="en" />
+			))}
+			
+			<!-- Call to Action -->
+			<section class="py-16 md:py-20">
+				<CallToAction currentLang="en" />
+			</section>
+		</main>
+		
+		<Footer currentLang="en" />
+	</body>
+</html>

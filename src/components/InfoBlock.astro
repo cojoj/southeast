@@ -1,0 +1,82 @@
+---
+import type { InfoBlock as InfoBlockType, Locale } from '../types';
+
+export interface Props {
+  block: InfoBlockType;
+  locale: Locale;
+}
+
+const { block, locale } = Astro.props;
+const copy = block.copy[locale];
+---
+
+<section class="info-block py-12">
+  <div class="container mx-auto px-4">
+    <!-- Decorative line -->
+    <div class="se-divider mb-8"></div>
+    
+    <div class="max-w-4xl mx-auto">
+      <!-- Title -->
+      <h2 class="text-2xl md:text-3xl font-semibold text-se-ink mb-6 se-line-sequence">
+        {copy.title}
+      </h2>
+      
+      <!-- Body paragraphs -->
+      <div class="space-y-4 mb-6">
+        {copy.body.map((paragraph) => (
+          <p class="text-base md:text-lg leading-relaxed text-neutral-800">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      
+      <!-- Bullets if they exist -->
+      {copy.bullets && copy.bullets.length > 0 && (
+        <div class="mt-8">
+          <ul class="space-y-3">
+            {copy.bullets.map((bullet) => (
+              <li class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-se-accent mt-2.5 flex-shrink-0"></div>
+                <span class="text-base leading-relaxed text-neutral-800">
+                  {bullet}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+    
+    <!-- Bottom decorative line -->
+    <div class="se-divider mt-8"></div>
+  </div>
+</section>
+
+<style>
+  .info-block {
+    background: linear-gradient(to bottom, 
+      rgba(232, 231, 230, 0.3) 0%, 
+      rgba(232, 231, 230, 0.1) 100%
+    );
+  }
+  
+  /* Subtle geometric pattern for brand consistency */
+  .info-block::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, 
+      transparent 0%, 
+      var(--color-se-accent) 20%, 
+      var(--color-se-accent) 80%, 
+      transparent 100%
+    );
+    opacity: 0.5;
+  }
+  
+  .info-block {
+    position: relative;
+  }
+</style>

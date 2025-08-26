@@ -1,0 +1,38 @@
+---
+import { 
+  Clock,
+  Package, 
+  Shirt,
+  Dumbbell,
+  Users,
+  Baby,
+  Brain,
+  Sparkles,
+  Footprints,
+  CalendarClock
+} from "@lucide/astro";
+
+export interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = "size-5" } = Astro.props;
+
+const iconMap = {
+  Clock,
+  Package,
+  Shirt,
+  Dumbbell,
+  Users,
+  Baby,
+  Brain,
+  Sparkles,
+  Footprints,
+  CalendarClock
+};
+
+const IconComponent = iconMap[name as keyof typeof iconMap] || Dumbbell;
+---
+
+<IconComponent class={className} aria-hidden="true" />
