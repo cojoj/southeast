@@ -1,11 +1,20 @@
 ---
 export interface Props {
   currentLang: 'pl' | 'en';
+  title?: {
+    pl: string;
+    en: string;
+  };
+  subtitle?: {
+    pl: string;
+    en: string;
+  };
+  backgroundImage?: string;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang, title, subtitle, backgroundImage = '/hero.jpg' } = Astro.props;
 
-const content = {
+const defaultContent = {
   pl: {
     title: "O NAS",
     subtitle: "Miejsce stworzone dla pasjonatów sportów walki – bez względu na wiek, doświadczenie i cel."
@@ -16,14 +25,17 @@ const content = {
   }
 };
 
-const currentContent = content[currentLang];
+const currentContent = {
+  title: title ? title[currentLang] : defaultContent[currentLang].title,
+  subtitle: subtitle ? subtitle[currentLang] : defaultContent[currentLang].subtitle
+};
 ---
 
 <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden">
   <!-- Hero Background Image -->
   <div 
     class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-    style="background-image: url('/hero.jpg'); filter: grayscale(100%) contrast(120%) brightness(90%);"
+    style={`background-image: url('${backgroundImage}'); filter: grayscale(100%) contrast(120%) brightness(90%);`}
   >
   </div>
   

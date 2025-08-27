@@ -3,7 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import CallToAction from '../components/CallToAction.astro'
-import ClassesHero from '../components/ClassesHero.astro'
+import Hero from '../components/Hero.astro'
 import ClassesGrid from '../components/ClassesGrid.astro'
 import InfoBlock from '../components/InfoBlock.astro'
 
@@ -43,7 +43,17 @@ const info = (infoData as InfoData).info
 		
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->
-			<ClassesHero locale="pl" />
+			<Hero 
+				currentLang="pl" 
+				title={{
+					pl: "TRENINGI",
+					en: "TRAINING"
+				}}
+				subtitle={{
+					pl: "Znajdź swój styl walki w naszej różnorodnej ofercie zajęć",
+					en: "Find your fighting style in our diverse class offerings"
+				}}
+			/>
 			
 			<!-- Classes Grid Section -->
 			<section class="py-16 md:py-20">
