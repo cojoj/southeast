@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro'
 import CommunitySection from '../components/CommunitySection.astro'
 import Hero from '../components/Hero.astro'
 import ClassesGrid from '../components/ClassesGrid.astro'
+import PrivateTraining from '../components/PrivateTraining.astro'
 import CLASection from '../components/CLASection.astro'
 
 // Import data
@@ -59,6 +60,12 @@ const classes = (classesData as ClassesData).classes
 					<ClassesGrid classes={classes} locale="pl" />
 				</div>
 			</section>
+			
+			<!-- Private Training Section -->
+			<PrivateTraining currentLang="pl" />
+			
+			<!-- Separator -->
+			<div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
 			
 			<!-- CLA Section -->
 			<CLASection currentLang="pl" />

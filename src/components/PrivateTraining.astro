@@ -1,0 +1,90 @@
+---
+import type { Locale } from '../types';
+
+export interface Props {
+  currentLang: Locale;
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    title: "Treningi Personalne",
+    description: "Chcesz szybciej robić postępy, skupić się na konkretnych technikach lub dopasować trening do swojego grafiku?",
+    details: "Nasi trenerzy prowadzą indywidualne zajęcia oraz treningi w kameralnych grupach – idealne, jeśli cenisz sobie personalne podejście.",
+    cta: "Zainteresowany? Napisz do nas:"
+  },
+  en: {
+    title: "Personal Training",
+    description: "Want to progress faster, focus on specific techniques or adapt training to your schedule?",
+    details: "Our trainers conduct individual sessions and small group training – perfect if you value a personal approach.",
+    cta: "Interested? Write to us:"
+  }
+};
+
+const copy = content[currentLang];
+---
+
+<section class="private-training-section py-16 md:py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        
+        <!-- Image Column -->
+        <div class="order-2 md:order-1">
+          <div class="relative">
+            <img
+              src={`${import.meta.env.BASE_URL}flagens.png`}
+              alt="Private training with professional instructor"
+              class="w-full h-auto shadow-lg object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        
+        <!-- Content Column -->
+        <div class="order-1 md:order-2 space-y-6">
+          <!-- Title -->
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-se-ink leading-tight">
+            {copy.title}
+          </h2>
+          
+          <!-- Description -->
+          <p class="text-base md:text-lg leading-relaxed text-neutral-800">
+            {copy.description}
+          </p>
+          
+          <!-- Details -->
+          <p class="text-base md:text-lg leading-relaxed text-neutral-800">
+            {copy.details}
+          </p>
+          
+          <!-- CTA with Email -->
+          <div class="pt-4">
+            <p class="text-base md:text-lg text-neutral-800 mb-2">
+              {copy.cta}
+            </p>
+            <a 
+              href="mailto:southeast.jiujitsu@gmail.com"
+              class="inline-flex items-center text-base md:text-lg font-semibold text-se-ink underline"
+            >
+              southeast.jiujitsu@gmail.com
+            </a>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .private-training-section {
+    background: linear-gradient(to bottom, 
+      rgba(255, 255, 255, 0.8) 0%, 
+      rgba(232, 231, 230, 0.3) 100%
+    );
+    position: relative;
+  }
+</style>
