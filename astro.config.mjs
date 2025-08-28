@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://cojoj.github.io",
   base: "/southeast",
+  trailingSlash: "always",
 
   i18n: {
     defaultLocale: "pl",
