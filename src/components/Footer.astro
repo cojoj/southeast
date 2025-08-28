@@ -76,9 +76,9 @@ const isPolish = currentLang === 'pl';
         
         <!-- Language Toggle -->
         <div class="flex justify-center lg:justify-end space-x-3 text-sm">
-          <a href="/" class={`${isPolish ? 'font-semibold' : 'text-additional/70'} hover:text-primary transition-colors`}>PL</a>
+          <a href={`${import.meta.env.BASE_URL}`} class={`${isPolish ? 'font-semibold' : 'text-additional/70'} hover:text-primary transition-colors`}>PL</a>
           <span class="text-additional/40">|</span>
-          <a href="/en" class={`${!isPolish ? 'font-semibold' : 'text-additional/70'} hover:text-primary transition-colors`}>EN</a>
+          <a href={`${import.meta.env.BASE_URL}en/`} class={`${!isPolish ? 'font-semibold' : 'text-additional/70'} hover:text-primary transition-colors`}>EN</a>
         </div>
       </div>
     </div>

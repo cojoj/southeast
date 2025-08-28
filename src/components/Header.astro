@@ -12,20 +12,20 @@ const isPolish = currentLang === 'pl';
   <div class="container mx-auto px-4 h-full flex items-center justify-between">
     <!-- Logo -->
     <div class="flex items-center">
-      <a href={isPolish ? "/" : "/en"} class="block">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}` : `${import.meta.env.BASE_URL}en/`} class="block">
         <img src={`${import.meta.env.BASE_URL}logos/logo_black.svg`} alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" />
       </a>
     </div>
 
     <!-- Desktop Navigation Menu -->
     <nav class="hidden lg:flex items-center space-x-10">
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
         {isPolish ? "O NAS" : "ABOUT"}
       </a>
-      <a href={isPolish ? "/treningi" : "/en/training"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
         {isPolish ? "TRENINGI" : "TRAINING"}
       </a>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`} class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
         {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
       </a>
       <a href="https://southeastjiujitsu.wod.guru/wizytowka" class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
@@ -56,11 +56,11 @@ const isPolish = currentLang === 'pl';
 
       <!-- Language Switcher -->
       <div class="flex items-center space-x-1 text-sm text-secondary">
-        <a href="/" class={`transition-all duration-200 hover:font-semibold ${isPolish ? 'font-semibold' : 'font-normal'}`}>
+        <a href={`${import.meta.env.BASE_URL}`} class={`transition-all duration-200 hover:font-semibold ${isPolish ? 'font-semibold' : 'font-normal'}`}>
           PL
         </a>
         <span>|</span>
-        <a href="/en" class={`transition-all duration-200 hover:font-semibold ${!isPolish ? 'font-semibold' : 'font-normal'}`}>
+        <a href={`${import.meta.env.BASE_URL}en/`} class={`transition-all duration-200 hover:font-semibold ${!isPolish ? 'font-semibold' : 'font-normal'}`}>
           EN
         </a>
       </div>
@@ -79,13 +79,13 @@ const isPolish = currentLang === 'pl';
   <!-- Mobile Menu -->
   <div class="lg:hidden bg-primary bg-opacity-95 backdrop-blur-sm absolute top-full left-0 right-0 mobile-menu-container" id="mobile-menu">
     <nav class="container mx-auto px-4 py-6 space-y-6 mobile-menu">
-      <a href={isPolish ? "/o-nas" : "/en/about"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "O NAS" : "ABOUT"}
       </a>
-      <a href={isPolish ? "/treningi" : "/en/training"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "TRENINGI" : "TRAINING"}
       </a>
-      <a href={isPolish ? "/harmonogram" : "/en/schedule"} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
+      <a href={isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
         {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
       </a>
       <a href="https://southeastjiujitsu.wod.guru/wizytowka" class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
