@@ -1,21 +1,22 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://southeastjj.pl',
+  site: "https://cojoj.github.io",
+  base: "/Southeast",
 
   i18n: {
-    defaultLocale: 'pl',
-    locales: ['pl', 'en'],
+    defaultLocale: "pl",
+    locales: ["pl", "en"],
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
 
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });
