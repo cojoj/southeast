@@ -36,7 +36,7 @@ import CommunitySection from '../../components/CommunitySection.astro'
 		<Header currentLang="en" />
 		<main class="relative">
 			<!-- Hero Section -->
-			<Hero currentLang="en" backgroundImage="/team.png" />
+			<Hero currentLang="en" backgroundImage={`${import.meta.env.BASE_URL}team.png`} />
 			
 			<!-- Intro Section -->
 			<AboutIntro currentLang="en" />
