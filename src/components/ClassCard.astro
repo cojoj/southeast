@@ -14,74 +14,86 @@ const isPolish = locale === 'pl';
 const levelLabels = {
   pl: {
     podstawy: 'Podstawy',
-    wszystkie: 'Wszystkie',
+    wszystkie: 'Wszystkie poziomy',
     zaawansowani: 'Zaawansowani',
     dzieci: 'Dzieci',
-    mieszane: 'Mieszane'
+    mieszane: 'Mieszane poziomy'
   },
   en: {
     podstawy: 'Basics',
     wszystkie: 'All levels',
     zaawansowani: 'Advanced',
     dzieci: 'Kids',
-    mieszane: 'Mixed'
+    mieszane: 'Mixed levels'
   }
 };
 ---
 
-<div class="class-card p-5">
-  <!-- Header -->
-  <div class="flex items-center gap-2 mb-1">
-    <IconByName name={item.icons.type} />
-    <h3 class="font-semibold text-lg leading-tight text-se-ink">{copy.name}</h3>
-  </div>
+<div class="group relative h-full">
+  <!-- Hover background effect -->
+  <div class="absolute -inset-2 bg-se-accent/5 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
   
-  <!-- Teaser -->
-  <p class="text-sm text-neutral-700 mb-3">{copy.teaser}</p>
-  
-  <!-- Meta Row -->
-  <div class="flex flex-wrap gap-4 text-sm mb-3">
-    <span class="inline-flex items-center gap-1">
-      <IconByName name={item.icons.duration} class="size-4" />
-      <strong>{item.durationMin}</strong> {isPolish ? 'min' : 'min'}
-    </span>
+  <div class="relative h-full p-6 bg-white/70 border border-se-accent shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">
     
-    {item.gear.length > 0 && (
-      <span class="inline-flex items-center gap-1">
-        <IconByName name={item.icons.gear} class="size-4" />
-        <span>
-          {isPolish ? 'Sprzęt: ' : 'Gear: '}
-          {item.gear[0]}{item.gear.length > 1 ? '…' : ''}
-        </span>
-      </span>
-    )}
+    <!-- Header -->
+    <div class="flex items-start gap-3 mb-4">
+      <div class="flex-shrink-0 mt-1">
+        <IconByName name={item.icons.type} class="size-6 text-se-ink" />
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-semibold text-xl text-se-ink leading-tight mb-1">{copy.name}</h3>
+        <div class="flex items-center gap-3 text-sm text-neutral-600">
+          <span class="inline-flex items-center gap-1">
+            <IconByName name={item.icons.duration} class="size-4" />
+            {item.durationMin} min
+          </span>
+          <span class="level-chip">
+            {levelLabels[locale][item.level]}
+          </span>
+        </div>
+      </div>
+    </div>
     
-    <span class="level-chip ml-auto">
-      {levelLabels[locale][item.level]}
-    </span>
-  </div>
-  
-  <!-- Divider -->
-  <div class="se-divider"></div>
-  
-  <!-- Body -->
-  <div class="space-y-3">
-    {copy.body.map((paragraph) => (
-      <p class="text-sm leading-6 text-neutral-800">{paragraph}</p>
-    ))}
+    <!-- Teaser -->
+    <p class="text-neutral-700 font-medium text-sm mb-3 italic">"{copy.teaser}"</p>
     
-    <!-- For Whom -->
+    <!-- Description -->
+    <p class="text-neutral-700 text-sm leading-relaxed mb-4 flex-1">{copy.description}</p>
+    
+    <!-- For Whom Section -->
     {copy.forWhom.length > 0 && (
-      <div>
-        <h4 class="text-sm font-semibold text-se-ink mb-2 se-line-sequence">
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold text-se-ink mb-2">
           {isPolish ? 'Dla kogo' : 'For whom'}
         </h4>
-        <ul class="list-disc pl-5 text-sm space-y-1">
+        <ul class="space-y-1">
           {copy.forWhom.map((item) => (
-            <li class="text-neutral-800">{item}</li>
+            <li class="text-sm text-neutral-700 flex items-start gap-2">
+              <span class="text-se-accent mt-1 flex-shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
           ))}
         </ul>
       </div>
     )}
+    
+    <!-- Equipment Section -->
+    {item.gear.length > 0 && (
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold text-se-ink mb-2 inline-flex items-center gap-1">
+          <IconByName name={item.icons.gear} class="size-4" />
+          {isPolish ? 'Sprzęt' : 'Equipment'}
+        </h4>
+        <div class="text-sm text-neutral-700">
+          <p class="mb-1">{item.gear.join(', ')}</p>
+          {copy.gearNote && (
+            <p class="text-neutral-600 italic">{copy.gearNote}</p>
+          )}
+        </div>
+      </div>
+    )}
+    
+    <!-- Bottom Divider -->
+    <div class="se-divider mt-auto"></div>
   </div>
 </div>

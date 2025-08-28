@@ -13,8 +13,9 @@ export interface ClassItem {
   copy: Record<Locale, {
     name: string;
     teaser: string;
-    body: string[];
+    description: string;
     forWhom: string[];
+    gearNote: string;
   }>;
 }
 

@@ -7,29 +7,15 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Sparkles","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Jiu-Jitsu Podstawy",
-          "teaser": "Idealne zajęcia na start.",
-          "body": [
-            "Skupiamy się na fundamentach walki w parterze: pozycje, kontrola, poddania.",
-            "Możesz dołączyć w dowolnym momencie, bez doświadczenia."
-          ],
-          "forWhom": [
-            "Początkujący, którzy chcą nauczyć się podstaw",
-            "Zaawansowani, którzy chcą poprawić fundamenty"
-          ]
-        },
         "en": {
           "name": "Jiu-Jitsu Fundamentals",
-          "teaser": "Perfect first step.",
-          "body": [
-            "We focus on ground-fighting fundamentals: positions, control, and submissions.",
-            "Join anytime, no experience required."
-          ],
+          "teaser": "Want to start your jiu-jitsu journey? This is the perfect class for you!",
+          "description": "Ground fighting fundamentals: basic positions, control, and submissions. Join anytime – no experience required.",
           "forWhom": [
-            "Beginners who want to learn the basics",
-            "Experienced athletes polishing fundamentals"
-          ]
+            "Complete beginners who want to learn jiu-jitsu from scratch",
+            "More experienced practitioners who want to strengthen their fundamentals and perfect their basics"
+          ],
+          "gearNote": ""
         }
       }
     },
@@ -40,29 +26,15 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Footprints","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Zapasy / Jiu‑Jitsu",
-          "teaser": "Stań się kompletnym grapplerem.",
-          "body": [
-            "Uczymy sprowadzeń do parteru z elementami zapasów i judo oraz łączenia ich z walką w parterze.",
-            "Pierwsza część: obalenia i rzuty od podstaw. Druga: zaawansowane zagadnienia parteru."
-          ],
-          "forWhom": [
-            "Każdy, kto chce nauczyć się zapasów w kontekście BJJ",
-            "Poziom open — odpowiednie dla wszystkich"
-          ]
-        },
         "en": {
-          "name": "Wrestling / Jiu‑Jitsu",
-          "teaser": "Become a complete grappler.",
-          "body": [
-            "Takedowns with wrestling and judo elements and how to blend them into ground fighting.",
-            "First half: entries, throws, finishes. Second: advanced groundwork."
-          ],
+          "name": "Wrestling/Jiu-Jitsu",
+          "teaser": "Want to become a complete grappler? This is a training you can't miss!",
+          "description": "Wrestling and judo takedowns + ground fighting. First half: throws from basics. Second half: advanced ground concepts.",
           "forWhom": [
-            "Anyone wanting wrestling skills for BJJ",
-            "All levels welcome"
-          ]
+            "Anyone who wants to learn wrestling skills and their application in jiu-jitsu context",
+            "Both beginners and advanced practitioners – training adapted for all skill levels"
+          ],
+          "gearNote": ""
         }
       }
     },
@@ -73,27 +45,15 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Brain","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Jiu‑Jitsu Zaawansowani",
-          "teaser": "Wyższa intensywność, głębsze detale.",
-          "body": [
-            "Zaawansowane aspekty walki w parterze, nacisk na decyzje i łączenie akcji."
-          ],
-          "forWhom": [
-            "Osoby z doświadczeniem w BJJ",
-            "Przygotowujący się do zawodów"
-          ]
-        },
         "en": {
-          "name": "Jiu‑Jitsu Advanced",
-          "teaser": "Higher intensity. Sharper details.",
-          "body": [
-            "Advanced ground concepts with emphasis on decision making and chaining."
-          ],
+          "name": "Jiu-Jitsu Advanced",
+          "teaser": "Higher intensity training focusing on more advanced aspects of ground fighting.",
+          "description": "High-intensity training: advanced techniques, strategy, competition preparation.",
           "forWhom": [
-            "Practitioners with BJJ experience",
-            "Competitors in prep"
-          ]
+            "Experienced practitioners with solid jiu-jitsu foundation who want to refine their skills",
+            "Athletes preparing for competitions and tournaments"
+          ],
+          "gearNote": ""
         }
       }
     },
@@ -104,29 +64,15 @@
       "gear": ["Sports shirt", "Shorts without pockets", "Mouthguard", "8oz gloves", "Shin guards"],
       "icons": {"type":"Dumbbell","duration":"Clock","gear":"Package"},
       "copy": {
-        "pl": {
-          "name": "MMA Podstawy",
-          "teaser": "Pierwszy krok w MMA.",
-          "body": [
-            "Podstawy walki w stójce, zapasy i parter. Dołącz w każdej chwili.",
-            "Na pierwsze treningi sprzęt pożyczymy na miejscu."
-          ],
-          "forWhom": [
-            "Początkujący w MMA",
-            "Osoby chcące wzmocnić podstawy"
-          ]
-        },
         "en": {
           "name": "MMA Fundamentals",
-          "teaser": "Start MMA the right way.",
-          "body": [
-            "Striking basics, wrestling and groundwork. Join anytime.",
-            "No gear for the first sessions? We'll lend it."
-          ],
+          "teaser": "Have no MMA experience and want to start training? This is the perfect group for your first session!",
+          "description": "MMA fundamentals: striking, wrestling, ground fighting. Well-rounded introduction to all combat ranges. Join anytime.",
           "forWhom": [
-            "Beginners to MMA",
-            "Athletes polishing basics"
-          ]
+            "Complete beginners who want to learn the basics of mixed martial arts",
+            "More experienced athletes from other disciplines who want to develop well-rounded MMA skills"
+          ],
+          "gearNote": "You don't need any equipment for your first sessions - we'll lend it to you on site :)"
         }
       }
     },
@@ -135,31 +81,17 @@
       "level": "podstawy",
       "durationMin": 60,
       "gear": ["Sports shirt", "Shorts without pockets", "Mouthguard", "10oz+ gloves", "Shin guards"],
-      "icons": {"type":"Dumbbell","duration":"Clock","gear":"Package"},
+      "icons": {"type":"Zap","duration":"Clock","gear":"Package"},
       "copy": {
-        "pl": {
-          "name": "Kickboxing Podstawy",
-          "teaser": "Idealny start w kickboxingu.",
-          "body": [
-            "Skupiamy się na podstawach kickboxingu; można dołączyć w każdej chwili.",
-            "Na pierwsze treningi sprzęt pożyczymy na miejscu."
-          ],
-          "forWhom": [
-            "Początkujący w kickboxingu",
-            "Osoby chcące poprawić podstawy"
-          ]
-        },
         "en": {
           "name": "Kickboxing Fundamentals",
-          "teaser": "Your first kickboxing class.",
-          "body": [
-            "Core kickboxing skills with an always‑open program.",
-            "We can lend gear for your first sessions."
-          ],
+          "teaser": "Have no kickboxing experience but would like to start training? This is the perfect group for your first session!",
+          "description": "Fundamental kickboxing: stance, footwork, punches, kicks, and defense. Technique over power. Join anytime.",
           "forWhom": [
-            "Kickboxing beginners",
-            "People improving fundamentals"
-          ]
+            "Complete beginners who want to learn kickboxing from the ground up",
+            "More experienced practitioners who want to refine their fundamental techniques and improve their striking basics"
+          ],
+          "gearNote": "You don't need any equipment for your first sessions - we'll lend it to you on site :)"
         }
       }
     },
@@ -170,21 +102,14 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Users","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Jiu‑Jitsu — wszystkie grupy",
-          "teaser": "Miks podstaw i zaawansowanych tematów.",
-          "body": [
-            "Łączymy naukę podstaw z bardziej zaawansowanymi zagadnieniami oraz elementami zapasów."
-          ],
-          "forWhom": ["Wszystkie poziomy zaawansowania"]
-        },
         "en": {
-          "name": "Jiu‑Jitsu — all levels",
-          "teaser": "Blend of fundamentals and advanced.",
-          "body": [
-            "Mix of essentials, advanced topics and wrestling elements."
+          "name": "Jiu-Jitsu All Levels",
+          "teaser": "A training where we mix learning jiu-jitsu fundamentals with advanced topics and wrestling elements.",
+          "description": "Mix of fundamentals and advanced techniques + wrestling elements. Beginners and experienced practitioners train together.",
+          "forWhom": [
+            "Perfect for all skill levels – beginners learn from experienced partners while advanced practitioners refine their teaching and fundamentals"
           ],
-          "forWhom": ["Suitable for all levels"]
+          "gearNote": ""
         }
       }
     },
@@ -195,21 +120,14 @@
       "gear": [],
       "icons": {"type":"CalendarClock","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Wolna mata",
-          "teaser": "Twoja przestrzeń do pracy.",
-          "body": [
-            "Niezorganizowane zajęcia: trenuj technikę, rób sparingi, pytaj trenera."
-          ],
-          "forWhom": ["Wszystkie poziomy"]
-        },
         "en": {
-          "name": "Open mat",
-          "teaser": "Your time, your drills.",
-          "body": [
-            "Unstructured session: drill, spar, ask the coach."
+          "name": "Open Mat",
+          "teaser": "The training is not structured - you can come at any time, find a training partner, work on technique, do sparring - you have complete freedom in these sessions.",
+          "description": "Self-directed training: drill techniques, sparring, conditioning. Coach always present for guidance and safety.",
+          "forWhom": [
+            "Suitable for all levels – from beginners wanting extra practice time to advanced athletes preparing for competition"
           ],
-          "forWhom": ["All levels"]
+          "gearNote": ""
         }
       }
     },
@@ -220,21 +138,15 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Baby","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Gry i zabawy (3–5 lat)",
-          "teaser": "Ruch przez zabawę.",
-          "body": [
-            "Zajęcia rozwijające koordynację, równowagę i pewność siebie w formie gier i ćwiczeń z bezpiecznymi elementami sportów walki."
-          ],
-          "forWhom": ["Dzieci 3–5 lat", "Idealne na pierwszy krok"]
-        },
         "en": {
-          "name": "Games & play (3–5)",
-          "teaser": "Movement through play.",
-          "body": [
-            "Build coordination, balance and confidence with safe, play‑based combat‑sport elements."
+          "name": "Games and Play with Martial Arts Elements",
+          "teaser": "Classes created especially for our youngest warriors.",
+          "description": "40 minutes of fun developing coordination, balance, and confidence. Safe games with basic martial arts elements.",
+          "forWhom": [
+            "Children aged 3–5 years who are ready for their first martial arts experience",
+            "Perfect as an introduction to structured physical activity and martial arts"
           ],
-          "forWhom": ["Kids 3–5", "Great first step"]
+          "gearNote": ""
         }
       }
     },
@@ -245,21 +157,14 @@
       "gear": ["Sports shirt", "Shorts without pockets"],
       "icons": {"type":"Baby","duration":"Clock","gear":"Shirt"},
       "copy": {
-        "pl": {
-          "name": "Jiu‑Jitsu dla dzieci (6–12)",
-          "teaser": "Dyscyplina, szacunek, pewność siebie.",
-          "body": [
-            "Techniki dostosowane do wieku i umiejętności, praca w parach, bezpieczna i wspierająca atmosfera."
-          ],
-          "forWhom": ["Dzieci 6–12 lat"]
-        },
         "en": {
-          "name": "Kids' Jiu‑Jitsu (6–12)",
-          "teaser": "Discipline, respect, confidence.",
-          "body": [
-            "Age‑appropriate techniques, partner work, safe and supportive environment."
+          "name": "Jiu-Jitsu for Kids",
+          "teaser": "Training designed for young warriors who want to learn discipline, respect, and confidence.",
+          "description": "Age-appropriate Jiu-Jitsu techniques, partner cooperation, discipline and respect. Safe and supportive environment.",
+          "forWhom": [
+            "Children aged 6–12 years who are ready to learn structured martial arts techniques and discipline"
           ],
-          "forWhom": ["Kids 6–12"]
+          "gearNote": ""
         }
       }
     }

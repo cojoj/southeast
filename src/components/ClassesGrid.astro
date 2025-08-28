@@ -10,193 +10,39 @@ export interface Props {
 const { classes, locale } = Astro.props;
 const isPolish = locale === 'pl';
 
-// Get unique levels and durations for filters
-const levels = [...new Set(classes.map(c => c.level))];
-const durations = [...new Set(classes.map(c => c.durationMin))].sort((a, b) => a - b);
-
-const levelLabels = {
-  pl: {
-    podstawy: 'Podstawy',
-    wszystkie: 'Wszystkie poziomy',
-    zaawansowani: 'Zaawansowani',
-    dzieci: 'Dzieci',
-    mieszane: 'Mieszane'
-  },
-  en: {
-    podstawy: 'Basics',
-    wszystkie: 'All levels',
-    zaawansowani: 'Advanced',
-    dzieci: 'Kids',
-    mieszane: 'Mixed'
-  }
-};
+// Separate adult and kids classes for better organization
+const adultClasses = classes.filter(c => c.level !== 'dzieci');
+const kidsClasses = classes.filter(c => c.level === 'dzieci');
 ---
 
 <div class="classes-grid-container">
-  <!-- Filters -->
-  <div class="mb-8">
-    <div class="flex flex-wrap gap-4 mb-6">
-      <!-- Level Filter -->
-      <div class="filter-group">
-        <label class="block text-sm font-semibold text-se-ink mb-2">
-          {isPolish ? 'Poziom' : 'Level'}
-        </label>
-        <select id="level-filter" class="filter-select px-3 py-2 border border-se-accent rounded-lg bg-white text-se-ink">
-          <option value="">{isPolish ? 'Wszystkie poziomy' : 'All levels'}</option>
-          {levels.map(level => (
-            <option value={level}>{levelLabels[locale][level]}</option>
-          ))}
-        </select>
-      </div>
-      
-      <!-- Duration Filter -->
-      <div class="filter-group">
-        <label class="block text-sm font-semibold text-se-ink mb-2">
-          {isPolish ? 'Długość' : 'Duration'}
-        </label>
-        <select id="duration-filter" class="filter-select px-3 py-2 border border-se-accent rounded-lg bg-white text-se-ink">
-          <option value="">{isPolish ? 'Wszystkie długości' : 'All durations'}</option>
-          {durations.map(duration => (
-            <option value={duration.toString()}>{duration} min</option>
-          ))}
-        </select>
+  
+  {/* Adult Classes Section */}
+  {adultClasses.length > 0 && (
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold text-se-ink mb-6 text-center">
+        {isPolish ? 'Treningi dla dorosłych' : 'Adult Training'}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {adultClasses.map((item) => (
+          <ClassCard item={item} locale={locale} />
+        ))}
       </div>
     </div>
-    
-    <!-- Active Filters Display -->
-    <div id="active-filters" class="hidden flex flex-wrap gap-2 mb-4">
-      <span class="text-sm text-neutral-600">{isPolish ? 'Aktywne filtry:' : 'Active filters:'}</span>
-    </div>
-  </div>
+  )}
   
-  <!-- Grid -->
-  <div id="classes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {classes.map((item) => (
-      <div class="class-item" 
-           data-level={item.level} 
-           data-duration={item.durationMin.toString()}>
-        <ClassCard item={item} locale={locale} />
+  {/* Kids Classes Section */}
+  {kidsClasses.length > 0 && (
+    <div>
+      <h2 class="text-2xl font-semibold text-se-ink mb-6 text-center">
+        {isPolish ? 'Treningi dla dzieci' : 'Kids Training'}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {kidsClasses.map((item) => (
+          <ClassCard item={item} locale={locale} />
+        ))}
       </div>
-    ))}
-  </div>
+    </div>
+  )}
   
-  <!-- No results message -->
-  <div id="no-results" class="hidden text-center py-12">
-    <p class="text-neutral-600">
-      {isPolish ? 'Nie znaleziono zajęć pasujących do wybranych kryteriów.' : 'No classes found matching the selected criteria.'}
-    </p>
-  </div>
 </div>
-
-<script>
-  function initializeFilters() {
-    const levelFilter = document.getElementById('level-filter') as HTMLSelectElement;
-    const durationFilter = document.getElementById('duration-filter') as HTMLSelectElement;
-    const classItems = document.querySelectorAll('.class-item') as NodeListOf<HTMLElement>;
-    const activeFiltersContainer = document.getElementById('active-filters') as HTMLElement;
-    const noResultsMessage = document.getElementById('no-results') as HTMLElement;
-    
-    function updateFilters() {
-      const selectedLevel = levelFilter.value;
-      const selectedDuration = durationFilter.value;
-      
-      let visibleCount = 0;
-      
-      classItems.forEach(item => {
-        const itemLevel = item.dataset.level;
-        const itemDuration = item.dataset.duration;
-        
-        const levelMatch = !selectedLevel || itemLevel === selectedLevel;
-        const durationMatch = !selectedDuration || itemDuration === selectedDuration;
-        
-        if (levelMatch && durationMatch) {
-          item.style.display = 'block';
-          visibleCount++;
-        } else {
-          item.style.display = 'none';
-        }
-      });
-      
-      // Show/hide no results message
-      if (visibleCount === 0) {
-        noResultsMessage.classList.remove('hidden');
-      } else {
-        noResultsMessage.classList.add('hidden');
-      }
-      
-      // Update active filters display
-      updateActiveFilters(selectedLevel, selectedDuration);
-    }
-    
-    function updateActiveFilters(level: string, duration: string) {
-      const hasFilters = level || duration;
-      
-      if (hasFilters) {
-        activeFiltersContainer.classList.remove('hidden');
-        
-        // Clear existing filter chips
-        const existingChips = activeFiltersContainer.querySelectorAll('.filter-chip');
-        existingChips.forEach(chip => chip.remove());
-        
-        // Add filter chips
-        if (level) {
-          const levelOption = levelFilter.querySelector(`option[value="${level}"]`) as HTMLOptionElement;
-          addFilterChip(levelOption.textContent || level, () => {
-            levelFilter.value = '';
-            updateFilters();
-          });
-        }
-        
-        if (duration) {
-          addFilterChip(`${duration} min`, () => {
-            durationFilter.value = '';
-            updateFilters();
-          });
-        }
-      } else {
-        activeFiltersContainer.classList.add('hidden');
-      }
-    }
-    
-    function addFilterChip(text: string, onRemove: () => void) {
-      const chip = document.createElement('span');
-      chip.className = 'filter-chip inline-flex items-center gap-1 px-2 py-1 bg-se-accent text-se-ink text-xs rounded-full';
-      chip.innerHTML = `
-        ${text}
-        <button type="button" class="hover:bg-black hover:bg-opacity-10 rounded-full p-0.5">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      `;
-      
-      const removeBtn = chip.querySelector('button');
-      removeBtn?.addEventListener('click', onRemove);
-      
-      activeFiltersContainer.appendChild(chip);
-    }
-    
-    // Event listeners
-    levelFilter.addEventListener('change', updateFilters);
-    durationFilter.addEventListener('change', updateFilters);
-  }
-  
-  // Initialize when DOM is loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeFilters);
-  } else {
-    initializeFilters();
-  }
-</script>
-
-<style>
-  .filter-select {
-    min-width: 150px;
-  }
-  
-  .filter-select:focus {
-    outline: none;
-    border-color: var(--color-se-accent);
-    box-shadow: 0 0 0 3px rgba(188, 198, 217, 0.1);
-  }
-</style>

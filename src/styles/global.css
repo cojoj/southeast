@@ -190,15 +190,37 @@ u, .underline {
 .class-card {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--color-se-accent);
-  border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .level-chip {
   font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   border: 1px solid var(--color-se-accent);
-  background-color: rgba(188, 198, 217, 0.1);
+  background-color: rgba(188, 198, 217, 0.15);
   color: var(--color-se-ink);
+  white-space: nowrap;
+}
+
+/* Enhanced card hover effects */
+.classes-grid-container .group:hover .class-card {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Section headings */
+.classes-grid-container h2 {
+  position: relative;
+}
+
+.classes-grid-container h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-se-accent);
+  margin: 0.75rem auto;
+  border-radius: 1px;
 }
