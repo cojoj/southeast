@@ -15,7 +15,7 @@ import ScheduleWidget from '../../components/ScheduleWidget.astro'
 		<meta name="description" content="Southeast Jiu-Jitsu class schedule in Kraków. Check training times for Jiu-Jitsu, MMA and Kickboxing." />
 	</head>
 	<body class="bg-additional">
-		<Header currentLang="en" />
+		<Header currentLang="en" currentUrl={Astro.url.pathname} />
 		<main class="pt-[75px]">
 			<ScheduleWidget />
 		</main>

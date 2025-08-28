@@ -38,7 +38,7 @@ const classes = (classesData as ClassesData).classes
 		<link rel="alternate" hreflang="pl" href="https://southeastjj.pl/treningi" />
 	</head>
 	<body class="bg-se">
-		<Header currentLang="pl" />
+		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
 		
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->

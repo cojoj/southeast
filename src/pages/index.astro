@@ -16,7 +16,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 		<meta name="description" content="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania." />
 	</head>
 	<body class="bg-additional">
-		<Header currentLang="pl" />
+		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
 		<main class="relative min-h-screen">
 			<!-- Hero Section -->
 			<section class="relative min-h-screen overflow-hidden">

@@ -15,7 +15,7 @@ import ScheduleWidget from '../components/ScheduleWidget.astro'
 		<meta name="description" content="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing." />
 	</head>
 	<body class="bg-additional">
-		<Header currentLang="pl" />
+		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
 		<main class="pt-[75px]">
 			<ScheduleWidget />
 		</main>

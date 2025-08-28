@@ -1,11 +1,19 @@
 ---
+import { getLanguageSwitchUrl, getCurrentLanguage } from '../utils/language';
+
 export interface Props {
   currentLang?: 'pl' | 'en';
+  currentUrl?: string;
 }
 
-const { currentLang = 'pl' } = Astro.props;
+const { currentLang = 'pl', currentUrl = Astro.url.pathname } = Astro.props;
 
 const isPolish = currentLang === 'pl';
+const baseUrl = import.meta.env.BASE_URL;
+
+// Generate language switch URLs based on current page
+const polishUrl = currentLang === 'en' ? getLanguageSwitchUrl(currentUrl, baseUrl) : currentUrl;
+const englishUrl = currentLang === 'pl' ? getLanguageSwitchUrl(currentUrl, baseUrl) : currentUrl;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-primary h-[75px]">
@@ -56,11 +64,11 @@ const isPolish = currentLang === 'pl';
 
       <!-- Language Switcher -->
       <div class="flex items-center space-x-1 text-sm text-secondary">
-        <a href={`${import.meta.env.BASE_URL}`} class={`transition-all duration-200 hover:font-semibold ${isPolish ? 'font-semibold' : 'font-normal'}`}>
+        <a href={polishUrl} class={`transition-all duration-200 hover:font-semibold ${isPolish ? 'font-semibold' : 'font-normal'}`}>
           PL
         </a>
         <span>|</span>
-        <a href={`${import.meta.env.BASE_URL}en/`} class={`transition-all duration-200 hover:font-semibold ${!isPolish ? 'font-semibold' : 'font-normal'}`}>
+        <a href={englishUrl} class={`transition-all duration-200 hover:font-semibold ${!isPolish ? 'font-semibold' : 'font-normal'}`}>
           EN
         </a>
       </div>
