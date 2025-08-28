@@ -1,0 +1,16 @@
+{
+  "name": "Southeast Jiu-Jitsu",
+  "short_name": "Southeast BJJ",
+  "description": "Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
+  "display": "standalone",
+  "start_url": "/"
+}
