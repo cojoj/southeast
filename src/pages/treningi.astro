@@ -5,15 +5,13 @@ import Footer from '../components/Footer.astro'
 import CommunitySection from '../components/CommunitySection.astro'
 import Hero from '../components/Hero.astro'
 import ClassesGrid from '../components/ClassesGrid.astro'
-import InfoBlock from '../components/InfoBlock.astro'
+import CLASection from '../components/CLASection.astro'
 
 // Import data
 import classesData from '../data/classes.pl.json'
-import infoData from '../data/info.pl.json'
-import type { ClassesData, InfoData } from '../types'
+import type { ClassesData } from '../types'
 
 const classes = (classesData as ClassesData).classes
-const info = (infoData as InfoData).info
 ---
 
 <html lang="pl">
@@ -62,10 +60,8 @@ const info = (infoData as InfoData).info
 				</div>
 			</section>
 			
-			<!-- Info Sections -->
-			{info.map((block) => (
-				<InfoBlock block={block} locale="pl" />
-			))}
+			<!-- CLA Section -->
+			<CLASection currentLang="pl" />
 			
 			<!-- Community Section -->
 			<CommunitySection 

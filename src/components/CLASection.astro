@@ -1,0 +1,139 @@
+---
+import type { Locale } from '../types';
+
+export interface Props {
+  currentLang: Locale;
+}
+
+const { currentLang } = Astro.props;
+
+const content = {
+  pl: {
+    title: "Metoda treningowa",
+    sections: [
+      {
+        question: "Czym jest Constraints-Led Approach?",
+        answer: "Nowoczesne podejście do treningu, które wykorzystuje walki zadaniowe z odpowiednio dobranymi ograniczeniami do nauki umiejętności. Trenujący zamiast powtarzania \"idealnej techniki\" w izolacji, uczy się w środowisku najbardziej zbliżonym do walki."
+      },
+      {
+        question: "Co to w praktyce oznacza dla Ciebie?",
+        bullets: [
+          "Szybsze przyswajanie umiejętności, bo zamiast suchego powtarzania technik, od razu uczysz się dostosowywać do zmieniających się warunków w walce",
+          "Więcej zabawy i zaangażowania na treningu, bo uczysz się poprzez zadania i wyzwania",
+          "Większą pewność siebie, bo trening odzwierciedla realne środowisko walki"
+        ]
+      },
+      {
+        question: "Co daje CLA w sportach walki?",
+        bullets: [
+          "Trening w realnych warunkach walki z oporującym przeciwnikiem",
+          "Nauka szybkiego reagowania i rozwiązywania problemów w dynamicznie zmieniającym się środowisku walki",
+          "Przestrzeń do tworzenia własnego stylu walki opartego na doświadczeniach",
+          "Promuje kreatywność i indywidualność",
+          "Lepszą i szybszą adaptację do zmieniających się warunków walki i stylów przeciwników"
+        ]
+      },
+      {
+        question: "Na czym polega?",
+        answer: "Trening opiera się na walkach zadaniowych z odpowiednio dobranymi ograniczeniami — zmiana przestrzeni, zasad czy tempa — by nauczyć Cię adaptacji do dynamicznego środowiska walki."
+      }
+    ]
+  },
+  en: {
+    title: "Training Method",
+    sections: [
+      {
+        question: "What is Constraints-Led Approach?",
+        answer: "A modern training approach that uses task-based sparring with carefully selected constraints to develop skills. Instead of drilling \"perfect technique\" in isolation, you learn in an environment that most closely resembles real combat."
+      },
+      {
+        question: "What does this mean for you in practice?",
+        bullets: [
+          "Faster skill acquisition, because instead of dry technique repetition, you immediately learn to adapt to changing combat conditions",
+          "More fun and engagement in training, because you learn through tasks and challenges",
+          "Greater confidence, because training reflects the real combat environment"
+        ]
+      },
+      {
+        question: "What does CLA bring to combat sports?",
+        bullets: [
+          "Training in real combat conditions with a resisting opponent",
+          "Learning quick reactions and problem-solving in a dynamically changing combat environment",
+          "Space to create your own fighting style based on experience",
+          "Promotes creativity and individuality",
+          "Better and faster adaptation to changing combat conditions and opponent styles"
+        ]
+      },
+      {
+        question: "What does it involve?",
+        answer: "Training is based on task-based sparring with carefully selected constraints — changing space, rules, or pace — to teach you adaptation to the dynamic combat environment."
+      }
+    ]
+  }
+};
+
+const copy = content[currentLang];
+---
+
+<section class="cla-section py-12">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Main Title -->
+      <h2 class="text-2xl md:text-3xl font-semibold text-se-ink mb-8 text-center">
+        {copy.title}
+      </h2>
+      
+      <!-- Content Sections -->
+      <div class="space-y-8">
+        {copy.sections.map((section) => (
+          <div class="cla-question-block">
+            <!-- Question/Heading -->
+            <h3 class="text-xl md:text-2xl font-medium text-se-ink mb-4">
+              {section.question}
+            </h3>
+            
+            <!-- Answer paragraph if exists -->
+            {section.answer && (
+              <p class="text-base md:text-lg leading-relaxed text-neutral-800 mb-4">
+                {section.answer}
+              </p>
+            )}
+            
+            <!-- Bullet points if exist -->
+            {section.bullets && section.bullets.length > 0 && (
+              <ul class="space-y-3">
+                {section.bullets.map((bullet) => (
+                  <li class="flex items-start gap-3">
+                    <div class="w-1.5 h-1.5 rounded-full bg-se-accent mt-2.5 flex-shrink-0"></div>
+                    <span class="text-base leading-relaxed text-neutral-800">
+                      {bullet}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cla-section {
+    background: linear-gradient(to bottom, 
+      rgba(232, 231, 230, 0.3) 0%, 
+      rgba(232, 231, 230, 0.1) 100%
+    );
+    position: relative;
+  }
+  
+  
+  .cla-question-block {
+    margin-bottom: 2rem;
+  }
+  
+  .cla-question-block:last-child {
+    margin-bottom: 0;
+  }
+</style>

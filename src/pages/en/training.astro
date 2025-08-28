@@ -5,15 +5,13 @@ import Footer from '../../components/Footer.astro'
 import CallToAction from '../../components/CallToAction.astro'
 import Hero from '../../components/Hero.astro'
 import ClassesGrid from '../../components/ClassesGrid.astro'
-import InfoBlock from '../../components/InfoBlock.astro'
+import CLASection from '../../components/CLASection.astro'
 
 // Import data
 import classesData from '../../data/classes.en.json'
-import infoData from '../../data/info.en.json'
-import type { ClassesData, InfoData } from '../../types'
+import type { ClassesData } from '../../types'
 
 const classes = (classesData as ClassesData).classes
-const info = (infoData as InfoData).info
 ---
 
 <html lang="en">
@@ -62,10 +60,8 @@ const info = (infoData as InfoData).info
 				</div>
 			</section>
 			
-			<!-- Info Sections -->
-			{info.map((block) => (
-				<InfoBlock block={block} locale="en" />
-			))}
+			<!-- CLA Section -->
+			<CLASection currentLang="en" />
 			
 			<!-- Call to Action -->
 			<section class="py-16 md:py-20">
