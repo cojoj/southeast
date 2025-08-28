@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://cojoj.github.io",
-  base: "/Southeast",
+  base: "/southeast",
 
   i18n: {
     defaultLocale: "pl",
