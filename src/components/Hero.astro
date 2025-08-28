@@ -12,7 +12,7 @@ export interface Props {
   backgroundImage?: string;
 }
 
-const { currentLang, title, subtitle, backgroundImage = '/hero.jpg' } = Astro.props;
+const { currentLang, title, subtitle, backgroundImage = `${import.meta.env.BASE_URL}hero.jpg` } = Astro.props;
 
 const defaultContent = {
   pl: {

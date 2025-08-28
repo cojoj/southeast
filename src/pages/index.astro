@@ -9,7 +9,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 <html lang="pl">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Southeast Jiu-Jitsu</title>
@@ -24,15 +24,15 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 				<video 
 					id="hero-video"
 					class="absolute inset-0 w-full h-full object-cover object-[center_35%]"
-					style="background-image: url('/hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);"
+					style={`background-image: url('${import.meta.env.BASE_URL}hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);`}
 					autoplay 
 					muted 
 					loop 
 					playsinline
 					preload="metadata"
 				>
-					<source src="/alan_seminar_highlights.webm" type="video/webm">
-					<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
+					<source src={`${import.meta.env.BASE_URL}alan_seminar_highlights.webm`} type="video/webm">
+					<source src={`${import.meta.env.BASE_URL}alan_seminar_highlights_compressed.mp4`} type="video/mp4">
 				</video>
 				
 				<!-- Dark Overlay for Contrast -->
@@ -44,7 +44,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 						<!-- Logo -->
 						<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
 							<img 
-								src="/logos/logo_white_jj.svg" 
+								src={`${import.meta.env.BASE_URL}logos/logo_white_jj.svg`} 
 								alt="Southeast Jiu-Jitsu Logo" 
 								class="w-full h-auto"
 							/>
