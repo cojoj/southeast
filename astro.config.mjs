@@ -5,8 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://cojoj.github.io",
-  base: process.env.NODE_ENV === "production" ? "/southeast" : "/",
+  site: "https://southeastjj.pl",
   trailingSlash: "always",
 
   i18n: {
