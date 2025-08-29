@@ -107,62 +107,11 @@ import MarketingOverview from '../../components/MarketingOverview.astro'
 				const video = document.getElementById('hero-video');
 				if (!video) return;
 
-				// Check connection speed if available
-				const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-				let isSlowConnection = false;
-
-				if (connection) {
-					// Consider 2G, slow-2g, or effectiveType slow-2g as slow connections
-					isSlowConnection = connection.effectiveType === 'slow-2g' || 
-									 connection.effectiveType === '2g' ||
-									 (connection.downlink && connection.downlink < 1.5);
-				}
-
-				// For slow connections, keep just the background image
-				if (isSlowConnection) {
-					video.style.display = 'none';
-					console.log('Slow connection detected, video disabled');
-					return;
-				}
-
-				// Add loading feedback
-				video.addEventListener('loadstart', function() {
-					console.log('Video loading started');
-				});
-
-				video.addEventListener('canplay', function() {
-					console.log('Video can start playing');
-				});
-
-				video.addEventListener('waiting', function() {
-					console.log('Video buffering...');
-				});
-
-				video.addEventListener('playing', function() {
-					console.log('Video playing');
-				});
-
-				// Error handling
+				// Basic error handling
 				video.addEventListener('error', function(e) {
 					console.error('Video error:', e);
-					// Fallback to background image
 					video.style.display = 'none';
 				});
-
-				// Progressive enhancement: Start loading when video enters viewport
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							// Video is in viewport, ensure it starts loading
-							if (video.readyState === 0) {
-								video.load();
-							}
-							observer.unobserve(video);
-						}
-					});
-				});
-
-				observer.observe(video);
 			});
 		</script>
 	</body>
