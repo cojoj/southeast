@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.southeastjj.pl",
+  site: "https://southeastjj.pl",
   trailingSlash: "always",
 
   i18n: {
