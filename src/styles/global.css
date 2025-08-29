@@ -5,6 +5,34 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Enhanced anchor positioning to handle loading delays */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Ensure anchor targets have proper spacing from fixed header */
+[id] {
+  scroll-margin-top: 85px; /* 75px header + 10px buffer */
+}
+
+/* Special handling for sections that already have scroll-margin-top */
+section[id] {
+  scroll-margin-top: 85px;
+}
+
+/* Prevent layout shifts during loading */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure video doesn't cause layout shifts */
+video {
+  display: block;
+}
+
 /* AreaNormal Font Family */
 @font-face {
   font-family: 'AreaNormal';

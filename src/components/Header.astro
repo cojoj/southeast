@@ -39,7 +39,7 @@ function isActiveLink(linkPath: string): boolean {
     <!-- Logo -->
     <div class="flex items-center">
       <a href={isPolish ? `${import.meta.env.BASE_URL}` : `${import.meta.env.BASE_URL}en/`} class="block">
-        <img src={`${import.meta.env.BASE_URL}logos/logo_black.svg`} alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" />
+        <img src={`${import.meta.env.BASE_URL}logos/logo_black.svg`} alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" width="180" height="60" />
       </a>
     </div>
 
@@ -226,28 +226,257 @@ function isActiveLink(linkPath: string): boolean {
     });
   });
 
-  // Handle anchor links on page load
+  // Smart asset detection for anchor link scrolling
+  function waitForCriticalAssets(targetElement) {
+    return new Promise((resolve) => {
+      const assetsToWait = [];
+      
+      // Get connection info for adaptive timeouts
+      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      const isFastConnection = !connection || connection.effectiveType === '4g' || (connection.downlink && connection.downlink > 10);
+      const baseTimeout = isFastConnection ? 800 : 1500; // Adaptive base timeout
+      
+      // Only wait for hero video if we're scrolling to a target above the fold
+      const targetRect = targetElement ? targetElement.getBoundingClientRect() : null;
+      const targetY = targetRect ? targetRect.top + window.scrollY : 0;
+      const isAboveFold = targetY < window.innerHeight;
+      
+      const video = document.getElementById('hero-video');
+      if (isAboveFold && video && video.readyState < 3) {
+        assetsToWait.push(new Promise(resolve => {
+          if (video.readyState >= 3) {
+            resolve();
+          } else {
+            video.addEventListener('canplaythrough', resolve, { once: true });
+            video.addEventListener('error', resolve, { once: true });
+            // Longer timeout for video on slow connections
+            setTimeout(resolve, baseTimeout * 2);
+          }
+        }));
+      }
+      
+      // Only wait for images that could affect layout between current position and target
+      const currentY = window.scrollY;
+      const scrollRange = [Math.min(currentY, targetY), Math.max(currentY, targetY) + window.innerHeight];
+      
+      const criticalImages = Array.from(document.querySelectorAll('img')).filter(img => {
+        // Skip lazy-loaded images that are far from target
+        if (img.loading === 'lazy') {
+          const imgRect = img.getBoundingClientRect();
+          const imgY = imgRect.top + window.scrollY;
+          return imgY >= scrollRange[0] - window.innerHeight && imgY <= scrollRange[1] + window.innerHeight;
+        }
+        // Always include eager-loaded images
+        return true;
+      });
+      
+      criticalImages.forEach(img => {
+        if (!img.complete) {
+          assetsToWait.push(new Promise(resolve => {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+            // Shorter timeout for images with dimensions (less layout shift risk)
+            const hasExplicitDimensions = img.hasAttribute('width') && img.hasAttribute('height');
+            const timeoutMultiplier = hasExplicitDimensions ? 0.5 : 1;
+            setTimeout(resolve, baseTimeout * timeoutMultiplier);
+          }));
+        }
+      });
+      
+      // If no critical assets to wait for, resolve quickly
+      if (assetsToWait.length === 0) {
+        // Still add small delay to ensure paint is complete
+        setTimeout(resolve, 50);
+      } else {
+        // Wait for critical assets with adaptive timeout
+        const maxTimeout = isFastConnection ? 2000 : 4000;
+        Promise.race([
+          Promise.all(assetsToWait),
+          new Promise(resolve => setTimeout(resolve, maxTimeout))
+        ]).then(resolve);
+      }
+    });
+  }
+  
+  function scrollToAnchor(targetId, retryCount = 0) {
+    const targetElement = document.getElementById(targetId);
+    
+    if (!targetElement) {
+      console.warn(`Anchor target #${targetId} not found`);
+      return;
+    }
+    
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Check if element is positioned correctly after scroll
+    const isCorrectlyPositioned = (el) => {
+      const rect = el.getBoundingClientRect();
+      const headerHeight = 85; // Account for scroll-margin-top
+      // Element is correctly positioned if it's near the expected position (within 20px tolerance)
+      return Math.abs(rect.top - headerHeight) < 20;
+    };
+    
+    // Progressive scroll strategy: Try CSS first, then JS as fallback
+    const scrollWithCSS = () => {
+      // Let CSS scroll-margin-top handle positioning
+      window.location.hash = targetId;
+    };
+    
+    const scrollWithJS = () => {
+      targetElement.scrollIntoView({ 
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    };
+    
+    // Try CSS approach first (instant, respects scroll-margin-top)
+    if (retryCount === 0) {
+      scrollWithCSS();
+      
+      // Check if CSS scroll worked after a brief delay
+      setTimeout(() => {
+        if (!isCorrectlyPositioned(targetElement)) {
+          console.log(`CSS scroll insufficient for #${targetId}, trying JS scroll`);
+          scrollWithJS();
+          
+          // Final verification
+          setTimeout(() => {
+            if (!isCorrectlyPositioned(targetElement) && retryCount < 2) {
+              console.log(`Retrying scroll to #${targetId}, attempt ${retryCount + 1}`);
+              scrollToAnchor(targetId, retryCount + 1);
+            }
+          }, prefersReducedMotion ? 100 : 500);
+        }
+      }, 100);
+    } else {
+      // Subsequent attempts use JS scrolling
+      scrollWithJS();
+      
+      setTimeout(() => {
+        if (!isCorrectlyPositioned(targetElement) && retryCount < 2) {
+          console.log(`Retrying scroll to #${targetId}, attempt ${retryCount + 1}`);
+          scrollToAnchor(targetId, retryCount + 1);
+        }
+      }, prefersReducedMotion ? 100 : 500);
+    }
+  }
+  
+  function showLoadingIndicator() {
+    // Only show for slow connections or if assets are actually loading
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSlowConnection = connection && (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g');
+    
+    if (!isSlowConnection) return null;
+    
+    const indicator = document.createElement('div');
+    indicator.id = 'scroll-loading-indicator';
+    indicator.innerHTML = `
+      <div style="
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.8); 
+        color: white; 
+        padding: 12px 20px; 
+        border-radius: 6px; 
+        font-size: 14px;
+        z-index: 9999;
+        pointer-events: none;
+      ">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="
+            width: 16px; 
+            height: 16px; 
+            border: 2px solid transparent; 
+            border-top: 2px solid white; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite;
+          "></div>
+          <span>Loading...</span>
+        </div>
+      </div>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    `;
+    document.body.appendChild(indicator);
+    return indicator;
+  }
+  
+  function hideLoadingIndicator(indicator) {
+    if (indicator && indicator.parentNode) {
+      indicator.parentNode.removeChild(indicator);
+    }
+  }
+  
+  async function handleAnchorLink(targetId) {
+    if (!targetId) return;
+    
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) {
+      console.warn(`Anchor target #${targetId} not found`);
+      return;
+    }
+    
+    // Show loading indicator for slow connections
+    const loadingIndicator = showLoadingIndicator();
+    
+    try {
+      // Wait for critical assets to load based on scroll target
+      await waitForCriticalAssets(targetElement);
+      
+      // Use progressive scroll strategy
+      scrollToAnchor(targetId);
+      
+    } finally {
+      // Hide loading indicator
+      setTimeout(() => hideLoadingIndicator(loadingIndicator), 100);
+    }
+  }
+  
   function handlePageLoadAnchor() {
     if (window.location.hash) {
       const targetId = window.location.hash.substring(1);
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        // Delay scroll to ensure page is fully rendered
-        setTimeout(() => {
-          targetElement.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }, 300);
-      }
+      handleAnchorLink(targetId);
     }
+  }
+  
+  // Handle anchor links clicked after page load
+  function handleAnchorClicks() {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href*="#"]');
+      if (!link) return;
+      
+      const href = link.getAttribute('href');
+      if (!href) return;
+      
+      // Check if it's a same-page anchor link
+      const url = new URL(href, window.location.href);
+      if (url.pathname === window.location.pathname && url.hash) {
+        e.preventDefault();
+        const targetId = url.hash.substring(1);
+        
+        // Update URL without triggering navigation
+        history.pushState(null, '', url.hash);
+        
+        handleAnchorLink(targetId);
+      }
+    });
   }
 
   // Run on page load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handlePageLoadAnchor);
+    document.addEventListener('DOMContentLoaded', () => {
+      handlePageLoadAnchor();
+      handleAnchorClicks();
+    });
   } else {
     handlePageLoadAnchor();
+    handleAnchorClicks();
   }
 </script>
