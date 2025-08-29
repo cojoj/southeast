@@ -26,27 +26,23 @@ const urlMapping: Record<string, string> = {
 /**
  * Get the equivalent URL in the other language
  * @param currentUrl - Current page URL
- * @param baseUrl - Base URL from Astro environment
  * @returns URL for the same page in the other language
  */
-export function getLanguageSwitchUrl(currentUrl: string, baseUrl: string): string {
-  // Remove base URL to get the clean path
-  const cleanUrl = currentUrl.replace(baseUrl.replace(/\/$/, ''), '');
-  
+export function getLanguageSwitchUrl(currentUrl: string): string {
   // Ensure the path starts with '/' and ends with '/'
-  const normalizedPath = cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`;
+  const normalizedPath = currentUrl.startsWith('/') ? currentUrl : `/${currentUrl}`;
   const pathWithSlash = normalizedPath.endsWith('/') ? normalizedPath : `${normalizedPath}/`;
   
   // Find the mapped URL
   const mappedPath = urlMapping[pathWithSlash];
   
   if (mappedPath) {
-    return `${baseUrl}${mappedPath.startsWith('/') ? mappedPath.substring(1) : mappedPath}`;
+    return mappedPath;
   }
   
   // Fallback: if no mapping found, go to appropriate homepage
   const isEnglishPage = pathWithSlash.startsWith('/en/');
-  return isEnglishPage ? baseUrl : `${baseUrl}en/`;
+  return isEnglishPage ? '/' : '/en/';
 }
 
 /**

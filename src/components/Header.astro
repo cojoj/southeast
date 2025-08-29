@@ -9,11 +9,9 @@ export interface Props {
 const { currentLang = 'pl', currentUrl = Astro.url.pathname } = Astro.props;
 
 const isPolish = currentLang === 'pl';
-const baseUrl = import.meta.env.BASE_URL;
-
 // Generate language switch URLs based on current page
-const polishUrl = currentLang === 'en' ? getLanguageSwitchUrl(currentUrl, baseUrl) : currentUrl;
-const englishUrl = currentLang === 'pl' ? getLanguageSwitchUrl(currentUrl, baseUrl) : currentUrl;
+const polishUrl = currentLang === 'en' ? getLanguageSwitchUrl(currentUrl) : currentUrl;
+const englishUrl = currentLang === 'pl' ? getLanguageSwitchUrl(currentUrl) : currentUrl;
 
 // Function to check if a navigation link is active
 function isActiveLink(linkPath: string): boolean {
@@ -22,11 +20,11 @@ function isActiveLink(linkPath: string): boolean {
   const normalizedLinkPath = linkPath.endsWith('/') ? linkPath : linkPath + '/';
   
   // Handle home page special cases
-  if (normalizedLinkPath === baseUrl || normalizedLinkPath === baseUrl + '/') {
-    return normalizedCurrentUrl === baseUrl || normalizedCurrentUrl === baseUrl + '/';
+  if (normalizedLinkPath === '/' || normalizedLinkPath === '/') {
+    return normalizedCurrentUrl === '/' || normalizedCurrentUrl === '/';
   }
-  if (normalizedLinkPath === baseUrl + 'en/' || normalizedLinkPath === baseUrl + 'en/') {
-    return normalizedCurrentUrl === baseUrl + 'en/';
+  if (normalizedLinkPath === '/en/' || normalizedLinkPath === '/en/') {
+    return normalizedCurrentUrl === '/en/';
   }
   
   // For other pages, check if current URL starts with the link path
@@ -38,8 +36,8 @@ function isActiveLink(linkPath: string): boolean {
   <div class="container mx-auto px-4 h-full flex items-center justify-between">
     <!-- Logo -->
     <div class="flex items-center">
-      <a href={isPolish ? `${import.meta.env.BASE_URL}` : `${import.meta.env.BASE_URL}en/`} class="block">
-        <img src={`${import.meta.env.BASE_URL}logos/logo_black.svg`} alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" />
+      <a href={isPolish ? `/` : `/en/`} class="block">
+        <img src="/logos/logo_black.svg" alt="Southeast Jiu-Jitsu" class="w-[180px] h-auto navbar-logo" />
       </a>
     </div>
 
@@ -47,15 +45,15 @@ function isActiveLink(linkPath: string): boolean {
     <nav class="hidden lg:flex items-center space-x-10">
       <!-- About with dropdown -->
       <div class="relative group">
-        <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`) ? 'font-semibold underline' : 'font-normal'}`}>
+        <a href={isPolish ? `/o-nas/` : `/en/about/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `/o-nas/` : `/en/about/`) ? 'font-semibold underline' : 'font-normal'}`}>
           {isPolish ? "O NAS" : "ABOUT"}
         </a>
         <!-- Dropdown -->
         <div class="absolute top-full left-0 mt-2 py-2 bg-primary shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[140px] z-50">
-          <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/#why-us` : `${import.meta.env.BASE_URL}en/about/#why-us`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/o-nas/#why-us` : `/en/about/#why-us`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Dlaczego my" : "Why us"}
           </a>
-          <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/#trainers` : `${import.meta.env.BASE_URL}en/about/#trainers`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/o-nas/#trainers` : `/en/about/#trainers`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Trenerzy" : "Trainers"}
           </a>
         </div>
@@ -63,27 +61,27 @@ function isActiveLink(linkPath: string): boolean {
 
       <!-- Training with dropdown -->
       <div class="relative group">
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`) ? 'font-semibold underline' : 'font-normal'}`}>
+        <a href={isPolish ? `/treningi/` : `/en/training/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `/treningi/` : `/en/training/`) ? 'font-semibold underline' : 'font-normal'}`}>
           {isPolish ? "TRENINGI" : "TRAINING"}
         </a>
         <!-- Dropdown -->
         <div class="absolute top-full left-0 mt-2 py-2 bg-primary shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[180px] z-50">
-          <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#adult-training` : `${import.meta.env.BASE_URL}en/training/#adult-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/treningi/#adult-training` : `/en/training/#adult-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Treningi dla dorosłych" : "Adult Training"}
           </a>
-          <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#kids-training` : `${import.meta.env.BASE_URL}en/training/#kids-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/treningi/#kids-training` : `/en/training/#kids-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Treningi dla dzieci" : "Kids Training"}
           </a>
-          <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#private-training` : `${import.meta.env.BASE_URL}en/training/#private-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/treningi/#private-training` : `/en/training/#private-training`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Trening personalny" : "Personal Training"}
           </a>
-          <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#cla` : `${import.meta.env.BASE_URL}en/training/#cla`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
+          <a href={isPolish ? `/treningi/#cla` : `/en/training/#cla`} class="block px-4 py-2 text-secondary hover:font-semibold hover:underline text-sm transition-all duration-200">
             {isPolish ? "Metody treningowe" : "Training Methods"}
           </a>
         </div>
       </div>
 
-      <a href={isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`) ? 'font-semibold underline' : 'font-normal'}`}>
+      <a href={isPolish ? `/harmonogram/` : `/en/schedule/`} class={`text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide ${isActiveLink(isPolish ? `/harmonogram/` : `/en/schedule/`) ? 'font-semibold underline' : 'font-normal'}`}>
         {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
       </a>
       <a href="https://southeastjiujitsu.wod.guru/wizytowka" class="text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide">
@@ -139,37 +137,37 @@ function isActiveLink(linkPath: string): boolean {
     <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu">
       <!-- About section -->
       <div>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}o-nas/` : `${import.meta.env.BASE_URL}en/about/`) ? 'font-semibold underline' : 'font-normal'}`}>
+        <a href={isPolish ? `/o-nas/` : `/en/about/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `/o-nas/` : `/en/about/`) ? 'font-semibold underline' : 'font-normal'}`}>
           {isPolish ? "O NAS" : "ABOUT"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/#why-us` : `${import.meta.env.BASE_URL}en/about/#why-us`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/o-nas/#why-us` : `/en/about/#why-us`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Dlaczego my" : "→ Why us"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}o-nas/#trainers` : `${import.meta.env.BASE_URL}en/about/#trainers`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/o-nas/#trainers` : `/en/about/#trainers`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Trenerzy" : "→ Trainers"}
         </a>
       </div>
 
       <!-- Training section -->
       <div>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}treningi/` : `${import.meta.env.BASE_URL}en/training/`) ? 'font-semibold underline' : 'font-normal'}`}>
+        <a href={isPolish ? `/treningi/` : `/en/training/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `/treningi/` : `/en/training/`) ? 'font-semibold underline' : 'font-normal'}`}>
           {isPolish ? "TRENINGI" : "TRAINING"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#adult-training` : `${import.meta.env.BASE_URL}en/training/#adult-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/treningi/#adult-training` : `/en/training/#adult-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Treningi dla dorosłych" : "→ Adult Training"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#kids-training` : `${import.meta.env.BASE_URL}en/training/#kids-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/treningi/#kids-training` : `/en/training/#kids-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Treningi dla dzieci" : "→ Kids Training"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#private-training` : `${import.meta.env.BASE_URL}en/training/#private-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/treningi/#private-training` : `/en/training/#private-training`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Trening personalny" : "→ Personal Training"}
         </a>
-        <a href={isPolish ? `${import.meta.env.BASE_URL}treningi/#cla` : `${import.meta.env.BASE_URL}en/training/#cla`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
+        <a href={isPolish ? `/treningi/#cla` : `/en/training/#cla`} class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-primary font-normal">
           {isPolish ? "→ Metody treningowe" : "→ Training Methods"}
         </a>
       </div>
 
-      <a href={isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `${import.meta.env.BASE_URL}harmonogram/` : `${import.meta.env.BASE_URL}en/schedule/`) ? 'font-semibold underline' : 'font-normal'}`}>
+      <a href={isPolish ? `/harmonogram/` : `/en/schedule/`} class={`mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-primary ${isActiveLink(isPolish ? `/harmonogram/` : `/en/schedule/`) ? 'font-semibold underline' : 'font-normal'}`}>
         {isPolish ? "HARMONOGRAM" : "SCHEDULE"}
       </a>
       <a href="https://southeastjiujitsu.wod.guru/wizytowka" class="mobile-menu-item block text-secondary hover:font-semibold hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-primary">
