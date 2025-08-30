@@ -1,8 +1,8 @@
 ---
-import TrainerCard from './TrainerCard.astro';
+import TrainerCard from "./TrainerCard.astro";
 
 export interface Props {
-  currentLang: 'pl' | 'en';
+  currentLang: "pl" | "en";
 }
 
 const { currentLang } = Astro.props;
@@ -16,23 +16,23 @@ const content = {
         role: "Założyciel i Główny Trener",
         bio: "Mateusz to doświadczony trener i aktywny zawodnik Jiu-Jitsu, posiadający czarny pas 1 stopnia. Swoją przygodę ze sportami walki rozpoczął w 2012 roku, a przez dwa lata trenował także MMA. Od ponad 9 lat prowadzi treningi, stale doskonaląc swoje metody nauczania, aby zapewnić swoim podopiecznym jak najszybsze i najskuteczniejsze postępy. Na swoich zajęciach kładzie duży nacisk na zaangażowanie trenujących i indywidualne podejście do każdego. Dba o to, aby atmosfera na treningach sprzyjała zarówno intensywnej pracy, jak i komfortowi uczestników. Mateusz to wielokrotny Mistrz Polski, medalista Mistrzostw Europy oraz zwycięzca wielu prestiżowych turniejów na arenie krajowej i międzynarodowej.",
         image: `/mateusz-flaga.jpg`,
-        isFounder: true
+        isFounder: true,
       },
       {
         name: "Maciek Janicki",
         role: "Trener Kickboxingu i MMA",
         bio: "Maciek to trener Kickboxingu oraz MMA w Southeast Jiu-Jitsu. Swoją przygodę ze sportami walki rozpoczął w 2018 roku. Przez lata doskonalił swoje umiejętności w boksie, kickboxingu i MMA, a od ponad roku rozwija się również w Jiu-Jitsu. Od 4 lat prowadzi treningi Kickboxingu i MMA, wykorzystując nowoczesne metody treningowe, które pozwalają jego podopiecznym osiągać szybkie postępy. Stawia na przyjazną i bezpieczną atmosferę, dzięki czemu każdy, niezależnie od poziomu zaawansowania, może rozwijać swoje umiejętności w komfortowych warunkach.",
         image: `/maciej-janicki.jpg`,
-        isFounder: false
+        isFounder: false,
       },
       {
         name: "Maciek Bąk",
         role: "Trener grup dziecięcych",
-        bio: "Maciek to trener dziecięcych w Southeast Jiu-Jitsu. Zaczynał przygodę ze sportami walki jako dziecko trenując judo, obecnie aktywny zawodnik i pasjonat Jiu-Jitsu oraz MMA. Od około trzech lat prowadzi treningi dla najmłodszych, dbając o bezpieczeństwo, rozwój techniczny i świetną zabawę. Dzięki doświadczeniu i pozytywnej energii potrafi zarazić dzieci pasją do sportów walki i zachęcić je do dalszego rozwoju na macie.",
+        bio: "Maciek to trener grup dziecięcych w Southeast Jiu-Jitsu. Zaczynał przygodę ze sportami walki jako dziecko trenując judo, obecnie aktywny zawodnik i pasjonat Jiu-Jitsu oraz MMA. Od około trzech lat prowadzi treningi dla najmłodszych, dbając o bezpieczeństwo, rozwój techniczny i świetną zabawę. Dzięki doświadczeniu i pozytywnej energii potrafi zarazić dzieci pasją do sportów walki i zachęcić je do dalszego rozwoju na macie.",
         image: `/maciej-bak.jpg`,
-        isFounder: false
-      }
-    ]
+        isFounder: false,
+      },
+    ],
   },
   en: {
     heading: "Trainers",
@@ -42,24 +42,24 @@ const content = {
         role: "Founder and Head Trainer",
         bio: "Mateusz is an experienced trainer and active Jiu-Jitsu competitor, holding a 1st degree black belt. He began his martial arts journey in 2012 and also trained MMA for two years. He has been teaching for over 9 years, constantly improving his teaching methods to provide his students with the fastest and most effective progress. In his classes, he places great emphasis on student engagement and individual approach to everyone. He ensures that the training atmosphere supports both intensive work and participant comfort. Mateusz is a multiple Polish Champion, European Championship medalist, and winner of many prestigious tournaments on the national and international stage.",
         image: `/mateusz-flaga.jpg`,
-        isFounder: true
+        isFounder: true,
       },
       {
         name: "Maciek Janicki",
         role: "Kickboxing and MMA Trainer",
         bio: "Maciek is a Kickboxing and MMA trainer at Southeast Jiu-Jitsu. He began his martial arts journey in 2018. Over the years, he perfected his skills in boxing, kickboxing, and MMA, and for over a year has also been developing in Jiu-Jitsu. He has been leading Kickboxing and MMA training for 4 years, using modern training methods that allow his students to achieve rapid progress. He focuses on a friendly and safe atmosphere, so everyone, regardless of their skill level, can develop their abilities in comfortable conditions.",
         image: `/maciej-janicki.jpg`,
-        isFounder: false
+        isFounder: false,
       },
       {
         name: "Maciek Bąk",
         role: "Kids Groups Trainer",
         bio: "Maciek is a children's trainer at Southeast Jiu-Jitsu. He started his martial arts journey as a child training judo, and is currently an active competitor and enthusiast of Jiu-Jitsu and MMA. He has been leading training for the youngest for about three years, taking care of safety, technical development, and great fun. Thanks to his experience and positive energy, he can infect children with a passion for martial arts and encourage them to further develop on the mat.",
         image: `/maciej-bak.jpg`,
-        isFounder: false
-      }
-    ]
-  }
+        isFounder: false,
+      },
+    ],
+  },
 };
 
 const currentContent = content[currentLang];
@@ -69,25 +69,29 @@ const currentContent = content[currentLang];
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <!-- Section Heading -->
     <div class="text-center mb-12 lg:mb-16">
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-secondary mb-6 leading-tight">
+      <h2
+        class="text-2xl md:text-3xl lg:text-4xl font-semibold text-secondary mb-6 leading-tight"
+      >
         {currentContent.heading}
       </h2>
-      
+
       <!-- Decorative line -->
       <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
     </div>
 
     <!-- Trainers Grid -->
     <div class="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3">
-      {currentContent.trainers.map((trainer) => (
-        <TrainerCard
-          name={trainer.name}
-          role={trainer.role}
-          bio={trainer.bio}
-          image={trainer.image}
-          isFounder={trainer.isFounder}
-        />
-      ))}
+      {
+        currentContent.trainers.map((trainer) => (
+          <TrainerCard
+            name={trainer.name}
+            role={trainer.role}
+            bio={trainer.bio}
+            image={trainer.image}
+            isFounder={trainer.isFounder}
+          />
+        ))
+      }
     </div>
   </div>
 </section>
