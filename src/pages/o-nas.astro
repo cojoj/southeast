@@ -7,6 +7,7 @@ import AboutIntro from '../components/AboutIntro.astro'
 import FeaturesGrid from '../components/FeaturesGrid.astro'
 import TrainerProfiles from '../components/TrainerProfiles.astro'
 import CommunitySection from '../components/CommunitySection.astro'
+import SocialMeta from '../components/SocialMeta.astro'
 ---
 
 <html lang="pl">
@@ -24,19 +25,13 @@ import CommunitySection from '../components/CommunitySection.astro'
 		<title>O nas - Southeast Jiu-Jitsu | Kraków</title>
 		<meta name="description" content="Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki. Treningi dla wszystkich poziomów zaawansowania." />
 		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://southeastjj.pl/o-nas" />
-		<meta property="og:title" content="O nas - Southeast Jiu-Jitsu | Kraków" />
-		<meta property="og:description" content="Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki." />
-		<meta property="og:image" content="https://southeastjj.pl/training-session.jpg" />
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://southeastjj.pl/o-nas" />
-		<meta property="twitter:title" content="O nas - Southeast Jiu-Jitsu | Kraków" />
-		<meta property="twitter:description" content="Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki." />
-		<meta property="twitter:image" content="https://southeastjj.pl/training-session.jpg" />
+		<SocialMeta 
+			title="O nas - Southeast Jiu-Jitsu | Kraków"
+			description="Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki."
+			image="/training-session.jpg"
+			url="/o-nas"
+			lang="pl"
+		/>
 	</head>
 	<body class="bg-additional">
 		<Header currentLang="pl" currentUrl={Astro.url.pathname} />

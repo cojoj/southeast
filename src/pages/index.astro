@@ -4,6 +4,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import CallToAction from '../components/CallToAction.astro'
 import MarketingOverview from '../components/MarketingOverview.astro'
+import SocialMeta from '../components/SocialMeta.astro'
 ---
 
 <html lang="pl">
@@ -22,6 +23,14 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 		<meta name="generator" content={Astro.generator} />
 		<title>Southeast Jiu-Jitsu</title>
 		<meta name="description" content="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania." />
+		
+		<SocialMeta 
+			title="Southeast Jiu-Jitsu"
+			description="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania."
+			image="/og-image.jpg"
+			url="/"
+			lang="pl"
+		/>
 	</head>
 	<body class="bg-additional">
 		<Header currentLang="pl" currentUrl={Astro.url.pathname} />

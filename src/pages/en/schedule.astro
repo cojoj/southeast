@@ -3,6 +3,7 @@ import '../../styles/global.css'
 import Header from '../../components/Header.astro'
 import Footer from '../../components/Footer.astro'
 import ScheduleWidget from '../../components/ScheduleWidget.astro'
+import SocialMeta from '../../components/SocialMeta.astro'
 ---
 
 <html lang="en">
@@ -19,6 +20,14 @@ import ScheduleWidget from '../../components/ScheduleWidget.astro'
 		<meta name="generator" content={Astro.generator} />
 		<title>Schedule - Southeast Jiu-Jitsu</title>
 		<meta name="description" content="Southeast Jiu-Jitsu class schedule in Kraków. Check training times for Jiu-Jitsu, MMA and Kickboxing." />
+		
+		<SocialMeta 
+			title="Schedule - Southeast Jiu-Jitsu"
+			description="Southeast Jiu-Jitsu class schedule in Kraków. Check training times for Jiu-Jitsu, MMA and Kickboxing."
+			image="/og-image.jpg"
+			url="/en/schedule"
+			lang="en"
+		/>
 	</head>
 	<body class="bg-additional">
 		<Header currentLang="en" currentUrl={Astro.url.pathname} />

@@ -1,0 +1,53 @@
+---
+export interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	url?: string;
+	type?: string;
+	lang?: 'pl' | 'en';
+	siteName?: string;
+}
+
+const {
+	title = 'Southeast Jiu-Jitsu',
+	description,
+	image = '/og-image.jpg',
+	url,
+	type = 'website',
+	lang = 'pl',
+	siteName = 'Southeast Jiu-Jitsu'
+} = Astro.props;
+
+// Generate absolute URL for image if it's a relative path
+const absoluteImage = image?.startsWith('/') 
+	? `https://southeastjj.pl${image}` 
+	: image || 'https://southeastjj.pl/og-image.jpg';
+
+// Generate absolute URL if provided
+const absoluteUrl = url?.startsWith('/') 
+	? `https://southeastjj.pl${url}` 
+	: url;
+
+// Default descriptions based on language
+const defaultDescription = lang === 'pl' 
+	? 'Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania.'
+	: 'Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Kraków, Poland. Training for all skill levels.';
+
+const finalDescription = description || defaultDescription;
+---
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+{absoluteUrl && <meta property="og:url" content={absoluteUrl} />}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:image" content={absoluteImage} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+{absoluteUrl && <meta property="twitter:url" content={absoluteUrl} />}
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={finalDescription} />
+<meta property="twitter:image" content={absoluteImage} />

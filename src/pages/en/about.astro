@@ -7,6 +7,7 @@ import AboutIntro from '../../components/AboutIntro.astro'
 import FeaturesGrid from '../../components/FeaturesGrid.astro'
 import TrainerProfiles from '../../components/TrainerProfiles.astro'
 import CommunitySection from '../../components/CommunitySection.astro'
+import SocialMeta from '../../components/SocialMeta.astro'
 ---
 
 <html lang="en">
@@ -24,19 +25,13 @@ import CommunitySection from '../../components/CommunitySection.astro'
 		<title>About Us - Southeast Jiu-Jitsu | Kraków</title>
 		<meta name="description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts. Training for all skill levels." />
 		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://southeastjj.pl/en/about" />
-		<meta property="og:title" content="About Us - Southeast Jiu-Jitsu | Kraków" />
-		<meta property="og:description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts." />
-		<meta property="og:image" content="https://southeastjj.pl/training-session.jpg" />
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://southeastjj.pl/en/about" />
-		<meta property="twitter:title" content="About Us - Southeast Jiu-Jitsu | Kraków" />
-		<meta property="twitter:description" content="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts." />
-		<meta property="twitter:image" content="https://southeastjj.pl/training-session.jpg" />
+		<SocialMeta 
+			title="About Us - Southeast Jiu-Jitsu | Kraków"
+			description="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts."
+			image="/training-session.jpg"
+			url="/en/about"
+			lang="en"
+		/>
 	</head>
 	<body class="bg-additional">
 		<Header currentLang="en" currentUrl={Astro.url.pathname} />

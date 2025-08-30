@@ -7,6 +7,7 @@ import Hero from '../components/Hero.astro'
 import ClassesGrid from '../components/ClassesGrid.astro'
 import PrivateTraining from '../components/PrivateTraining.astro'
 import CLASection from '../components/CLASection.astro'
+import SocialMeta from '../components/SocialMeta.astro'
 
 // Import data
 import classesData from '../data/classes.pl.json'
@@ -30,11 +31,13 @@ const classes = (classesData as ClassesData).classes
 		<title>Treningi - Southeast Jiu-Jitsu</title>
 		<meta name="description" content="Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, Kickboxing. Zajęcia dla wszystkich poziomów - od podstaw po zaawansowane. Zapisz się na darmowy trening próbny." />
 		
-		<!-- Open Graph -->
-		<meta property="og:title" content="Treningi - Southeast Jiu-Jitsu" />
-		<meta property="og:description" content="Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, Kickboxing. Zajęcia dla wszystkich poziomów." />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://southeastjj.pl/treningi" />
+		<SocialMeta 
+			title="Treningi - Southeast Jiu-Jitsu"
+			description="Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, Kickboxing. Zajęcia dla wszystkich poziomów."
+			image="/og-image.jpg"
+			url="/treningi"
+			lang="pl"
+		/>
 		
 		<!-- Canonical -->
 		<link rel="canonical" href="https://southeastjj.pl/treningi" />

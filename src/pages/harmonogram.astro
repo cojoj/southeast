@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import ScheduleWidget from '../components/ScheduleWidget.astro'
+import SocialMeta from '../components/SocialMeta.astro'
 ---
 
 <html lang="pl">
@@ -19,6 +20,14 @@ import ScheduleWidget from '../components/ScheduleWidget.astro'
 		<meta name="generator" content={Astro.generator} />
 		<title>Harmonogram - Southeast Jiu-Jitsu</title>
 		<meta name="description" content="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing." />
+		
+		<SocialMeta 
+			title="Harmonogram - Southeast Jiu-Jitsu"
+			description="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing."
+			image="/og-image.jpg"
+			url="/harmonogram"
+			lang="pl"
+		/>
 	</head>
 	<body class="bg-additional">
 		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
