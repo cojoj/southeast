@@ -91,7 +91,7 @@ const currentContent = content[currentLang];
           
           <div class="space-y-8">
             {currentContent.points.map((point, index) => (
-              <div key={index} class="flex items-start space-x-6 relative group">
+              <div class="flex items-start space-x-6 relative group">
                 <!-- Animated number badge - now rectangular -->
                 <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-additional font-bold text-lg relative z-10 shadow-lg transform transition-all duration-300 group-hover:scale-125">
                   {index + 1}
@@ -131,4 +131,3 @@ const currentContent = content[currentLang];
     </div>
   </div>
 </section>
-

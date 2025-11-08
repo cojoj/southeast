@@ -32,7 +32,7 @@ const isPolish = currentLang === 'pl';
             target="_blank"
             rel="noopener noreferrer"
             class="block hover:text-primary transition-colors cursor-pointer group"
-            onclick="handleMapsClick(event)"
+            data-map-link
           >
             <span class="font-medium group-hover:underline">ul. Saska 12F/6U</span><br>
             <span class="text-additional/80 group-hover:underline group-hover:text-primary">30-720 Kraków</span>
@@ -92,30 +92,28 @@ const isPolish = currentLang === 'pl';
   </div>
 </footer>
 
-<script>
+<script is:inline>
+  const mapLink = document.querySelector('[data-map-link]');
+
+  /** @param {MouseEvent} event */
   function handleMapsClick(event) {
-    // Check if we're on a mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+
     if (isMobile) {
-      // On mobile, prevent default and try geo protocol first
       event.preventDefault();
-      
-      // Try geo protocol for native maps apps
+
       const geoUrl = 'geo:0,0?q=Southeast+Jiu-Jitsu,+ul.+Saska+12F/6U,+Kraków,+Poland';
-      
-      // Create a hidden iframe to test if geo protocol is supported
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       iframe.src = geoUrl;
       document.body.appendChild(iframe);
-      
-      // Fallback to Google Maps after a short delay if geo doesn't work
+
       setTimeout(() => {
         document.body.removeChild(iframe);
         window.open('https://maps.google.com/?q=Southeast+Jiu-Jitsu,+ul.+Saska+12F/6U,+Kraków,+Poland', '_blank');
       }, 500);
     }
-    // On desktop, let the default Google Maps link work normally
   }
+
+  mapLink?.addEventListener('click', handleMapsClick);
 </script>

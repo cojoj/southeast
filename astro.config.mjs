@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
+const tailwindPlugins =
+  /** @type {any} */ (tailwindcss());
+
 export default defineConfig({
   site: "https://southeastjj.pl",
   trailingSlash: "always",
@@ -17,6 +19,6 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: tailwindPlugins,
   },
 });
