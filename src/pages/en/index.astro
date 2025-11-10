@@ -1,132 +1,109 @@
 ---
-import '../../styles/global.css'
-import Header from '../../components/Header.astro'
-import Footer from '../../components/Footer.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 import MarketingOverview from '../../components/MarketingOverview.astro'
-import SocialMeta from '../../components/SocialMeta.astro'
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<!-- Favicons -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Southeast Jiu-Jitsu</title>
-		<meta name="description" content="Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Kraków, Poland. Training for all skill levels." />
-		
-		<SocialMeta 
-			title="Southeast Jiu-Jitsu"
-			description="Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Kraków, Poland. Training for all skill levels."
-			image="/og-image.jpg"
-			url="/en"
-			lang="en"
-		/>
-	</head>
-	<body class="bg-additional">
-		<Header currentLang="en" currentUrl={Astro.url.pathname} />
-		<main class="relative min-h-screen">
-			<!-- Hero Section -->
-			<section class="relative min-h-screen overflow-hidden">
-				<!-- Hero Background Video with Image Fallback -->
-				<video 
-					id="hero-video"
-					class="absolute inset-0 w-full h-full object-cover object-[center_35%]"
-					style={`background-image: url('/hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);`}
-					autoplay 
-					muted 
-					loop 
-					playsinline
-					preload="metadata"
-				>
-					<source src="/alan_seminar_highlights.webm" type="video/webm">
-					<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
-				</video>
-				
-				<!-- Dark Overlay for Contrast -->
-				<div class="absolute inset-0 bg-black/40"></div>
-				
-				<!-- Logo and Content -->
-				<div class="absolute inset-0 flex items-center justify-center">
-					<div class="relative z-10 w-full max-w-4xl px-4 text-center">
-						<!-- Logo -->
-						<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
-							<img 
-								src="/logos/logo_white_jj.svg" 
-								alt="Southeast Jiu-Jitsu Logo" 
-								class="w-full h-auto"
-							/>
-						</div>
-						
-						<!-- Description -->
-						<p class="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-							Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced trainers!
-						</p>
-						
-						<!-- CTA Buttons -->
-						<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
-							<a 
-								href="https://southeastjiujitsu.wod.guru/rejestracja"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
-							>
-								First free training
-							</a>
-							
-							<a 
-								href="https://southeastjiujitsu.wod.guru/wizytowka"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
-							>
-								Buy membership
-							</a>
-						</div>
+<BaseLayout
+	title="Southeast Jiu-Jitsu"
+	description="Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Kraków, Poland. Training for all skill levels."
+	lang="en"
+	currentUrl={Astro.url.pathname}
+	bodyClass="bg-additional"
+>
+	<main class="relative min-h-screen">
+		<!-- Hero Section -->
+		<section class="relative min-h-screen overflow-hidden">
+			<!-- Hero Background Video with Image Fallback -->
+			<video
+				id="hero-video"
+				class="absolute inset-0 w-full h-full object-cover object-[center_35%]"
+				style={`background-image: url('/hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);`}
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="metadata"
+			>
+				<source src="/alan_seminar_highlights.webm" type="video/webm">
+				<source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
+			</video>
+
+			<!-- Dark Overlay for Contrast -->
+			<div class="absolute inset-0 bg-black/40"></div>
+
+			<!-- Logo and Content -->
+			<div class="absolute inset-0 flex items-center justify-center">
+				<div class="relative z-10 w-full max-w-4xl px-4 text-center">
+					<!-- Logo -->
+					<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
+						<img
+							src="/logos/logo_white_jj.svg"
+							alt="Southeast Jiu-Jitsu Logo"
+							class="w-full h-auto"
+						/>
+					</div>
+
+					<!-- Description -->
+					<p class="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+						Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced trainers!
+					</p>
+
+					<!-- CTA Buttons -->
+					<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+						<a
+							href="https://southeastjiujitsu.wod.guru/rejestracja"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
+						>
+							First free training
+						</a>
+
+						<a
+							href="https://southeastjiujitsu.wod.guru/wizytowka"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
+						>
+							Buy membership
+						</a>
 					</div>
 				</div>
-				
-				<!-- Scroll indicator -->
-				<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-					<svg 
-						class="w-6 h-6 text-white opacity-60 animate-bounce" 
-						fill="none" 
-						stroke="currentColor" 
-						viewBox="0 0 24 24"
-					>
-						<path 
-							stroke-linecap="round" 
-							stroke-linejoin="round" 
-							stroke-width="2" 
-							d="M19 14l-7 7m0 0l-7-7m7 7V3"
-						/>
-					</svg>
-				</div>
-				
-			</section>
-			
-			<!-- Marketing Overview Section -->
-			<MarketingOverview currentLang="en" />
-		</main>
-		<Footer currentLang="en" />
-		
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const video = document.getElementById('hero-video');
-				if (!video) return;
+			</div>
 
-				// Basic error handling
-				video.addEventListener('error', function(e) {
-					console.error('Video error:', e);
-					video.style.display = 'none';
-				});
+			<!-- Scroll indicator -->
+			<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+				<svg
+					class="w-6 h-6 text-white opacity-60 animate-bounce"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M19 14l-7 7m0 0l-7-7m7 7V3"
+					/>
+				</svg>
+			</div>
+
+		</section>
+
+		<!-- Marketing Overview Section -->
+		<MarketingOverview currentLang="en" />
+	</main>
+
+	<script slot="scripts">
+		document.addEventListener('DOMContentLoaded', function() {
+			const video = document.getElementById('hero-video');
+			if (!video) return;
+
+			// Basic error handling
+			video.addEventListener('error', function(e) {
+				console.error('Video error:', e);
+				video.style.display = 'none';
 			});
-		</script>
-	</body>
-</html>
+		});
+	</script>
+</BaseLayout>

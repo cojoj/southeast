@@ -1,39 +1,16 @@
 ---
-import '../styles/global.css'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
 import MarketingOverview from '../components/MarketingOverview.astro'
-import SocialMeta from '../components/SocialMeta.astro'
 ---
 
-<html lang="pl">
-	<head>
-		<meta charset="utf-8" />
-		
-		<!-- Favicons -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Southeast Jiu-Jitsu</title>
-		<meta name="description" content="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania." />
-		
-		<SocialMeta 
-			title="Southeast Jiu-Jitsu"
-			description="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania."
-			image="/og-image.jpg"
-			url="/"
-			lang="pl"
-		/>
-	</head>
-	<body class="bg-additional">
-		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
-		<main class="relative min-h-screen">
+<BaseLayout
+	title="Southeast Jiu-Jitsu"
+	description="Southeast Jiu-Jitsu - Brazylijskie Jiu-Jitsu w Krakowie. Treningi dla wszystkich poziomów zaawansowania."
+	lang="pl"
+	currentUrl={Astro.url.pathname}
+	bodyClass="bg-additional"
+>
+	<main class="relative min-h-screen">
 			<!-- Hero Section -->
 			<section class="relative min-h-screen overflow-hidden">
 				<!-- Hero Background Video with Image Fallback -->
@@ -116,19 +93,17 @@ import SocialMeta from '../components/SocialMeta.astro'
 			<!-- Marketing Overview Section -->
 			<MarketingOverview currentLang="pl" />
 		</main>
-		<Footer currentLang="pl" />
-		
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const video = document.getElementById('hero-video');
-				if (!video) return;
 
-				// Basic error handling
-				video.addEventListener('error', function(e) {
-					console.error('Video error:', e);
-					video.style.display = 'none';
-				});
+	<script slot="scripts">
+		document.addEventListener('DOMContentLoaded', function() {
+			const video = document.getElementById('hero-video');
+			if (!video) return;
+
+			// Basic error handling
+			video.addEventListener('error', function(e) {
+				console.error('Video error:', e);
+				video.style.display = 'none';
 			});
-		</script>
-	</body>
-</html>
+		});
+	</script>
+</BaseLayout>

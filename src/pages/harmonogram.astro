@@ -1,39 +1,16 @@
 ---
-import '../styles/global.css'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
 import ScheduleWidget from '../components/ScheduleWidget.astro'
-import SocialMeta from '../components/SocialMeta.astro'
 ---
 
-<html lang="pl">
-	<head>
-		<meta charset="utf-8" />
-		<!-- Favicons -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Harmonogram - Southeast Jiu-Jitsu</title>
-		<meta name="description" content="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing." />
-		
-		<SocialMeta 
-			title="Harmonogram - Southeast Jiu-Jitsu"
-			description="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing."
-			image="/og-image.jpg"
-			url="/harmonogram"
-			lang="pl"
-		/>
-	</head>
-	<body class="bg-additional">
-		<Header currentLang="pl" currentUrl={Astro.url.pathname} />
-		<main class="pt-[75px]">
-			<ScheduleWidget />
-		</main>
-		<Footer currentLang="pl" />
-	</body>
-</html>
+<BaseLayout
+	title="Harmonogram - Southeast Jiu-Jitsu"
+	description="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing."
+	lang="pl"
+	currentUrl={Astro.url.pathname}
+	bodyClass="bg-additional"
+>
+	<main class="pt-[75px]">
+		<ScheduleWidget />
+	</main>
+</BaseLayout>

@@ -1,13 +1,10 @@
 ---
-import '../../styles/global.css'
-import Header from '../../components/Header.astro'
-import Footer from '../../components/Footer.astro'
-import CommunitySection from '../../components/CommunitySection.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 import Hero from '../../components/Hero.astro'
 import ClassesGrid from '../../components/ClassesGrid.astro'
 import PrivateTraining from '../../components/PrivateTraining.astro'
 import CLASection from '../../components/CLASection.astro'
-import SocialMeta from '../../components/SocialMeta.astro'
+import CommunitySection from '../../components/CommunitySection.astro'
 
 // Import data
 import classesData from '../../data/classes.en.json'
@@ -16,101 +13,75 @@ import type { ClassesData } from '../../types'
 const classes = (classesData as ClassesData).classes
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<!-- Favicons -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Training - Southeast Jiu-Jitsu</title>
-		<meta name="description" content="Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial." />
-		
-		<SocialMeta 
-			title="Training - Southeast Jiu-Jitsu"
-			description="Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels."
-			image="/og-image.jpg"
-			url="/en/training"
-			lang="en"
+<BaseLayout
+	title="Training - Southeast Jiu-Jitsu"
+	description="Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial."
+	lang="en"
+	currentUrl={Astro.url.pathname}
+	bodyClass="bg-se"
+	canonicalUrl="https://southeastjj.pl/en/training"
+	hreflangPl="https://southeastjj.pl/treningi"
+	hreflangEn="https://southeastjj.pl/en/training"
+>
+	<main class="relative min-h-screen">
+		<!-- Hero Section -->
+		<Hero
+			currentLang="en"
+			title={{
+				pl: "TRENINGI",
+				en: "TRAINING"
+			}}
+			subtitle={{
+				pl: "Znajdź swój styl walki w naszej różnorodnej ofercie zajęć",
+				en: "Find your fighting style in our diverse class offerings"
+			}}
 		/>
-		
-		<!-- Canonical -->
-		<link rel="canonical" href="https://southeastjj.pl/en/training" />
-		
-		<!-- Alternate language -->
-		<link rel="alternate" hreflang="pl" href="https://southeastjj.pl/treningi" />
-		<link rel="alternate" hreflang="en" href="https://southeastjj.pl/en/training" />
-	</head>
-	<body class="bg-se">
-		<Header currentLang="en" currentUrl={Astro.url.pathname} />
-		
-		<main class="relative min-h-screen">
-			<!-- Hero Section -->
-			<Hero 
-				currentLang="en" 
-				title={{
-					pl: "TRENINGI",
-					en: "TRAINING"
-				}}
-				subtitle={{
-					pl: "Znajdź swój styl walki w naszej różnorodnej ofercie zajęć",
-					en: "Find your fighting style in our diverse class offerings"
-				}}
-			/>
-			
-			<!-- Classes Grid Section -->
-			<section class="py-16 md:py-20">
-				<div class="container mx-auto px-4">
-					<ClassesGrid classes={classes} locale="en" />
-				</div>
-			</section>
-			
-			<!-- Private Training Section -->
-			<PrivateTraining currentLang="en" />
-			
-			<!-- Separator -->
-			<div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
-			
-			<!-- CLA Section -->
-			<CLASection currentLang="en" />
-			
-			<!-- Community Section -->
-			<CommunitySection 
-				currentLang="en" 
-				heading={{
-					pl: "Dołącz do nas!",
-					en: "Join us!"
-				}}
-				description={{
-					pl: "Poznaj nasze innowacyjne metody treningowe i trenuj Jiu-Jitsu, MMA i Kickboxing pod okiem trenerów z wieloletnim doświadczeniem!",
-					en: "Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced coaches!"
-				}}
-				primaryButton={{
-					text: {
-						pl: "Pierwszy darmowy trening",
-						en: "First free training"
-					},
-					href: "https://southeastjiujitsu.wod.guru/rejestracja"
-				}}
-				secondaryButton={{
-					text: {
-						pl: "Kup karnet",
-						en: "Buy membership"
-					},
-					href: {
-						pl: "https://southeastjiujitsu.wod.guru/wizytowka",
-						en: "https://southeastjiujitsu.wod.guru/wizytowka"
-					},
-					external: true
-				}}
-			/>
-		</main>
-		
-		<Footer currentLang="en" />
-	</body>
-</html>
+
+		<!-- Classes Grid Section -->
+		<section class="py-16 md:py-20">
+			<div class="container mx-auto px-4">
+				<ClassesGrid classes={classes} locale="en" />
+			</div>
+		</section>
+
+		<!-- Private Training Section -->
+		<PrivateTraining currentLang="en" />
+
+		<!-- Separator -->
+		<div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+
+		<!-- CLA Section -->
+		<CLASection currentLang="en" />
+
+		<!-- Community Section -->
+		<CommunitySection
+			currentLang="en"
+			heading={{
+				pl: "Dołącz do nas!",
+				en: "Join us!"
+			}}
+			description={{
+				pl: "Poznaj nasze innowacyjne metody treningowe i trenuj Jiu-Jitsu, MMA i Kickboxing pod okiem trenerów z wieloletnim doświadczeniem!",
+				en: "Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced coaches!"
+			}}
+			primaryButton={{
+				text: {
+					pl: "Pierwszy darmowy trening",
+					en: "First free training"
+				},
+				href: "https://southeastjiujitsu.wod.guru/rejestracja"
+			}}
+			secondaryButton={{
+				text: {
+					pl: "Kup karnet",
+					en: "Buy membership"
+				},
+				href: {
+					pl: "https://southeastjiujitsu.wod.guru/wizytowka",
+					en: "https://southeastjiujitsu.wod.guru/wizytowka"
+				},
+				external: true
+			}}
+		/>
+	</main>
+</BaseLayout>
