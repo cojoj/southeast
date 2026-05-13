@@ -52,6 +52,7 @@ export const classes = [
   {
     id: 'bjj-grupa-zawodnicza',
     level: 'zaawansowani',
+    durationMin: 120,
     gear: ['sports-shirt', 'shorts-no-pockets'],
     icons: { type: 'Brain', duration: 'Clock', gear: 'Shirt' },
     copy: {
