@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../Hero.astro';
+import AboutIntro from '../AboutIntro.astro';
+import FeaturesGrid from '../FeaturesGrid.astro';
+import TrainerProfiles from '../TrainerProfiles.astro';
+import CommunitySection from '../CommunitySection.astro';
+import { pageMeta, routes } from '../../data/site';
+import type { Locale } from '../../types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const meta = pageMeta.about[locale];
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  lang={locale}
+  currentUrl={routes.about[locale]}
+  bodyClass={meta.bodyClass}
+  ogImage={meta.ogImage}
+>
+  <main class="relative">
+    <Hero currentLang={locale} backgroundImage="/team.jpg" />
+    <AboutIntro currentLang={locale} />
+    <FeaturesGrid currentLang={locale} />
+    <TrainerProfiles currentLang={locale} />
+    <CommunitySection currentLang={locale} />
+  </main>
+</BaseLayout>

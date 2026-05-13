@@ -1,4 +1,6 @@
 ---
+import { site } from '../data/site';
+
 export interface Props {
 	title?: string;
 	description?: string;
@@ -16,17 +18,17 @@ const {
 	url,
 	type = 'website',
 	lang = 'pl',
-	siteName = 'Southeast Jiu-Jitsu'
+	siteName = site.name
 } = Astro.props;
 
 // Generate absolute URL for image if it's a relative path
 const absoluteImage = image?.startsWith('/') 
-	? `https://southeastjj.pl${image}` 
-	: image || 'https://southeastjj.pl/og-image.jpg';
+	? `${site.url}${image}`
+	: image || `${site.url}${site.defaultOgImage}`;
 
 // Generate absolute URL if provided
 const absoluteUrl = url?.startsWith('/') 
-	? `https://southeastjj.pl${url}` 
+	? `${site.url}${url}`
 	: url;
 
 // Default descriptions based on language

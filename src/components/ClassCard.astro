@@ -1,5 +1,7 @@
 ---
 import type { ClassItem, Locale } from '../types';
+import { classLevelLabels } from '../data/site';
+import { gearLabels } from '../data/classes';
 import IconByName from './IconByName.astro';
 
 export interface Props {
@@ -10,23 +12,7 @@ export interface Props {
 const { item, locale } = Astro.props;
 const copy = item.copy[locale];
 const isPolish = locale === 'pl';
-
-const levelLabels = {
-  pl: {
-    podstawy: 'Podstawy',
-    wszystkie: 'Wszystkie poziomy',
-    zaawansowani: 'Zaawansowani',
-    dzieci: 'Dzieci',
-    mieszane: 'Mieszane poziomy'
-  },
-  en: {
-    podstawy: 'Basics',
-    wszystkie: 'All levels',
-    zaawansowani: 'Advanced',
-    dzieci: 'Kids',
-    mieszane: 'Mixed levels'
-  }
-};
+const gear = item.gear.map((gearItem) => gearLabels[locale][gearItem]);
 ---
 
 <div class="group relative h-full">
@@ -48,7 +34,7 @@ const levelLabels = {
             {item.durationMin} min
           </span>
           <span class="level-chip">
-            {levelLabels[locale][item.level]}
+            {classLevelLabels[locale][item.level]}
           </span>
         </div>
       </div>
@@ -78,14 +64,14 @@ const levelLabels = {
     )}
     
     <!-- Equipment Section -->
-    {item.gear.length > 0 && (
+    {gear.length > 0 && (
       <div class="mb-4">
         <h4 class="text-sm font-semibold text-se-ink mb-2 inline-flex items-center gap-1">
           <IconByName name={item.icons.gear} class="size-4" />
           {isPolish ? 'Sprzęt' : 'Equipment'}
         </h4>
         <div class="text-sm text-neutral-700">
-          <p class="mb-1">{item.gear.join(', ')}</p>
+          <p class="mb-1">{gear.join(', ')}</p>
           {copy.gearNote && (
             <p class="text-neutral-600 italic">{copy.gearNote}</p>
           )}

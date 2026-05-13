@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import SocialMeta from '../components/SocialMeta.astro'
+import { absoluteUrl, getLanguageSwitchUrl } from '../utils/language'
 
 export interface Props {
 	title: string
@@ -27,6 +28,11 @@ const {
 	hreflangEn,
 	hreflangPl
 } = Astro.props
+
+const canonicalHref = canonicalUrl ?? absoluteUrl(currentUrl)
+const alternateHref = absoluteUrl(getLanguageSwitchUrl(currentUrl))
+const hreflangEnHref = hreflangEn ?? (lang === 'en' ? canonicalHref : alternateHref)
+const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateHref)
 ---
 
 <html lang={lang}>
@@ -70,12 +76,10 @@ const {
 			lang={lang}
 		/>
 
-		<!-- Canonical URL (optional) -->
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<link rel="canonical" href={canonicalHref} />
 
-		<!-- Alternate languages (optional) -->
-		{hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
-		{hreflangPl && <link rel="alternate" hreflang="pl" href={hreflangPl} />}
+		<link rel="alternate" hreflang="en" href={hreflangEnHref} />
+		<link rel="alternate" hreflang="pl" href={hreflangPlHref} />
 
 		<!-- Slot for additional head elements -->
 		<slot name="head" />
@@ -91,7 +95,7 @@ const {
 		<!-- Main content slot -->
 		<slot />
 
-		<Footer currentLang={lang} />
+		<Footer currentLang={lang} currentUrl={currentUrl} />
 
 		<!-- Slot for page-specific scripts -->
 		<slot name="scripts" />

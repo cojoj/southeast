@@ -1,5 +1,6 @@
 ---
 import type { ClassItem, Locale } from '../types';
+import { classSectionLabels } from '../data/classes';
 import ClassCard from './ClassCard.astro';
 
 export interface Props {
@@ -8,7 +9,7 @@ export interface Props {
 }
 
 const { classes, locale } = Astro.props;
-const isPolish = locale === 'pl';
+const labels = classSectionLabels[locale];
 
 // Separate adult and kids classes for better organization
 const adultClasses = classes.filter(c => c.level !== 'dzieci');
@@ -21,7 +22,7 @@ const kidsClasses = classes.filter(c => c.level === 'dzieci');
   {adultClasses.length > 0 && (
     <div id="adult-training" class="mb-12">
       <h2 class="text-2xl font-semibold text-se-ink mb-6 text-center">
-        {isPolish ? 'Treningi dla dorosłych' : 'Adult Training'}
+        {labels.adults}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {adultClasses.map((item) => (
@@ -33,9 +34,9 @@ const kidsClasses = classes.filter(c => c.level === 'dzieci');
   
   {/* Kids Classes Section */}
   {kidsClasses.length > 0 && (
-<div id="kids-training">
+    <div id="kids-training">
       <h2 class="text-2xl font-semibold text-se-ink mb-6 text-center">
-        {isPolish ? 'Treningi dla dzieci' : 'Kids Training'}
+        {labels.kids}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {kidsClasses.map((item) => (

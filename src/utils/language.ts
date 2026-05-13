@@ -1,64 +1,35 @@
-/**
- * Language and URL mapping utilities for multilingual navigation
- */
+import { routes, site } from '../data/site';
+import type { Locale, PageKey } from '../types';
 
-export type Language = 'pl' | 'en';
-
-export type PageRoute = 'home' | 'about' | 'training' | 'schedule';
-
-/**
- * Maps Polish URLs to their English equivalents
- */
-const urlMapping: Record<string, string> = {
-  // Polish to English
-  '/': '/en/',
-  '/o-nas/': '/en/about/',
-  '/treningi/': '/en/training/',
-  '/harmonogram/': '/en/schedule/',
-  
-  // English to Polish
-  '/en/': '/',
-  '/en/about/': '/o-nas/',
-  '/en/training/': '/treningi/',
-  '/en/schedule/': '/harmonogram/',
-};
-
-/**
- * Get the equivalent URL in the other language
- * @param currentUrl - Current page URL
- * @returns URL for the same page in the other language
- */
 export function getLanguageSwitchUrl(currentUrl: string): string {
-  // Ensure the path starts with '/' and ends with '/'
-  const normalizedPath = currentUrl.startsWith('/') ? currentUrl : `/${currentUrl}`;
-  const pathWithSlash = normalizedPath.endsWith('/') ? normalizedPath : `${normalizedPath}/`;
-  
-  // Find the mapped URL
-  const mappedPath = urlMapping[pathWithSlash];
-  
-  if (mappedPath) {
-    return mappedPath;
+  const pathWithSlash = normalizePath(currentUrl);
+
+  for (const route of Object.values(routes)) {
+    if (route.pl === pathWithSlash) return route.en;
+    if (route.en === pathWithSlash) return route.pl;
   }
-  
-  // Fallback: if no mapping found, go to appropriate homepage
+
   const isEnglishPage = pathWithSlash.startsWith('/en/');
-  return isEnglishPage ? '/' : '/en/';
+  return routes.home[isEnglishPage ? 'pl' : 'en'];
 }
 
-/**
- * Detect current language from URL
- * @param currentUrl - Current page URL
- * @returns Current language (pl or en)
- */
-export function getCurrentLanguage(currentUrl: string): Language {
-  return currentUrl.includes('/en/') ? 'en' : 'pl';
+export function getCurrentLanguage(currentUrl: string): Locale {
+  return normalizePath(currentUrl).startsWith('/en/') ? 'en' : 'pl';
 }
 
-/**
- * Get the other language (opposite of current)
- * @param currentLang - Current language
- * @returns The other language
- */
-export function getOtherLanguage(currentLang: Language): Language {
+export function getOtherLanguage(currentLang: Locale): Locale {
   return currentLang === 'pl' ? 'en' : 'pl';
+}
+
+export function absoluteUrl(path: string): string {
+  return new URL(path, site.url).toString();
+}
+
+export function routePath(page: PageKey, locale: Locale): string {
+  return routes[page][locale];
+}
+
+function normalizePath(path: string): string {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return normalizedPath.endsWith('/') ? normalizedPath : `${normalizedPath}/`;
 }

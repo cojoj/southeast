@@ -1,4 +1,5 @@
 ---
+import { features } from '../data/site';
 import FeatureCard from './FeatureCard.astro';
 
 export interface Props {
@@ -6,87 +7,7 @@ export interface Props {
 }
 
 const { currentLang } = Astro.props;
-
-const iconMap: Record<string, string> = {
-  // PL
-  "Indywidualne podejście": "user-check",
-  "Usystematyzowany plan treningowy": "list-checks",
-  "Innowacyjne metody treningowe": "lightbulb",
-  "Efektywne i intensywne treningi": "activity",
-  "Treningi dla każdego": "users",
-
-  // EN
-  "Individual approach": "user-check",
-  "Systematic training plan": "list-checks",
-  "Innovative training methods": "lightbulb",
-  "Effective and intensive training": "activity",
-  "Training for everyone": "users"
-};
-
-const content = {
-  pl: {
-    heading: "Co wyróżnia Southeast Jiu-Jitsu?",
-    features: [
-      {
-        title: "Indywidualne podejście",
-        description: "Treningi odbywają się w małych grupach, co pozwala nam skupić się na każdym uczestniku. Dzięki temu nasi trenerzy mogą dostosować poziom zajęć do Twoich umiejętności i celów treningowych.",
-        icon: iconMap["Indywidualne podejście"]
-      },
-      {
-        title: "Usystematyzowany plan treningowy",
-        description: "Nasze zajęcia prowadzone są według stworzonego przez naszych trenerów i aktualizowanego na bieżąco planu, który krok po kroku pozwala rozwijać wasze umiejętności w danym sporcie. Każda sesja jest starannie zaplanowana, aby zapewnić optymalny rozwój zarówno dla początkujących, jak i zaawansowanych zawodników.",
-        icon: iconMap["Usystematyzowany plan treningowy"]
-      },
-      {
-        title: "Innowacyjne metody treningowe",
-        description: "W Southeast Jiu-Jitsu w treningu nie wykorzystujemy statycznego powtarzania technik na nieoporującym przeciwniku. Stawiamy na naukę poprzez praktykę – w naszych treningach główną rolę odgrywają gry zadaniowe wykonywane na oporującym przeciwniku. Dzięki temu szybciej rozwijasz swoje umiejętności i uczysz się adaptacji do dynamicznych sytuacji występujących w walce.",
-        icon: iconMap["Innowacyjne metody treningowe"]
-      },
-      {
-        title: "Efektywne i intensywne treningi",
-        description: "Nasze metody gwarantują szybkie postępy oraz poprawę kondycji fizycznej. Każdy trening jest dynamiczny i angażujący, co pozwala rozwijać siłę, wytrzymałość oraz niezbędną koordynację ruchową.",
-        icon: iconMap["Efektywne i intensywne treningi"]
-      },
-      {
-        title: "Treningi dla każdego",
-        description: "Niezależnie od tego, czy trenujesz rekreacyjnie, czy przygotowujesz się do zawodów, pomożemy Ci osiągnąć Twoje cele. Wspieramy zarówno osoby, które chcą poprawić swoją sprawność, jak i tych, którzy dążą do sukcesów na zawodach.",
-        icon: iconMap["Treningi dla każdego"]
-      }
-    ]
-  },
-  en: {
-    heading: "What makes Southeast Jiu-Jitsu special?",
-    features: [
-      {
-        title: "Individual approach",
-        description: "Training takes place in small groups, allowing us to focus on each participant. This way, our trainers can adapt the level of classes to your skills and training goals.",
-        icon: iconMap["Individual approach"]
-      },
-      {
-        title: "Systematic training plan",
-        description: "Our classes are conducted according to a plan created by our trainers and continuously updated, which step by step allows you to develop your skills in a given sport. Each session is carefully planned to ensure optimal development for both beginners and advanced athletes.",
-        icon: iconMap["Systematic training plan"]
-      },
-      {
-        title: "Innovative training methods",
-        description: "At Southeast Jiu-Jitsu, we don't use static repetition of techniques on non-resisting opponents. We focus on learning through practice – in our training, the main role is played by task-based games performed against resisting opponents. This way, you develop your skills faster and learn to adapt to dynamic situations occurring in combat.",
-        icon: iconMap["Innovative training methods"]
-      },
-      {
-        title: "Effective and intensive training",
-        description: "Our methods guarantee rapid progress and improvement in physical fitness. Every training session is dynamic and engaging, allowing you to develop strength, endurance, and necessary motor coordination.",
-        icon: iconMap["Effective and intensive training"]
-      },
-      {
-        title: "Training for everyone",
-        description: "Whether you train recreationally or are preparing for competitions, we will help you achieve your goals. We support both people who want to improve their fitness and those who strive for success in competitions.",
-        icon: iconMap["Training for everyone"]
-      }
-    ]
-  }
-};
-
-const currentContent = content[currentLang];
+const currentContent = features[currentLang];
 ---
 
 <section id="why-us" class="bg-white py-16 lg:py-24">
@@ -105,7 +26,7 @@ const currentContent = content[currentLang];
     <div class="grid gap-8 md:gap-10 lg:gap-12">
       <!-- First row: 2 features -->
       <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
-        {currentContent.features.slice(0, 2).map((feature, index) => (
+        {currentContent.items.slice(0, 2).map((feature, index) => (
           <FeatureCard
             title={feature.title}
             description={feature.description}
@@ -119,17 +40,17 @@ const currentContent = content[currentLang];
       <div class="grid justify-center">
         <div class="max-w-2xl">
           <FeatureCard
-            title={currentContent.features[2].title}
-            description={currentContent.features[2].description}
+            title={currentContent.items[2].title}
+            description={currentContent.items[2].description}
             index={2}
-            icon={currentContent.features[2].icon}
+            icon={currentContent.items[2].icon}
           />
         </div>
       </div>
       
       <!-- Third row: 2 features -->
       <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
-        {currentContent.features.slice(3, 5).map((feature, index) => (
+        {currentContent.items.slice(3, 5).map((feature, index) => (
           <FeatureCard
             title={feature.title}
             description={feature.description}

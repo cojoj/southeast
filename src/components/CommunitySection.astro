@@ -1,70 +1,15 @@
 ---
+import { community, routes, site } from '../data/site';
+
 export interface Props {
   currentLang: 'pl' | 'en';
-  heading?: {
-    pl: string;
-    en: string;
-  };
-  description?: {
-    pl: string;
-    en: string;
-  };
-  primaryButton?: {
-    text: {
-      pl: string;
-      en: string;
-    };
-    href: string;
-    external?: boolean;
-  };
-  secondaryButton?: {
-    text: {
-      pl: string;
-      en: string;
-    };
-    href: {
-      pl: string;
-      en: string;
-    };
-    external?: boolean;
-  };
+  variant?: 'default' | 'training';
 }
 
-const { 
-  currentLang, 
-  heading, 
-  description, 
-  primaryButton, 
-  secondaryButton 
-} = Astro.props;
-
-const defaultContent = {
-  pl: {
-    heading: "Dołącz do Southeast Jiu-Jitsu",
-    description: "Oferujemy zajęcia dla dzieci i dorosłych przez 6 dni w tygodniu o różnych porach dnia, aby każdy mógł znaleźć czas na trening.",
-    cta: {
-      primary: "Pierwszy darmowy trening",
-      secondary: "Sprawdź harmonogram"
-    }
-  },
-  en: {
-    heading: "Join Southeast Jiu-Jitsu",
-    description: "We offer classes for children and adults 6 days a week at different times of the day, so everyone can find time to train.",
-    cta: {
-      primary: "First free training",
-      secondary: "Check schedule"
-    }
-  }
-};
-
-const currentContent = {
-  heading: heading?.[currentLang] || defaultContent[currentLang].heading,
-  description: description?.[currentLang] || defaultContent[currentLang].description,
-  cta: {
-    primary: primaryButton?.text[currentLang] || defaultContent[currentLang].cta.primary,
-    secondary: secondaryButton?.text[currentLang] || defaultContent[currentLang].cta.secondary
-  }
-};
+const { currentLang, variant = 'default' } = Astro.props;
+const currentContent = community[variant][currentLang];
+const secondaryHref = variant === 'training' ? site.wodGuru.memberships : routes.schedule[currentLang];
+const secondaryExternal = variant === 'training';
 ---
 
 <section class="bg-secondary py-16 lg:py-24">
@@ -82,21 +27,21 @@ const currentContent = {
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
       <a 
-        href={primaryButton?.href || "https://southeastjiujitsu.wod.guru/rejestracja"}
-        target={primaryButton?.external !== false ? "_blank" : undefined}
-        rel={primaryButton?.external !== false ? "noopener noreferrer" : undefined}
+        href={site.wodGuru.registration}
+        target="_blank"
+        rel="noopener noreferrer"
         class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
       >
-        {currentContent.cta.primary}
+        {currentContent.primary}
       </a>
       
       <a 
-        href={secondaryButton?.href[currentLang] || (currentLang === 'pl' ? '/harmonogram' : '/en/schedule')}
-        target={secondaryButton?.external ? "_blank" : undefined}
-        rel={secondaryButton?.external ? "noopener noreferrer" : undefined}
+        href={secondaryHref}
+        target={secondaryExternal ? "_blank" : undefined}
+        rel={secondaryExternal ? "noopener noreferrer" : undefined}
         class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-transparent border-2 border-additional text-additional font-normal text-base uppercase tracking-wide hover:bg-additional hover:text-secondary transition-all duration-200"
       >
-        {currentContent.cta.secondary}
+        {currentContent.secondary}
       </a>
     </div>
 

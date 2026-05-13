@@ -1,34 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import Hero from '../../components/Hero.astro'
-import AboutIntro from '../../components/AboutIntro.astro'
-import FeaturesGrid from '../../components/FeaturesGrid.astro'
-import TrainerProfiles from '../../components/TrainerProfiles.astro'
-import CommunitySection from '../../components/CommunitySection.astro'
+import AboutPage from '../../components/pages/AboutPage.astro';
 ---
 
-<BaseLayout
-	title="About Us - Southeast Jiu-Jitsu | Kraków"
-	description="Learn about Southeast Jiu-Jitsu in Kraków - our trainers, innovative training methods, and community of martial arts enthusiasts. Training for all skill levels."
-	lang="en"
-	currentUrl={Astro.url.pathname}
-	bodyClass="bg-additional"
-	ogImage="/training-session.jpg"
->
-	<main class="relative">
-		<!-- Hero Section -->
-		<Hero currentLang="en" backgroundImage="/team.jpg" />
-
-		<!-- Intro Section -->
-		<AboutIntro currentLang="en" />
-
-		<!-- Features Grid Section -->
-		<FeaturesGrid currentLang="en" />
-
-		<!-- Trainer Profiles Section -->
-		<TrainerProfiles currentLang="en" />
-
-		<!-- Community and CTA Section -->
-		<CommunitySection currentLang="en" />
-	</main>
-</BaseLayout>
+<AboutPage locale="en" />

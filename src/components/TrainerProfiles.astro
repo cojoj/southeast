@@ -1,4 +1,5 @@
 ---
+import { trainers } from "../data/site";
 import TrainerCard from "./TrainerCard.astro";
 
 export interface Props {
@@ -6,77 +7,7 @@ export interface Props {
 }
 
 const { currentLang } = Astro.props;
-
-const content = {
-  pl: {
-    heading: "Trenerzy",
-    trainers: [
-      {
-        name: "Mateusz Flaga",
-        role: "Założyciel i Główny Trener",
-        bio: "Mateusz to doświadczony trener i aktywny zawodnik Jiu-Jitsu, posiadający czarny pas 1 stopnia. Swoją przygodę ze sportami walki rozpoczął w 2012 roku, a przez dwa lata trenował także MMA. Od ponad 9 lat prowadzi treningi, stale doskonaląc swoje metody nauczania, aby zapewnić swoim podopiecznym jak najszybsze i najskuteczniejsze postępy. Na swoich zajęciach kładzie duży nacisk na zaangażowanie trenujących i indywidualne podejście do każdego. Dba o to, aby atmosfera na treningach sprzyjała zarówno intensywnej pracy, jak i komfortowi uczestników. Mateusz to wielokrotny Mistrz Polski, medalista Mistrzostw Europy oraz zwycięzca wielu prestiżowych turniejów na arenie krajowej i międzynarodowej.",
-        image: `/mateusz.png`,
-        isFounder: true,
-      },
-      {
-        name: "Maciek Janicki",
-        role: "Trener Kickboxingu i MMA",
-        bio: "Maciek to trener Kickboxingu oraz MMA w Southeast Jiu-Jitsu. Swoją przygodę ze sportami walki rozpoczął w 2018 roku. Przez lata doskonalił swoje umiejętności w boksie, kickboxingu i MMA, a od ponad roku rozwija się również w Jiu-Jitsu. Od 4 lat prowadzi treningi Kickboxingu i MMA, wykorzystując nowoczesne metody treningowe, które pozwalają jego podopiecznym osiągać szybkie postępy. Stawia na przyjazną i bezpieczną atmosferę, dzięki czemu każdy, niezależnie od poziomu zaawansowania, może rozwijać swoje umiejętności w komfortowych warunkach.",
-        image: `/maciek_janicki.png`,
-        isFounder: false,
-      },
-      {
-        name: "Maciek Bąk",
-        role: "Trener grup dziecięcych",
-        bio: "Maciek to trener grup dziecięcych w Southeast Jiu-Jitsu. Zaczynał przygodę ze sportami walki jako dziecko trenując judo, obecnie aktywny zawodnik i pasjonat Jiu-Jitsu oraz MMA. Od około trzech lat prowadzi treningi dla najmłodszych, dbając o bezpieczeństwo, rozwój techniczny i świetną zabawę. Dzięki doświadczeniu i pozytywnej energii potrafi zarazić dzieci pasją do sportów walki i zachęcić je do dalszego rozwoju na macie.",
-        image: `/maciek_bak.png`,
-        isFounder: false,
-      },
-      {
-        name: "Wiktoria Kolińska",
-        role: "Trenerka grup dziecięcych",
-        bio: "Wiktoria to purpurowy pas w Jiu-Jitsu z 10 letnim doświadczeniem w sportach walki. Dla Wiktorii BJJ to nie tylko sport, ale także sposób na życie – uczy pewności siebie, cierpliwości i radzenia sobie z wyzwaniami. Swoją przygodę z BJJ zaczynała w młodości, dlatego doskonale rozumie potrzeby najmłodszych. Posiada trzy lata doświadczenia w prowadzeniu zajęć dla dzieci oraz pracy jako trenerka i wychowawczyni na obozach sportowych. Tworzy atmosferę, w której dzieci zyskują pewność siebie, rozwijają swoje umiejętności i czerpią radość z każdego treningu.",
-        image: `/wiktoria.png`,
-        isFounder: false,
-      },
-    ],
-  },
-  en: {
-    heading: "Trainers",
-    trainers: [
-      {
-        name: "Mateusz Flaga",
-        role: "Founder and Head Trainer",
-        bio: "Mateusz is an experienced trainer and active Jiu-Jitsu competitor, holding a 1st degree black belt. He began his martial arts journey in 2012 and also trained MMA for two years. He has been teaching for over 9 years, constantly improving his teaching methods to provide his students with the fastest and most effective progress. In his classes, he places great emphasis on student engagement and individual approach to everyone. He ensures that the training atmosphere supports both intensive work and participant comfort. Mateusz is a multiple Polish Champion, European Championship medalist, and winner of many prestigious tournaments on the national and international stage.",
-        image: `/mateusz.png`,
-        isFounder: true,
-      },
-      {
-        name: "Maciek Janicki",
-        role: "Kickboxing and MMA Trainer",
-        bio: "Maciek is a Kickboxing and MMA trainer at Southeast Jiu-Jitsu. He began his martial arts journey in 2018. Over the years, he perfected his skills in boxing, kickboxing, and MMA, and for over a year has also been developing in Jiu-Jitsu. He has been leading Kickboxing and MMA training for 4 years, using modern training methods that allow his students to achieve rapid progress. He focuses on a friendly and safe atmosphere, so everyone, regardless of their skill level, can develop their abilities in comfortable conditions.",
-        image: `/maciek_janicki.png`,
-        isFounder: false,
-      },
-      {
-        name: "Maciek Bąk",
-        role: "Kids Groups Trainer",
-        bio: "Maciek is a children's trainer at Southeast Jiu-Jitsu. He started his martial arts journey as a child training judo, and is currently an active competitor and enthusiast of Jiu-Jitsu and MMA. He has been leading training for the youngest for about three years, taking care of safety, technical development, and great fun. Thanks to his experience and positive energy, he can infect children with a passion for martial arts and encourage them to further develop on the mat.",
-        image: `/maciek_bak.png`,
-        isFounder: false,
-      },
-      {
-        name: "Wiktoria Kolińska",
-        role: "Kids Groups Trainer",
-        bio: "Wiktoria is a purple belt in Jiu-Jitsu with 10 years of experience in martial arts. For Wiktoria, BJJ is not just a sport, but also a way of life – it teaches self-confidence, patience, and dealing with challenges. She started her BJJ journey in her youth, which is why she perfectly understands the needs of the youngest ones. She has three years of experience leading classes for children and working as a trainer and counselor at sports camps. She creates an atmosphere where children gain confidence, develop their skills, and enjoy every training session.",
-        image: `/wiktoria.png`,
-        isFounder: false,
-      },
-    ],
-  },
-};
-
-const currentContent = content[currentLang];
+const currentContent = trainers[currentLang];
 ---
 
 <section id="trainers" class="bg-additional py-16 lg:py-24">
@@ -96,7 +27,7 @@ const currentContent = content[currentLang];
     <!-- Trainers Grid -->
     <div class="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3">
       {
-        currentContent.trainers.map((trainer) => (
+        currentContent.items.map((trainer) => (
           <TrainerCard
             name={trainer.name}
             role={trainer.role}

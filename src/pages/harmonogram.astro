@@ -1,16 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'
-import ScheduleWidget from '../components/ScheduleWidget.astro'
+import SchedulePage from '../components/pages/SchedulePage.astro';
 ---
 
-<BaseLayout
-	title="Harmonogram - Southeast Jiu-Jitsu"
-	description="Harmonogram zajęć Southeast Jiu-Jitsu w Krakowie. Sprawdź godziny treningów Jiu-Jitsu, MMA i Kickboxing."
-	lang="pl"
-	currentUrl={Astro.url.pathname}
-	bodyClass="bg-additional"
->
-	<main class="pt-[75px]">
-		<ScheduleWidget />
-	</main>
-</BaseLayout>
+<SchedulePage locale="pl" />

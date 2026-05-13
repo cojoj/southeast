@@ -1,9 +1,19 @@
+---
+import type { Locale } from '../types';
+
+export interface Props {
+  currentLang: Locale;
+}
+
+const { currentLang } = Astro.props;
+---
+
 <script
   is:inline
   src="https://wod.guru/widget.js"
-  onload="WodGuruWidget.init({ 
-    subdomain: 'southeastjiujitsu', 
-    type: 'schedule', 
-    params: { hideTop: '1' } 
-  });"
+  onload={`WodGuruWidget.init({
+    subdomain: 'southeastjiujitsu',
+    type: 'schedule',
+    params: { hideTop: '1', lang: '${currentLang}' }
+  });`}
 ></script>

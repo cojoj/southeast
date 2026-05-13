@@ -1,24 +1,12 @@
 ---
+import { aboutIntro } from '../data/site';
+
 export interface Props {
   currentLang: 'pl' | 'en';
 }
 
 const { currentLang } = Astro.props;
-
-const content = {
-  pl: {
-    heading: "Kim jesteśmy?",
-    description: "Southeast Jiu-Jitsu to miejsce stworzone dla wszystkich pasjonatów sportów walki. Specjalizujemy się w No-Gi Jiu-Jitsu, MMA oraz Kickboxingu, oferujemy treningi dostosowane do różnych poziomów zaawansowania – zarówno dla początkujących, jak i bardziej zaawansowanych - każdy znajdzie coś dla siebie!",
-    philosophy: "Naszym priorytetem jest bezpieczne i przyjazne środowisko treningowe, w którym każdy, niezależnie od płci, wieku czy doświadczenia, może rozwijać swoje umiejętności i stać się częścią naszej społeczności."
-  },
-  en: {
-    heading: "Who are we?",
-    description: "Southeast Jiu-Jitsu is a place created for all martial arts enthusiasts. We specialize in No-Gi Jiu-Jitsu, MMA, and Kickboxing, offering training adapted to different skill levels – both for beginners and more advanced practitioners - everyone will find something for themselves!",
-    philosophy: "Our priority is a safe and friendly training environment where everyone, regardless of gender, age, or experience, can develop their skills and become part of our community."
-  }
-};
-
-const currentContent = content[currentLang];
+const currentContent = aboutIntro[currentLang];
 ---
 
 <section class="bg-additional py-16 lg:py-24">

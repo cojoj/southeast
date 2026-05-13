@@ -1,60 +1,12 @@
 ---
+import { marketingOverview, site } from '../data/site';
+
 export interface Props {
   currentLang: 'pl' | 'en';
 }
 
 const { currentLang } = Astro.props;
-
-const content = {
-  pl: {
-    headline: "Dlaczego Southeast Jiu-Jitsu to najlepszy wybór dla Twojego rozwoju?",
-    mainCopy: "W Southeast Jiu-Jitsu nie tracisz czasu na nudne powtarzanie technik. Od pierwszego treningu wchodzisz w akcję dzięki naszej innowacyjnej metodzie <u>Constraint-Led Approach (CLA)</u>.",
-    points: [
-      {
-        title: "Nauka przez praktykę",
-        description: "trenujemy przeciwko oporującemu przeciwnikowi, nie na manekinie"
-      },
-      {
-        title: "Indywidualne podejście",
-        description: "małe grupy, maksymalna uwaga dla każdego uczestnika"
-      },
-      {
-        title: "Systematyczny plan rozwoju",
-        description: "każdy trening ma swój cel i miejsce w Twoim postępie"
-      },
-      {
-        title: "Szybkie rezultaty",
-        description: "nasza metoda gwarantuje efektywny rozwój umiejętności i kondycji"
-      }
-    ],
-    cta: "Stań się lepszą wersją siebie"
-  },
-  en: {
-    headline: "Why Southeast Jiu-Jitsu is the best choice for your development?",
-    mainCopy: "At Southeast Jiu-Jitsu, you don't waste time on boring repetitive drills. From your very first training session, you experience non-stop action thanks to our innovative <u>Constraint-Led Approach (CLA)</u>.",
-    points: [
-      {
-        title: "Learn through practice",
-        description: "we train against resisting opponents, not static dummies"
-      },
-      {
-        title: "Individual approach",
-        description: "small groups ensure maximum attention for every participant"
-      },
-      {
-        title: "Systematic development plan",
-        description: "every training session has its purpose in your progress"
-      },
-      {
-        title: "Rapid results",
-        description: "our methodology guarantees effective skill and fitness development"
-      }
-    ],
-    cta: "Start your journey"
-  }
-};
-
-const currentContent = content[currentLang];
+const currentContent = marketingOverview[currentLang];
 ---
 
 <section class="bg-additional py-16 lg:py-24">
@@ -119,7 +71,7 @@ const currentContent = content[currentLang];
         <!-- CTA Button -->
         <div class="flex justify-start">
           <a 
-            href="https://southeastjiujitsu.wod.guru/rejestracja"
+            href={site.wodGuru.registration}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-block w-full sm:w-auto px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200 text-center sm:text-left"

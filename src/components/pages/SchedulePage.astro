@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScheduleWidget from '../ScheduleWidget.astro';
+import { pageMeta, routes, scheduleContent } from '../../data/site';
+import type { Locale } from '../../types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const meta = pageMeta.schedule[locale];
+const content = scheduleContent[locale];
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  lang={locale}
+  currentUrl={routes.schedule[locale]}
+  bodyClass={meta.bodyClass}
+>
+  <main class="pt-[75px]">
+    <section class="bg-additional py-10 md:py-12">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-3xl md:text-4xl font-light text-secondary tracking-wide">
+          {content.heading}
+        </h1>
+        <p class="mt-3 text-base md:text-lg text-secondary/80">
+          {content.description}
+        </p>
+      </div>
+    </section>
+    <ScheduleWidget currentLang={locale} />
+  </main>
+</BaseLayout>

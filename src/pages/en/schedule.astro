@@ -1,16 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import ScheduleWidget from '../../components/ScheduleWidget.astro'
+import SchedulePage from '../../components/pages/SchedulePage.astro';
 ---
 
-<BaseLayout
-	title="Schedule - Southeast Jiu-Jitsu"
-	description="Southeast Jiu-Jitsu class schedule in Kraków. Check training times for Jiu-Jitsu, MMA and Kickboxing."
-	lang="en"
-	currentUrl={Astro.url.pathname}
-	bodyClass="bg-additional"
->
-	<main class="pt-[75px]">
-		<ScheduleWidget />
-	</main>
-</BaseLayout>
+<SchedulePage locale="en" />

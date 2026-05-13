@@ -1,47 +1,29 @@
-# Astro Starter Kit: Minimal
+# Southeast Jiu-Jitsu
+
+Static Astro site for Southeast Jiu-Jitsu in Krakow. The site is bilingual, with Polish routes at the root and English routes under `/en/`.
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
+npm run validate
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Use `npm run check` for Astro diagnostics, `npm run build` for the static bundle, and `npm run preview` to smoke-test the generated site.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Structure
 
-## 🚀 Project Structure
+- `src/pages/` contains only thin locale route wrappers.
+- `src/components/pages/` contains shared page templates.
+- `src/components/` contains reusable rendering components.
+- `src/data/classes.ts` contains the canonical class offering and localized gear labels.
+- `src/data/site.ts` contains routes, metadata, navigation, CTA links, and localized page copy.
+- `src/types.ts` contains shared contracts.
+- `public/` contains static images, videos, fonts, favicons, and meta assets.
 
-Inside of your Astro project, you'll see the following folders and files:
+Generated output lives in `dist/` and should not be edited.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Validation
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`npm run validate:data` checks the route table, localized page metadata, nav references, class IDs, class copy, gear labels, and required public assets. `npm run validate` runs data validation, Astro Check, and a production build.

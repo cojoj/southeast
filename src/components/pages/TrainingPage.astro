@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../Hero.astro';
+import ClassesGrid from '../ClassesGrid.astro';
+import PrivateTraining from '../PrivateTraining.astro';
+import CLASection from '../CLASection.astro';
+import CommunitySection from '../CommunitySection.astro';
+import { classes } from '../../data/classes';
+import { heroContent, pageMeta, routes } from '../../data/site';
+import type { Locale } from '../../types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const meta = pageMeta.training[locale];
+const title = {
+  pl: heroContent.training.pl.title,
+  en: heroContent.training.en.title,
+};
+const subtitle = {
+  pl: heroContent.training.pl.subtitle,
+  en: heroContent.training.en.subtitle,
+};
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  lang={locale}
+  currentUrl={routes.training[locale]}
+  bodyClass={meta.bodyClass}
+>
+  <main class="relative min-h-screen">
+    <Hero
+      currentLang={locale}
+      title={title}
+      subtitle={subtitle}
+    />
+
+    <section class="py-16 md:py-20">
+      <div class="container mx-auto px-4">
+        <ClassesGrid classes={classes} locale={locale} />
+      </div>
+    </section>
+
+    <PrivateTraining currentLang={locale} />
+
+    <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+
+    <CLASection currentLang={locale} />
+
+    <CommunitySection currentLang={locale} variant="training" />
+  </main>
+</BaseLayout>

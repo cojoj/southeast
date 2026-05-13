@@ -9,11 +9,13 @@ import {
   Brain,
   Sparkles,
   Footprints,
-  CalendarClock
+  CalendarClock,
+  Zap
 } from "@lucide/astro";
+import type { ClassIcon } from '../types';
 
 export interface Props {
-  name: string;
+  name: ClassIcon;
   class?: string;
 }
 
@@ -29,10 +31,11 @@ const iconMap = {
   Brain,
   Sparkles,
   Footprints,
-  CalendarClock
+  CalendarClock,
+  Zap
 };
 
-const IconComponent = iconMap[name as keyof typeof iconMap] || Dumbbell;
+const IconComponent = iconMap[name] || Dumbbell;
 ---
 
 <IconComponent class={className} aria-hidden="true" />

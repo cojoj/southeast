@@ -1,28 +1,13 @@
 ---
 import type { Locale } from '../types';
+import { privateTraining, site } from '../data/site';
 
 export interface Props {
   currentLang: Locale;
 }
 
 const { currentLang } = Astro.props;
-
-const content = {
-  pl: {
-    title: "Treningi Personalne",
-    description: "Chcesz szybciej robić postępy, skupić się na konkretnych technikach lub dopasować trening do swojego grafiku?",
-    details: "Nasi trenerzy prowadzą indywidualne zajęcia oraz treningi w kameralnych grupach – idealne, jeśli cenisz sobie personalne podejście.",
-    cta: "Zainteresowany? Napisz do nas:"
-  },
-  en: {
-    title: "Personal Training",
-    description: "Want to progress faster, focus on specific techniques or adapt training to your schedule?",
-    details: "Our trainers conduct individual sessions and small group training – perfect if you value a personal approach.",
-    cta: "Interested? Write to us:"
-  }
-};
-
-const copy = content[currentLang];
+const copy = privateTraining[currentLang];
 ---
 
 <section id="private-training" class="private-training-section py-16 md:py-20">
@@ -65,10 +50,10 @@ const copy = content[currentLang];
               {copy.cta}
             </p>
             <a 
-              href="mailto:southeast.jiujitsu@gmail.com"
+              href={site.contact.emailHref}
               class="inline-flex items-center text-base md:text-lg font-semibold text-se-ink underline"
             >
-              southeast.jiujitsu@gmail.com
+              {site.contact.email}
             </a>
           </div>
           

@@ -1,37 +1,47 @@
 export type Locale = 'pl' | 'en';
 
+export type Localized<T> = Record<Locale, T>;
+
+export type PageKey = 'home' | 'about' | 'training' | 'schedule';
+
+export type ClassLevel = 'podstawy' | 'wszystkie' | 'zaawansowani' | 'dzieci' | 'mieszane';
+
+export type GearItem =
+  | 'sports-shirt'
+  | 'shorts-no-pockets'
+  | 'mouthguard'
+  | 'gloves-8oz'
+  | 'gloves-10oz'
+  | 'shin-guards';
+
+export type ClassIcon =
+  | 'Baby'
+  | 'Brain'
+  | 'CalendarClock'
+  | 'Clock'
+  | 'Dumbbell'
+  | 'Footprints'
+  | 'Package'
+  | 'Shirt'
+  | 'Sparkles'
+  | 'Users'
+  | 'Zap';
+
 export interface ClassItem {
   id: string;
-  level: 'podstawy' | 'wszystkie' | 'zaawansowani' | 'dzieci' | 'mieszane';
+  level: ClassLevel;
   durationMin: number;
-  gear: string[];
+  gear: GearItem[];
   icons: {
-    type: string;
-    duration: string;
-    gear: string;
+    type: ClassIcon;
+    duration: ClassIcon;
+    gear: ClassIcon;
   };
-  copy: Record<Locale, {
+  copy: Localized<{
     name: string;
     teaser: string;
     description: string;
     forWhom: string[];
     gearNote: string;
   }>;
-}
-
-export interface InfoBlock {
-  id: string;
-  copy: Record<Locale, { 
-    title: string; 
-    body: string[]; 
-    bullets?: string[] 
-  }>;
-}
-
-export interface ClassesData {
-  classes: ClassItem[];
-}
-
-export interface InfoData {
-  info: InfoBlock[];
 }

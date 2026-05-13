@@ -1,34 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'
-import Hero from '../components/Hero.astro'
-import AboutIntro from '../components/AboutIntro.astro'
-import FeaturesGrid from '../components/FeaturesGrid.astro'
-import TrainerProfiles from '../components/TrainerProfiles.astro'
-import CommunitySection from '../components/CommunitySection.astro'
+import AboutPage from '../components/pages/AboutPage.astro';
 ---
 
-<BaseLayout
-	title="O nas - Southeast Jiu-Jitsu | Kraków"
-	description="Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki. Treningi dla wszystkich poziomów zaawansowania."
-	lang="pl"
-	currentUrl={Astro.url.pathname}
-	bodyClass="bg-additional"
-	ogImage="/training-session.jpg"
->
-	<main class="relative">
-		<!-- Hero Section -->
-		<Hero currentLang="pl" backgroundImage="/team.jpg" />
-
-		<!-- Intro Section -->
-		<AboutIntro currentLang="pl" />
-
-		<!-- Features Grid Section -->
-		<FeaturesGrid currentLang="pl" />
-
-		<!-- Trainer Profiles Section -->
-		<TrainerProfiles currentLang="pl" />
-
-		<!-- Community and CTA Section -->
-		<CommunitySection currentLang="pl" />
-	</main>
-</BaseLayout>
+<AboutPage locale="pl" />
