@@ -29,10 +29,12 @@ const gear = item.gear.map((gearItem) => gearLabels[locale][gearItem]);
       <div class="flex-1 min-w-0">
         <h3 class="font-semibold text-xl text-se-ink leading-tight mb-1">{copy.name}</h3>
         <div class="flex items-center gap-3 text-sm text-neutral-600">
-          <span class="inline-flex items-center gap-1">
-            <IconByName name={item.icons.duration} class="size-4" />
-            {item.durationMin} min
-          </span>
+          {item.durationMin && (
+            <span class="inline-flex items-center gap-1">
+              <IconByName name={item.icons.duration} class="size-4" />
+              {item.durationMin} min
+            </span>
+          )}
           <span class="level-chip">
             {classLevelLabels[locale][item.level]}
           </span>

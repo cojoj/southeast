@@ -30,7 +30,7 @@ export type ClassIcon =
 export interface ClassItem {
   id: string;
   level: ClassLevel;
-  durationMin: number;
+  durationMin?: number;
   gear: GearItem[];
   icons: {
     type: ClassIcon;
