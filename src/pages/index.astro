@@ -94,7 +94,7 @@ import MarketingOverview from '../components/MarketingOverview.astro'
 			<MarketingOverview currentLang="pl" />
 		</main>
 
-	<script slot="scripts">
+	<script slot="scripts" is:inline>
 		document.addEventListener('DOMContentLoaded', function() {
 			const video = document.getElementById('hero-video');
 			if (!video) return;

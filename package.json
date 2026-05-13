@@ -9,12 +9,20 @@
     "check": "astro check",
     "astro": "astro"
   },
+  "engines": {
+    "node": ">=24 <25"
+  },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@lucide/astro": "^0.556.0",
-    "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.4",
-    "tailwindcss": "^4.1.17",
-    "typescript": "^5.9.3"
+    "@astrojs/check": "^0.9.9",
+    "@lucide/astro": "^1.14.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.2",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "yaml-language-server": {
+      "yaml": "2.9.0"
+    }
   }
 }
