@@ -1,0 +1,44 @@
+---
+export interface Props {
+  src: string;
+  avifSrc?: string;
+  alt: string;
+  width: number;
+  height: number;
+  sizes?: string;
+  class?: string;
+  imgClass?: string;
+  loading?: 'eager' | 'lazy';
+  fetchPriority?: 'high' | 'low' | 'auto';
+  decoding?: 'async' | 'sync' | 'auto';
+}
+
+const {
+  src,
+  avifSrc,
+  alt,
+  width,
+  height,
+  sizes,
+  class: wrapperClass,
+  imgClass,
+  loading = 'lazy',
+  fetchPriority = 'auto',
+  decoding = 'async',
+} = Astro.props;
+---
+
+<picture class={wrapperClass}>
+  {avifSrc && <source srcset={avifSrc} type="image/avif" sizes={sizes} />}
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    class={imgClass}
+    loading={loading}
+    fetchpriority={fetchPriority}
+    decoding={decoding}
+  />
+</picture>

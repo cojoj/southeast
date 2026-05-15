@@ -1,4 +1,5 @@
 ---
+import { scheduleContent, site } from '../data/site';
 import type { Locale } from '../types';
 
 export interface Props {
@@ -6,14 +7,300 @@ export interface Props {
 }
 
 const { currentLang } = Astro.props;
+const copy = scheduleContent[currentLang];
+const scheduleWidgetId = `schedule-${currentLang}`;
+const scheduleAllowedOrigin = `https://${site.wodGuru.subdomain}.wod.guru`;
+const scheduleIframeUrl = `https://${site.wodGuru.subdomain}.wod.guru/classes?_wgid=${scheduleWidgetId}&hideTop=1&lang=${currentLang}`;
+const iframeTitle = currentLang === 'pl' ? 'Harmonogram zajęć WodGuru' : 'WodGuru class schedule';
 ---
 
-<script
-  is:inline
-  src="https://wod.guru/widget.js"
-  onload={`WodGuruWidget.init({
-    subdomain: 'southeastjiujitsu',
-    type: 'schedule',
-    params: { hideTop: '1', lang: '${currentLang}' }
-  });`}
-></script>
+<section class="bg-additional px-4 pb-16 md:pb-20">
+  <div
+    class="schedule-shell mx-auto max-w-6xl border border-primary/70 bg-white/70 p-4 shadow-sm md:p-6"
+    data-schedule-shell
+    data-lang={currentLang}
+    data-subdomain={site.wodGuru.subdomain}
+  >
+    <div class="schedule-status flex min-h-[420px] items-center justify-center text-center text-secondary" data-schedule-status>
+      <div>
+        <div class="mx-auto mb-4 size-10 rounded-full border-2 border-primary border-t-secondary motion-safe:animate-spin"></div>
+        <p class="text-base md:text-lg">{copy.loading}</p>
+      </div>
+    </div>
+
+    <div class="wodguru-schedule-region min-h-[420px]" data-schedule-widget-region>
+      <iframe
+        src={scheduleIframeUrl}
+        title={iframeTitle}
+        class="block min-h-[420px] w-full border-0"
+        loading="lazy"
+        data-wodguru-iframe={scheduleWidgetId}
+        data-schedule-iframe
+      ></iframe>
+    </div>
+
+    <div class="schedule-fallback hidden min-h-[420px] items-center justify-center text-center text-secondary" data-schedule-fallback>
+      <div class="max-w-2xl">
+        <h2 class="mb-4 text-2xl font-semibold tracking-wide">{copy.fallbackHeading}</h2>
+        <p class="mx-auto mb-8 max-w-xl text-base leading-relaxed text-secondary/80 md:text-lg">
+          {copy.fallbackDescription}
+        </p>
+
+        <div class="flex flex-col justify-center gap-3 sm:flex-row">
+          <a
+            href={site.wodGuru.schedule}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-ring inline-flex min-h-12 items-center justify-center bg-secondary px-6 py-3 text-sm uppercase tracking-wide text-additional transition-colors hover:bg-secondary/90"
+          >
+            {copy.scheduleCta}
+          </a>
+          <a
+            href={site.wodGuru.memberships}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-ring inline-flex min-h-12 items-center justify-center bg-primary px-6 py-3 text-sm uppercase tracking-wide text-secondary transition-colors hover:bg-primary/90"
+          >
+            {copy.membershipCta}
+          </a>
+          <a
+            href={site.contact.emailHref}
+            class="focus-ring inline-flex min-h-12 items-center justify-center border border-secondary/30 px-6 py-3 text-sm uppercase tracking-wide text-secondary transition-colors hover:bg-secondary hover:text-additional"
+          >
+            {copy.contactCta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ scheduleAllowedOrigin, scheduleWidgetId }}>
+  const scheduleStatus = document.querySelector('[data-schedule-status]');
+  const scheduleRegion = document.querySelector('[data-schedule-widget-region]');
+  const scheduleFallback = document.querySelector('[data-schedule-fallback]');
+  const scheduleIframe = document.querySelector('[data-schedule-iframe]');
+
+  let scheduleLoaded = false;
+  let scheduleDialogMode = false;
+  let scheduleCurrentModal = null;
+  let scheduleModalStack = [];
+
+  function hideScheduleStatus() {
+    scheduleLoaded = true;
+    scheduleStatus?.classList.add('hidden');
+    scheduleStatus?.classList.remove('flex');
+  }
+
+  function sendScheduleMessage(type, message = {}) {
+    if (!scheduleIframe?.contentWindow) return;
+    scheduleIframe.contentWindow.postMessage(
+      {
+        type,
+        message: {
+          _wgid: scheduleWidgetId,
+          ...message,
+        },
+      },
+      scheduleAllowedOrigin,
+    );
+  }
+
+  function setScheduleHeight(height) {
+    if (scheduleDialogMode) return;
+
+    const nextHeight = Math.max(Number(height) || 0, 420);
+    if (!scheduleIframe || !scheduleRegion) return;
+
+    scheduleIframe.style.height = `${nextHeight}px`;
+    scheduleRegion.style.minHeight = `${nextHeight}px`;
+  }
+
+  function showScheduleFallback() {
+    if (scheduleLoaded) return;
+    scheduleStatus?.classList.add('hidden');
+    scheduleStatus?.classList.remove('flex');
+    scheduleRegion?.classList.add('hidden');
+    scheduleFallback?.classList.remove('hidden');
+    scheduleFallback?.classList.add('flex');
+  }
+
+  function parseScheduleData(rawData) {
+    if (!rawData) return {};
+    if (typeof rawData === 'object') return rawData;
+
+    try {
+      return JSON.parse(rawData);
+    } catch {
+      return {};
+    }
+  }
+
+  function attachScheduleModalEvents(modal) {
+    modal.querySelectorAll('[data-action]').forEach((element) => {
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const action = element.getAttribute('data-action');
+        const data = parseScheduleData(element.getAttribute('data-data'));
+
+        if (action === 'CloseModal') {
+          hideScheduleModal(event.metaKey || event.ctrlKey);
+          return;
+        }
+
+        if (action === 'OpenBlank') {
+          const targetUrl = data?.url || data?.href;
+          if (targetUrl) window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          return;
+        }
+
+        sendScheduleMessage('ModalAction', { action, data });
+      });
+    });
+
+    modal.querySelectorAll('[data-change]').forEach((element) => {
+      element.addEventListener('change', (event) => {
+        event.preventDefault();
+
+        const action = element.getAttribute('data-change');
+        const data = parseScheduleData(element.getAttribute('data-data'));
+        const valueKey = element.getAttribute('data-value-key') || 'value';
+        const value = Number.parseInt(element.value, 10);
+
+        data[valueKey] = Number.isNaN(value) ? element.value : value;
+        sendScheduleMessage('ModalAction', { action, data });
+      });
+    });
+  }
+
+  function createScheduleModal(content) {
+    const modal = document.createElement('div');
+    modal.className = 'wodguru-modal-overlay';
+    modal.innerHTML = `
+      <div class="wodguru-modal-container">
+        <div class="wodguru-modal-content">${content || ''}</div>
+      </div>
+    `;
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) hideScheduleModal(event.metaKey || event.ctrlKey);
+    });
+
+    attachScheduleModalEvents(modal);
+    document.body.appendChild(modal);
+    document.documentElement.classList.add('overflow-hidden');
+
+    return modal;
+  }
+
+  function showScheduleModal(message) {
+    if (scheduleCurrentModal) {
+      scheduleCurrentModal.classList.add('hidden');
+      scheduleModalStack.push(scheduleCurrentModal);
+    }
+
+    scheduleCurrentModal = createScheduleModal(message.content);
+  }
+
+  function updateScheduleModal(message) {
+    if (!scheduleCurrentModal) {
+      showScheduleModal(message);
+      return;
+    }
+
+    const modalContent = scheduleCurrentModal.querySelector('.wodguru-modal-content');
+    if (!modalContent) return;
+
+    modalContent.innerHTML = message.content || '';
+    attachScheduleModalEvents(scheduleCurrentModal);
+  }
+
+  function hideScheduleModal(closeAll = false) {
+    scheduleCurrentModal?.remove();
+    scheduleCurrentModal = null;
+
+    if (closeAll) {
+      scheduleModalStack.forEach((modal) => modal.remove());
+      scheduleModalStack = [];
+    } else {
+      scheduleCurrentModal = scheduleModalStack.pop() || null;
+      scheduleCurrentModal?.classList.remove('hidden');
+    }
+
+    if (!scheduleCurrentModal && scheduleModalStack.length === 0) {
+      document.documentElement.classList.remove('overflow-hidden');
+    }
+  }
+
+  function enterScheduleDialogMode() {
+    scheduleDialogMode = true;
+    if (scheduleIframe) scheduleIframe.style.height = `${window.innerHeight}px`;
+    if (scheduleRegion) scheduleRegion.style.minHeight = `${window.innerHeight}px`;
+  }
+
+  function exitScheduleDialogMode() {
+    scheduleDialogMode = false;
+    sendScheduleMessage('FrameHeight');
+  }
+
+  window.addEventListener('message', (event) => {
+    const { type, message } = event.data || {};
+    if (event.origin !== scheduleAllowedOrigin) return;
+    if (!type || !message || message._wgid !== scheduleWidgetId) return;
+
+    switch (type) {
+      case 'FrameHeight':
+        setScheduleHeight(message.height);
+        hideScheduleStatus();
+        break;
+      case 'ShowModal':
+        showScheduleModal(message);
+        hideScheduleStatus();
+        break;
+      case 'UpdateModal':
+        updateScheduleModal(message);
+        break;
+      case 'CloseModal':
+        hideScheduleModal(message.forceCloseAll);
+        break;
+      case 'ScrollToTop':
+        scheduleIframe?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      case 'EnterDialogMode':
+        enterScheduleDialogMode();
+        break;
+      case 'ExitDialogMode':
+        exitScheduleDialogMode();
+        break;
+      case 'GTMEvent':
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(message);
+        break;
+    }
+  });
+
+  scheduleIframe?.addEventListener('load', () => {
+    hideScheduleStatus();
+    sendScheduleMessage('HelloWod', {
+      debug: false,
+      parentUrl: window.location.href,
+    });
+    sendScheduleMessage('FrameHeight');
+  }, { once: true });
+
+  scheduleIframe?.addEventListener('error', showScheduleFallback, { once: true });
+  window.addEventListener('resize', () => sendScheduleMessage('FrameHeight'));
+  window.setTimeout(showScheduleFallback, 8000);
+</script>
+
+<style is:global>
+  .wodguru-modal-overlay {
+    overflow-y: auto;
+    padding: 24px 16px;
+  }
+
+  .wodguru-modal-container {
+    max-height: none;
+  }
+</style>

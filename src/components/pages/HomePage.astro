@@ -20,31 +20,54 @@ const hero = homeHero[locale];
   currentUrl={routes.home[locale]}
   bodyClass={meta.bodyClass}
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/hero-poster.jpg" />
+    <link rel="preload" as="image" href="/logos/logo_white_jj.svg" />
+  </Fragment>
+
   <main class="relative min-h-screen">
     <section class="relative min-h-screen overflow-hidden">
+      <picture class="absolute inset-0 block h-full w-full">
+        <source srcset="/hero.avif" type="image/avif" />
+        <img
+          src="/hero-poster.jpg"
+          alt=""
+          width="960"
+          height="1706"
+          class="h-full w-full object-cover object-[center_35%] grayscale contrast-125 brightness-90"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+
       <video
         id="hero-video"
-        class="absolute inset-0 w-full h-full object-cover object-[center_35%]"
-        style={`background-image: url('/hero.jpg'); background-size: cover; background-position: center 35%; background-repeat: no-repeat; filter: grayscale(100%) contrast(120%) brightness(90%);`}
+        class="absolute inset-0 hidden h-full w-full object-cover object-[center_35%] grayscale contrast-125 brightness-90 md:block"
         autoplay
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
+        poster="/hero-poster.jpg"
+        aria-hidden="true"
       >
-        <source src="/alan_seminar_highlights.webm" type="video/webm">
-        <source src="/alan_seminar_highlights_compressed.mp4" type="video/mp4">
       </video>
 
       <div class="absolute inset-0 bg-black/40"></div>
 
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="relative z-10 w-full max-w-4xl px-4 text-center">
+          <h1 class="sr-only">{hero.title}</h1>
+
           <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
             <img
               src="/logos/logo_white_jj.svg"
               alt={`${site.name} Logo`}
+              width="300"
+              height="124"
               class="w-full h-auto"
+              fetchpriority="high"
             />
           </div>
 
@@ -57,7 +80,7 @@ const hero = homeHero[locale];
               href={site.wodGuru.registration}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
+              class="focus-ring-on-dark w-full sm:w-auto min-w-[240px] px-8 py-4 bg-secondary text-additional font-normal text-base uppercase tracking-wide hover:bg-secondary/90 transition-all duration-200"
             >
               {hero.primaryCta}
             </a>
@@ -66,7 +89,7 @@ const hero = homeHero[locale];
               href={site.wodGuru.memberships}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
+              class="focus-ring-on-dark w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-secondary font-normal text-base uppercase tracking-wide hover:bg-primary/90 transition-all duration-200"
             >
               {hero.secondaryCta}
             </a>
@@ -99,6 +122,24 @@ const hero = homeHero[locale];
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.getElementById('hero-video');
       if (!video) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const shouldLoadVideo = window.matchMedia('(min-width: 768px)').matches && !prefersReducedMotion;
+
+      if (shouldLoadVideo) {
+        const source = document.createElement('source');
+        source.src = window.matchMedia('(max-width: 1023px)').matches
+          ? '/hero-loop-mobile.mp4'
+          : '/hero-loop-desktop.mp4';
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        video.load();
+        video.play().catch(function() {
+          video.style.display = 'none';
+        });
+      } else {
+        video.style.display = 'none';
+      }
 
       video.addEventListener('error', function() {
         video.style.display = 'none';

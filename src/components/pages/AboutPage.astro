@@ -24,6 +24,10 @@ const meta = pageMeta.about[locale];
   bodyClass={meta.bodyClass}
   ogImage={meta.ogImage}
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/team-hero.avif" type="image/avif" />
+  </Fragment>
+
   <main class="relative">
     <Hero currentLang={locale} backgroundImage="/team.jpg" />
     <AboutIntro currentLang={locale} />

@@ -12,9 +12,14 @@ export interface Props {
     en: string;
   };
   backgroundImage?: string;
+  backgroundAvif?: string;
 }
 
-const { currentLang, title, subtitle, backgroundImage = "/hero.jpg" } = Astro.props;
+const { currentLang, title, subtitle, backgroundImage = "/hero.jpg", backgroundAvif } = Astro.props;
+const resolvedAvif = backgroundAvif ?? (backgroundImage === '/team.jpg' ? '/team-hero.avif' : '/hero.avif');
+const imageDimensions = backgroundImage === '/team.jpg'
+  ? { width: 1800, height: 832 }
+  : { width: 1280, height: 1920 };
 
 const currentContent = {
   title: title ? title[currentLang] : heroContent.about[currentLang].title,
@@ -23,15 +28,22 @@ const currentContent = {
 ---
 
 <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden">
-  <!-- Hero Background Image -->
-  <div 
-    class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-    style={`background-image: url('${backgroundImage}'); filter: grayscale(100%) contrast(120%) brightness(90%);`}
-  >
-  </div>
+  <picture class="absolute inset-0 block h-full w-full">
+    <source srcset={resolvedAvif} type="image/avif" />
+    <img
+      src={backgroundImage}
+      alt=""
+      width={imageDimensions.width}
+      height={imageDimensions.height}
+      class="h-full w-full object-cover object-center saturate-[0.75] contrast-[1.05] brightness-[0.82]"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
   
   <!-- Dark Overlay for Contrast -->
-  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="absolute inset-0 bg-black/35"></div>
   
   <!-- Content -->
   <div class="absolute inset-0 flex items-center justify-center">

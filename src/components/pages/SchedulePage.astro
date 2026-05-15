@@ -20,6 +20,11 @@ const content = scheduleContent[locale];
   currentUrl={routes.schedule[locale]}
   bodyClass={meta.bodyClass}
 >
+  <Fragment slot="head">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://wod.guru/widget-styles.css" />
+  </Fragment>
+
   <main class="pt-[75px]">
     <section class="bg-additional py-10 md:py-12">
       <div class="container mx-auto px-4 text-center">

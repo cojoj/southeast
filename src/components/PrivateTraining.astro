@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../types';
 import { privateTraining, site } from '../data/site';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 export interface Props {
   currentLang: Locale;
@@ -18,10 +19,14 @@ const copy = privateTraining[currentLang];
         <!-- Image Column -->
         <div class="order-2 md:order-1">
           <div class="relative">
-            <img
+            <ResponsiveImage
               src="/flagens.jpg"
+              avifSrc="/flagens.avif"
               alt="Private training with professional instructor"
-              class="w-full h-auto shadow-lg object-cover"
+              width={900}
+              height={1200}
+              sizes="(min-width: 768px) 552px, calc(100vw - 32px)"
+              imgClass="w-full h-auto shadow-lg object-cover"
               loading="lazy"
             />
           </div>
@@ -51,7 +56,7 @@ const copy = privateTraining[currentLang];
             </p>
             <a 
               href={site.contact.emailHref}
-              class="inline-flex items-center text-base md:text-lg font-semibold text-se-ink underline"
+              class="focus-ring inline-flex items-center text-base md:text-lg font-semibold text-se-ink underline"
             >
               {site.contact.email}
             </a>

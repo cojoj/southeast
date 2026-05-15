@@ -32,6 +32,10 @@ const subtitle = {
   currentUrl={routes.training[locale]}
   bodyClass={meta.bodyClass}
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/hero.avif" type="image/avif" />
+  </Fragment>
+
   <main class="relative min-h-screen">
     <Hero
       currentLang={locale}

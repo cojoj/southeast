@@ -37,14 +37,6 @@ const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateH
 
 <html lang={lang}>
 	<head>
-		<!-- Google Tag Manager -->
-		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-W9Q5ZDPT');</script>
-		<!-- End Google Tag Manager -->
-
 		<!-- DataLayer initialization with language tracking -->
 		<script is:inline define:vars={{ lang }}>
 			window.dataLayer = window.dataLayer || [];
@@ -52,6 +44,32 @@ const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateH
 				'lang': lang
 			});
 		</script>
+
+		<!-- Google Tag Manager, delayed until the browser has painted the page shell. -->
+		<script is:inline>
+			(function(w,d,s,l,i){
+				w[l]=w[l]||[];
+				w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+
+				function loadGtm(){
+					if (d.getElementById('gtm-script')) return;
+					var f=d.getElementsByTagName(s)[0];
+					var j=d.createElement(s);
+					var dl=l!='dataLayer'?'&l='+l:'';
+					j.async=true;
+					j.id='gtm-script';
+					j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+					f.parentNode.insertBefore(j,f);
+				}
+
+				if ('requestIdleCallback' in w) {
+					w.requestIdleCallback(loadGtm, { timeout: 2500 });
+				} else {
+					w.addEventListener('load', function(){ setTimeout(loadGtm, 1200); }, { once: true });
+				}
+			})(window,document,'script','dataLayer','GTM-W9Q5ZDPT');
+		</script>
+		<!-- End Google Tag Manager -->
 
 		<meta charset="utf-8" />
 
@@ -62,6 +80,8 @@ const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateH
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="preload" href="/fonts/AreaNormal-Regular.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/AreaNormal-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />

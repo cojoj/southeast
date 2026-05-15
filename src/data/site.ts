@@ -18,6 +18,7 @@ export const site = {
   wodGuru: {
     registration: 'https://southeastjiujitsu.wod.guru/rejestracja',
     memberships: 'https://southeastjiujitsu.wod.guru/wizytowka',
+    schedule: 'https://southeastjiujitsu.wod.guru/grafik',
     account: 'https://southeastjiujitsu.wod.guru/user/login',
     subdomain: 'southeastjiujitsu',
   },
@@ -136,16 +137,18 @@ export const externalNav = [
 
 export const homeHero = {
   pl: {
+    title: 'Brazylijskie Jiu-Jitsu w Krakowie',
     description: 'Poznaj nasze innowacyjne metody treningowe i trenuj Jiu-Jitsu, MMA i Kickboxing pod okiem trenerów z wieloletnim doświadczeniem!',
     primaryCta: 'Pierwszy darmowy trening',
     secondaryCta: 'Kup karnet',
   },
   en: {
+    title: 'Brazilian Jiu-Jitsu in Krakow',
     description: 'Discover our innovative training methods and train Jiu-Jitsu, MMA and Kickboxing under experienced trainers!',
     primaryCta: 'First free training',
     secondaryCta: 'Buy membership',
   },
-} satisfies Localized<{ description: string; primaryCta: string; secondaryCta: string }>;
+} satisfies Localized<{ title: string; description: string; primaryCta: string; secondaryCta: string }>;
 
 export const heroContent = {
   about: {
@@ -174,12 +177,33 @@ export const scheduleContent = {
   pl: {
     heading: 'HARMONOGRAM',
     description: 'Sprawdź aktualne godziny zajęć i wybierz trening dla siebie.',
+    loading: 'Ładujemy aktualny harmonogram zajęć...',
+    fallbackHeading: 'Harmonogram chwilowo się nie załadował',
+    fallbackDescription: 'Możesz otworzyć grafik bezpośrednio w WodGuru albo skontaktować się z nami, jeśli chcesz dobrać pierwszy trening.',
+    scheduleCta: 'Otwórz grafik w WodGuru',
+    membershipCta: 'Sprawdź karnety',
+    contactCta: 'Napisz do nas',
   },
   en: {
     heading: 'SCHEDULE',
     description: 'Check current class times and choose the right training session.',
+    loading: 'Loading the current class schedule...',
+    fallbackHeading: 'The schedule did not load',
+    fallbackDescription: 'You can open the timetable directly in WodGuru or contact us if you want help choosing your first session.',
+    scheduleCta: 'Open schedule in WodGuru',
+    membershipCta: 'Check memberships',
+    contactCta: 'Email us',
   },
-} satisfies Localized<{ heading: string; description: string }>;
+} satisfies Localized<{
+  heading: string;
+  description: string;
+  loading: string;
+  fallbackHeading: string;
+  fallbackDescription: string;
+  scheduleCta: string;
+  membershipCta: string;
+  contactCta: string;
+}>;
 
 export const marketingOverview = {
   pl: {
