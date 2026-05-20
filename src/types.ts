@@ -31,6 +31,7 @@ export interface ClassItem {
   id: string;
   level: ClassLevel;
   durationMin?: number;
+  durationLabel?: string;
   gear: GearItem[];
   icons: {
     type: ClassIcon;

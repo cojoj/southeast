@@ -14,6 +14,7 @@ const copy = item.copy[locale];
 const isPolish = locale === 'pl';
 const gear = item.gear.map((gearItem) => gearLabels[locale][gearItem]);
 const detailsLabel = isPolish ? 'Szczegóły zajęć' : 'Class details';
+const durationLabel = item.durationLabel ?? (item.durationMin ? `${item.durationMin} min` : undefined);
 ---
 
 <div class="group relative h-full">
@@ -30,10 +31,10 @@ const detailsLabel = isPolish ? 'Szczegóły zajęć' : 'Class details';
       <div class="flex-1 min-w-0">
         <h3 class="font-semibold text-xl text-se-ink leading-tight mb-1">{copy.name}</h3>
         <div class="flex items-center gap-3 text-sm text-neutral-600">
-          {item.durationMin && (
+          {durationLabel && (
             <span class="inline-flex items-center gap-1">
               <IconByName name={item.icons.duration} class="size-4" />
-              {item.durationMin} min
+              {durationLabel}
             </span>
           )}
           <span class="level-chip">

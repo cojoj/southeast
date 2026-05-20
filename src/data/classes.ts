@@ -52,6 +52,7 @@ export const classes = [
   {
     id: 'bjj-wszystkie',
     level: 'wszystkie',
+    durationLabel: '60-90 min',
     gear: ['sports-shirt', 'shorts-no-pockets'],
     icons: { type: 'Users', duration: 'Clock', gear: 'Shirt' },
     copy: {
