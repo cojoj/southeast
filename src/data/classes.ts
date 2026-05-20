@@ -22,28 +22,56 @@ export const gearLabels = {
 export const classes = [
   {
     id: 'bjj-podstawy',
+    level: 'podstawy',
+    durationMin: 60,
+    gear: ['sports-shirt', 'shorts-no-pockets'],
+    icons: { type: 'Sparkles', duration: 'Clock', gear: 'Shirt' },
+    copy: {
+      pl: {
+        name: 'Jiu-Jitsu Podstawy',
+        teaser: 'Chcesz rozpocząć swoją przygodę z jiu-jitsu? To idealne zajęcia na Twój pierwszy trening!',
+        description: 'Na tych zajęciach skupiamy się na podstawowych aspektach jiu-jitsu, a plan treningowy ułożony jest tak, że możesz dołączyć w każdej chwili.',
+        forWhom: [
+          'Osoby początkujące, które chcą nauczyć się podstaw jiu-jitsu',
+          'Bardziej zaawansowani trenujący, którzy chcą poprawić swoje podstawy',
+        ],
+        gearNote: '',
+      },
+      en: {
+        name: 'Jiu-Jitsu Fundamentals',
+        teaser: 'Want to start your jiu-jitsu journey? This is the perfect class for your first training session!',
+        description: 'In this class we focus on the most basic aspects of jiu-jitsu, with a training plan that makes it easy to join anytime.',
+        forWhom: [
+          'Complete beginners who want to learn jiu-jitsu from scratch',
+          'More experienced practitioners who want to refine their basics',
+        ],
+        gearNote: '',
+      },
+    },
+  },
+  {
+    id: 'bjj-wszystkie',
     level: 'wszystkie',
-    durationMin: 75,
     gear: ['sports-shirt', 'shorts-no-pockets'],
     icons: { type: 'Users', duration: 'Clock', gear: 'Shirt' },
     copy: {
       pl: {
-        name: 'Jiu-Jitsu wszystkie poziomy',
-        teaser: 'Trening dla osób początkujących i bardziej zaawansowanych, który pozwala rozwijać jiu-jitsu w swoim tempie.',
-        description: 'Fundamenty walki w parterze, kontrola, poddania i zadania dostosowane do poziomu grupy. Możesz dołączyć w każdej chwili - bez doświadczenia.',
+        name: 'Jiu-Jitsu Wszystkie Poziomy',
+        teaser: 'Trening, na którym mieszamy naukę podstaw z zaawansowanymi zagadnieniami.',
+        description: 'Zajęcia dla osób z rekomendowanym minimum 6 miesiącami doświadczenia. Łączymy podstawy, zaawansowane koncepcje i zadania treningowe dopasowane do poziomu grupy.',
         forWhom: [
-          'Osoby początkujące, które chcą rozpocząć treningi jiu-jitsu',
-          'Bardziej zaawansowani trenujący, którzy chcą rozwijać swoje umiejętności',
+          'Osoby po pierwszych miesiącach treningu, które chcą podnieść swój poziom',
+          'Bardziej zaawansowani trenujący',
         ],
         gearNote: '',
       },
       en: {
         name: 'Jiu-Jitsu All Levels',
-        teaser: 'Training for beginners and more experienced practitioners, built so everyone can develop their jiu-jitsu at their own pace.',
-        description: 'Ground fighting fundamentals, control, submissions, and tasks adapted to the group level. Join anytime - no experience required.',
+        teaser: 'Training where we blend fundamentals with more advanced concepts.',
+        description: 'A class for practitioners with a recommended minimum of 6 months of experience. We combine fundamentals, advanced concepts, and training tasks adapted to the group level.',
         forWhom: [
-          'Beginners who want to start training jiu-jitsu',
-          'More experienced practitioners who want to keep developing their skills',
+          'Practitioners past their first months of training who want to raise their level',
+          'More advanced practitioners',
         ],
         gearNote: '',
       },
