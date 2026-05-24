@@ -2,7 +2,7 @@ export type Locale = 'pl' | 'en';
 
 export type Localized<T> = Record<Locale, T>;
 
-export type PageKey = 'home' | 'about' | 'training' | 'schedule';
+export type PageKey = 'home' | 'about' | 'training' | 'schedule' | 'summerCamp';
 
 export type ClassLevel = 'podstawy' | 'wszystkie' | 'zaawansowani' | 'dzieci' | 'mieszane';
 

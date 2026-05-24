@@ -1,0 +1,340 @@
+---
+import {
+  CalendarClock,
+  CircleCheck,
+  Dumbbell,
+  ExternalLink,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  Ticket,
+  Users,
+  Utensils,
+} from '@lucide/astro';
+import { pageMeta, routes, site } from '../../data/site';
+import { summerCamp, summerCampSignupUrl } from '../../data/summerCamp';
+import type { Locale } from '../../types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../ResponsiveImage.astro';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const meta = pageMeta.summerCamp[locale];
+const content = summerCamp[locale];
+const mapHref = `https://maps.google.com/?q=${site.address.mapQuery}`;
+const includedIconComponents = {
+  CalendarClock,
+  Dumbbell,
+  Sparkles,
+  Ticket,
+  Users,
+  Utensils,
+};
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  lang={locale}
+  currentUrl={routes.summerCamp[locale]}
+  bodyClass={meta.bodyClass}
+  ogImage={meta.ogImage}
+>
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/summer-camp-poster.jpg" />
+  </Fragment>
+
+  <main class="pt-[75px]">
+    <section class="bg-secondary text-additional">
+      <div class="container mx-auto grid gap-10 px-4 py-12 md:py-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] lg:items-center lg:py-20">
+        <div>
+          <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-primary">
+            {content.hero.eyebrow}
+          </p>
+          <h1 class="max-w-3xl text-4xl font-semibold uppercase leading-tight md:text-5xl lg:text-6xl">
+            {content.hero.title}
+          </h1>
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-additional/85 md:text-lg">
+            {content.hero.lead}
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={summerCampSignupUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center gap-2 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors hover:bg-primary/90"
+            >
+              {content.hero.primaryCta}
+              <ExternalLink class="size-4" aria-hidden="true" />
+            </a>
+            <a
+              href={site.contact.phoneHref}
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center gap-2 border border-additional/35 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-additional transition-colors hover:bg-additional/10"
+            >
+              <Phone class="size-4" aria-hidden="true" />
+              {content.hero.contactCta}
+            </a>
+          </div>
+
+          {content.trust.formLanguageNote && (
+            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-additional/70">
+              {content.trust.formLanguageNote}
+            </p>
+          )}
+
+          <dl class="mt-8 grid gap-3 sm:grid-cols-2 lg:max-w-3xl">
+            {content.facts.map((fact) => (
+              <div class="border border-additional/20 bg-additional/5 p-4">
+                <dt class="text-xs font-semibold uppercase tracking-wide text-primary">
+                  {fact.label}
+                </dt>
+                <dd class="mt-1 text-lg text-additional">
+                  {fact.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <figure class="mx-auto w-full max-w-sm lg:max-w-md">
+          <ResponsiveImage
+            src="/summer-camp-poster.jpg"
+            alt={content.poster.alt}
+            width={1080}
+            height={1350}
+            sizes="(min-width: 1024px) 384px, min(100vw - 32px, 384px)"
+            imgClass="w-full border border-additional/20 shadow-2xl"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <figcaption class="mt-3 text-sm leading-relaxed text-additional/70">
+            {content.poster.caption}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="bg-additional py-14 md:py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-3xl text-center">
+          <h2 class="text-3xl font-semibold uppercase tracking-wide text-secondary md:text-4xl">
+            {content.included.heading}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-secondary/75 md:text-lg">
+            {content.included.intro}
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {content.included.items.map((item) => {
+            const Icon = includedIconComponents[item.icon];
+
+            return (
+              <article class="border border-primary bg-white p-5 shadow-sm">
+                <div class="mb-4 inline-flex size-11 items-center justify-center bg-primary text-secondary">
+                  <Icon class="size-6" aria-hidden="true" />
+                </div>
+                <h3 class="text-lg font-semibold text-secondary">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary/75">
+                  {item.description}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+
+        <div class="mx-auto mt-10 max-w-4xl border-y border-primary py-6">
+          <h3 class="text-center text-lg font-semibold uppercase tracking-wide text-secondary">
+            {content.included.attractionsHeading}
+          </h3>
+          <ul class="mt-5 flex flex-wrap justify-center gap-3">
+            {content.included.attractions.map((attraction) => (
+              <li class="border border-primary bg-primary/35 px-4 py-2 text-sm text-secondary">
+                {attraction}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-14 md:py-20">
+      <div class="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div>
+          <h2 class="text-3xl font-semibold uppercase tracking-wide text-secondary md:text-4xl">
+            {content.schedule.heading}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-secondary/75">
+            {content.schedule.intro}
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            {content.schedule.turnuses.map((turnus) => (
+              <article class="border border-primary bg-additional p-5">
+                <p class="text-sm font-semibold uppercase tracking-wide text-secondary/65">
+                  {turnus.label}
+                </p>
+                <p class="mt-2 text-xl font-semibold text-secondary">
+                  {turnus.date}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold uppercase tracking-wide text-secondary">
+            {content.schedule.dayHeading}
+          </h3>
+          <ol class="mt-6 space-y-4">
+            {content.schedule.dayPlan.map((item) => (
+              <li class="grid gap-3 border-l-4 border-primary bg-additional p-5 sm:grid-cols-[120px_1fr]">
+                <time class="font-semibold text-secondary">
+                  {item.time}
+                </time>
+                <div>
+                  <h4 class="font-semibold text-secondary">
+                    {item.title}
+                  </h4>
+                  <p class="mt-1 text-sm leading-relaxed text-secondary/75">
+                    {item.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <p class="mt-5 text-sm font-semibold text-secondary">
+            {content.schedule.note}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-additional py-14 md:py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-3xl text-center">
+          <h2 class="text-3xl font-semibold uppercase tracking-wide text-secondary md:text-4xl">
+            {content.pricing.heading}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-secondary/75">
+            {content.pricing.intro}
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          {content.pricing.cards.map((card) => (
+            <article class="border border-primary bg-white p-5 shadow-sm">
+              <div class="border-b border-primary pb-4">
+                <h3 class="text-2xl font-semibold text-secondary">
+                  {card.title}
+                </h3>
+                <p class="mt-1 text-sm uppercase tracking-wide text-secondary/65">
+                  {card.subtitle}
+                </p>
+              </div>
+
+              <table class="mt-5 w-full border-collapse text-left">
+                <thead>
+                  <tr class="text-sm uppercase tracking-wide text-secondary/65">
+                    <th scope="col" class="pb-3 font-semibold"> </th>
+                    <th scope="col" class="pb-3 font-semibold">{content.pricing.earlyLabel}</th>
+                    <th scope="col" class="pb-3 font-semibold">{content.pricing.laterLabel}</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-primary">
+                  {card.rows.map((row) => (
+                    <tr>
+                      <th scope="row" class="py-4 pr-3 text-sm font-semibold text-secondary">
+                        {row.audience}
+                      </th>
+                      <td class="py-4 pr-3 text-lg font-semibold text-secondary">
+                        {row.early}
+                      </td>
+                      <td class="py-4 text-lg text-secondary">
+                        {row.later}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </article>
+          ))}
+        </div>
+
+        <p class="mt-6 text-center text-base font-semibold text-secondary">
+          {content.pricing.siblingDiscount}
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-secondary py-14 text-additional md:py-20">
+      <div class="container mx-auto grid gap-10 px-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div>
+          <div class="mb-5 inline-flex size-12 items-center justify-center bg-primary text-secondary">
+            <ShieldCheck class="size-7" aria-hidden="true" />
+          </div>
+          <h2 class="text-3xl font-semibold uppercase tracking-wide md:text-4xl">
+            {content.trust.heading}
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-additional/75">
+            {content.trust.intro}
+          </p>
+          <ul class="mt-8 space-y-4">
+            {content.trust.points.map((point) => (
+              <li class="flex gap-3 text-additional/90">
+                <CircleCheck class="mt-0.5 size-5 flex-shrink-0 text-primary" aria-hidden="true" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <aside class="border border-additional/20 bg-additional/5 p-5">
+          <h3 class="text-xl font-semibold uppercase tracking-wide">
+            {content.trust.contactHeading}
+          </h3>
+          <div class="mt-6 space-y-4 text-additional/85">
+            <a
+              href={mapHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring-on-dark flex gap-3 transition-colors hover:text-primary"
+            >
+              <MapPin class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span>
+                {site.address.street}<br />
+                {site.address.postalCity}
+              </span>
+            </a>
+            <a href={site.contact.phoneHref} class="focus-ring-on-dark flex gap-3 transition-colors hover:text-primary">
+              <Phone class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span>{site.contact.phone}</span>
+            </a>
+            <a href={site.contact.emailHref} class="focus-ring-on-dark flex gap-3 break-all transition-colors hover:text-primary">
+              <Mail class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span>{site.contact.email}</span>
+            </a>
+          </div>
+
+          <a
+            href={summerCampSignupUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-ring-on-dark mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors hover:bg-primary/90"
+          >
+            {content.hero.primaryCta}
+            <ExternalLink class="size-4" aria-hidden="true" />
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -25,18 +25,21 @@ function isActiveLink(linkPath: string): boolean {
   <div class="container mx-auto px-4 h-full flex items-center justify-between">
     <div class="flex items-center">
       <a href={homeHref} class="block focus-ring" aria-label={site.name}>
-        <img src="/logos/logo_black.svg" alt="" width="300" height="88" class="w-[180px] h-auto navbar-logo" fetchpriority="high" />
+        <img src="/logos/logo_black.svg" alt="" width="300" height="88" class="w-[150px] xl:w-[170px] 2xl:w-[180px] h-auto navbar-logo" fetchpriority="high" />
       </a>
     </div>
 
-    <nav class="hidden lg:flex items-center space-x-10" aria-label="Main navigation">
+    <nav class="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-8" aria-label="Main navigation">
       {nav.map((item) => {
         const href = routes[item.page][currentLang];
         const active = isActiveLink(href);
+        const linkClass = item.seasonal
+          ? `focus-ring inline-flex min-h-10 items-center border border-secondary bg-secondary px-3 py-2 text-xs font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-secondary/90 hover:no-underline xl:text-sm 2xl:text-base ${active ? 'bg-secondary/90' : ''}`
+          : `focus-ring text-secondary hover:underline transition-all duration-200 text-xs xl:text-sm 2xl:text-base tracking-wide font-normal ${active ? 'underline' : ''}`;
 
         return (
           <div class="relative group">
-            <a href={href} class={`focus-ring text-secondary hover:underline transition-all duration-200 text-base tracking-wide font-normal ${active ? 'underline' : ''}`}>
+            <a href={href} class={linkClass}>
               {item.label[currentLang]}
             </a>
 
@@ -54,29 +57,29 @@ function isActiveLink(linkPath: string): boolean {
       })}
 
       {externalNav.map((item) => (
-        <a href={item.href} class="focus-ring text-secondary hover:underline transition-all duration-200 text-base font-normal tracking-wide">
+        <a href={item.href} class="focus-ring text-secondary hover:underline transition-all duration-200 text-xs font-normal tracking-wide xl:text-sm 2xl:text-base">
           {item.label[currentLang]}
         </a>
       ))}
     </nav>
 
     <div class="flex items-center space-x-3">
-      <div class="hidden lg:flex items-center space-x-3">
+      <div class="hidden lg:flex items-center space-x-2 xl:space-x-3">
         <a href={site.social[0].href} target="_blank" rel="noopener noreferrer" class="focus-ring text-secondary transition-all duration-200" aria-label={site.social[0].label}>
-          <svg class="w-[22px] h-[22px] hover:stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <svg class="h-5 w-5 hover:stroke-[2] xl:h-[22px] xl:w-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
         <a href={site.social[1].href} target="_blank" rel="noopener noreferrer" class="focus-ring text-secondary transition-all duration-200" aria-label={site.social[1].label}>
-          <svg class="w-[22px] h-[22px] hover:stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <svg class="h-5 w-5 hover:stroke-[2] xl:h-[22px] xl:w-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
       </div>
 
-      <div class="flex items-center space-x-1 text-sm text-secondary" aria-label="Language switcher">
+      <div class="flex items-center space-x-1 text-xs text-secondary xl:text-sm" aria-label="Language switcher">
         <a href={polishUrl} class={`focus-ring transition-all duration-200 hover:underline ${currentLang === 'pl' ? 'font-semibold underline' : 'font-normal'}`}>
           PL
         </a>
@@ -107,7 +110,7 @@ function isActiveLink(linkPath: string): boolean {
     <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu" aria-label="Mobile navigation">
       {nav.map((item) => (
         <div>
-          <a href={routes[item.page][currentLang]} class={`focus-ring mobile-menu-item block text-secondary hover:underline transition-all duration-200 text-base tracking-wide py-3 border-b border-secondary/20 ${isActiveLink(routes[item.page][currentLang]) ? 'font-semibold underline' : 'font-normal'}`}>
+          <a href={routes[item.page][currentLang]} class={`focus-ring mobile-menu-item block hover:underline transition-all duration-200 text-base tracking-wide py-3 ${item.seasonal ? 'mb-2 border border-secondary bg-secondary px-4 font-semibold text-primary hover:no-underline' : `border-b border-secondary/20 text-secondary ${isActiveLink(routes[item.page][currentLang]) ? 'font-semibold underline' : 'font-normal'}`}`}>
             {item.label[currentLang]}
           </a>
 

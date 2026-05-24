@@ -39,6 +39,7 @@ export const site = {
 
 export const routes = {
   home: { pl: '/', en: '/en/' },
+  summerCamp: { pl: '/polkolonie/', en: '/en/summer-camp/' },
   about: { pl: '/o-nas/', en: '/en/about/' },
   training: { pl: '/treningi/', en: '/en/training/' },
   schedule: { pl: '/harmonogram/', en: '/en/schedule/' },
@@ -55,6 +56,20 @@ export const pageMeta = {
       title: 'Southeast Jiu-Jitsu',
       description: 'Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Krakow, Poland. Training for all skill levels.',
       bodyClass: 'bg-additional',
+    },
+  },
+  summerCamp: {
+    pl: {
+      title: 'Półkolonie sportowe dla dzieci - Southeast Jiu-Jitsu',
+      description: 'Aktywne półkolonie sportowe dla dzieci 5-13 lat w Krakowie. Treningi Jiu-Jitsu, codzienne atrakcje, wyżywienie i opieka 8:00-16:00.',
+      bodyClass: 'bg-additional',
+      ogImage: '/summer-camp-poster.jpg',
+    },
+    en: {
+      title: 'Summer Day Camp for Kids - Southeast Jiu-Jitsu',
+      description: 'Active sports summer day camp for children ages 5-13 in Krakow. Jiu-Jitsu training, daily activities, meals and care from 8:00 to 16:00.',
+      bodyClass: 'bg-additional',
+      ogImage: '/summer-camp-poster.jpg',
     },
   },
   about: {
@@ -104,6 +119,11 @@ export const pageMeta = {
 
 export const nav = [
   {
+    page: 'summerCamp',
+    label: { pl: 'PÓŁKOLONIE', en: 'SUMMER CAMP' },
+    seasonal: true,
+  },
+  {
     page: 'about',
     label: { pl: 'O NAS', en: 'ABOUT' },
     children: [
@@ -129,6 +149,7 @@ export const nav = [
   page: Exclude<PageKey, 'home'>;
   label: Localized<string>;
   children?: Array<{ href: Localized<string>; label: Localized<string> }>;
+  seasonal?: boolean;
 }>;
 
 export const externalNav = [

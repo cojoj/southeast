@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { classes, gearLabels } from '../src/data/classes.ts';
 import { nav, pageMeta, routes, site } from '../src/data/site.ts';
+import { summerCamp, summerCampSignupUrl } from '../src/data/summerCamp.ts';
 import type { GearItem, Locale, PageKey } from '../src/types.ts';
 
 const locales = ['pl', 'en'] satisfies Locale[];
@@ -41,6 +42,19 @@ for (const item of nav) {
   }
 }
 
+assert(summerCampSignupUrl.startsWith('https://docs.google.com/forms/'), 'Summer camp signup URL must point to Google Forms');
+assertLocalized(summerCamp, 'summerCamp');
+
+for (const locale of locales) {
+  const content = summerCamp[locale];
+  assert(Boolean(content.hero.title), `summerCamp.${locale}.hero.title is empty`);
+  assert(content.facts.length >= 4, `summerCamp.${locale}.facts should include key parent facts`);
+  assert(content.included.items.length >= 6, `summerCamp.${locale}.included.items should include the core offer`);
+  assert(content.schedule.turnuses.length === 2, `summerCamp.${locale}.schedule.turnuses should include exactly two turnuses`);
+  assert(content.pricing.cards.length === 2, `summerCamp.${locale}.pricing.cards should include one-turnus and two-turnus prices`);
+  assert(content.trust.points.length >= 3, `summerCamp.${locale}.trust.points should include trust proof`);
+}
+
 const classIds = new Set<string>();
 for (const item of classes) {
   assert(!classIds.has(item.id), `Duplicate class id ${item.id}`);
@@ -68,6 +82,7 @@ for (const image of [
   '/training.jpg',
   '/training-session.jpg',
   '/flagens.jpg',
+  '/summer-camp-poster.jpg',
   '/logos/logo_black.svg',
   '/logos/logo_white_jj.svg',
 ]) {
