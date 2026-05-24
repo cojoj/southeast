@@ -18,6 +18,7 @@ export const site = {
   wodGuru: {
     registration: 'https://southeastjiujitsu.wod.guru/rejestracja',
     memberships: 'https://southeastjiujitsu.wod.guru/wizytowka',
+    shop: 'https://southeastjiujitsu.wod.guru/produkty',
     schedule: 'https://southeastjiujitsu.wod.guru/grafik',
     account: 'https://southeastjiujitsu.wod.guru/user/login',
     subdomain: 'southeastjiujitsu',
@@ -132,6 +133,7 @@ export const nav = [
 
 export const externalNav = [
   { href: site.wodGuru.memberships, label: { pl: 'KARNETY', en: 'MEMBERSHIPS' } },
+  { href: site.wodGuru.shop, label: { pl: 'SKLEP', en: 'SHOP' } },
   { href: site.wodGuru.account, label: { pl: 'MOJE KONTO', en: 'MY ACCOUNT' } },
 ] satisfies Array<{ href: string; label: Localized<string> }>;
 
