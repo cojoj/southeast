@@ -21,8 +21,8 @@ function isActiveLink(linkPath: string): boolean {
 }
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-primary h-[75px]">
-  <div class="container mx-auto px-4 h-full flex items-center justify-between">
+<header class="site-header fixed top-0 left-0 right-0 z-50 bg-primary">
+  <div class="site-header-inner container mx-auto px-4 flex items-center justify-between">
     <div class="flex items-center">
       <a href={homeHref} class="block focus-ring" aria-label={site.name}>
         <img src="/logos/logo_black.svg" alt="" width="300" height="88" class="w-[150px] xl:w-[170px] 2xl:w-[180px] h-auto navbar-logo" fetchpriority="high" />
@@ -106,7 +106,7 @@ function isActiveLink(linkPath: string): boolean {
     </div>
   </div>
 
-  <div class="lg:hidden bg-primary fixed inset-0 top-[75px] mobile-menu-container z-40 overflow-y-auto" id="mobile-menu" aria-hidden="true" inert>
+  <div class="lg:hidden bg-primary fixed left-0 right-0 bottom-0 mobile-menu-container z-40 overflow-y-auto" id="mobile-menu" aria-hidden="true" inert>
     <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu" aria-label="Mobile navigation">
       {nav.map((item) => (
         <div>
