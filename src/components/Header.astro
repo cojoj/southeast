@@ -144,35 +144,10 @@ function isActiveLink(linkPath: string): boolean {
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = document.getElementById('hamburger-icon');
   const menuItems = mobileMenu?.querySelectorAll('.mobile-menu-item');
-  const root = document.documentElement;
-  const isInstagramBrowser = /\bInstagram\b/i.test(navigator.userAgent);
 
   let isMenuOpen = false;
-  let visualViewportFrame = 0;
-
-  root.classList.toggle('instagram-browser', isInstagramBrowser);
-
-  function updateBrowserTopInset() {
-    if (visualViewportFrame) return;
-
-    visualViewportFrame = window.requestAnimationFrame(() => {
-      visualViewportFrame = 0;
-      const viewport = window.visualViewport;
-      const viewportHeight = viewport?.height ?? window.innerHeight;
-      const instagramChromeInset = isInstagramBrowser
-        ? Math.max(0, (window.screen?.height ?? viewportHeight) - viewportHeight)
-        : 0;
-      const viewportTop = Math.max(
-        viewport?.offsetTop ?? 0,
-        (viewport?.pageTop ?? window.scrollY) - window.scrollY,
-        Math.min(instagramChromeInset, 128),
-      );
-      root.style.setProperty('--site-js-top-inset', `${Math.max(0, viewportTop)}px`);
-    });
-  }
 
   function setMenuOpen(open: boolean) {
-    updateBrowserTopInset();
     isMenuOpen = open;
     hamburgerIcon?.classList.toggle('open', open);
     mobileMenu?.classList.toggle('open', open);
@@ -216,17 +191,8 @@ function isActiveLink(linkPath: string): boolean {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      updateBrowserTopInset();
-      handlePageLoadAnchor();
-    });
+    document.addEventListener('DOMContentLoaded', handlePageLoadAnchor);
   } else {
-    updateBrowserTopInset();
     handlePageLoadAnchor();
   }
-
-  window.visualViewport?.addEventListener('resize', updateBrowserTopInset);
-  window.visualViewport?.addEventListener('scroll', updateBrowserTopInset);
-  window.addEventListener('scroll', updateBrowserTopInset, { passive: true });
-  window.addEventListener('orientationchange', updateBrowserTopInset);
 </script>
