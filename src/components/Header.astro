@@ -144,10 +144,26 @@ function isActiveLink(linkPath: string): boolean {
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = document.getElementById('hamburger-icon');
   const menuItems = mobileMenu?.querySelectorAll('.mobile-menu-item');
+  const root = document.documentElement;
 
   let isMenuOpen = false;
+  let visualViewportFrame = 0;
+
+  function updateBrowserTopInset() {
+    if (visualViewportFrame) return;
+
+    visualViewportFrame = window.requestAnimationFrame(() => {
+      visualViewportFrame = 0;
+      const viewportTop = Math.max(
+        window.visualViewport?.offsetTop ?? 0,
+        (window.visualViewport?.pageTop ?? window.scrollY) - window.scrollY,
+      );
+      root.style.setProperty('--site-browser-top-inset', `${Math.max(0, viewportTop)}px`);
+    });
+  }
 
   function setMenuOpen(open: boolean) {
+    updateBrowserTopInset();
     isMenuOpen = open;
     hamburgerIcon?.classList.toggle('open', open);
     mobileMenu?.classList.toggle('open', open);
@@ -191,8 +207,17 @@ function isActiveLink(linkPath: string): boolean {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handlePageLoadAnchor);
+    document.addEventListener('DOMContentLoaded', () => {
+      updateBrowserTopInset();
+      handlePageLoadAnchor();
+    });
   } else {
+    updateBrowserTopInset();
     handlePageLoadAnchor();
   }
+
+  window.visualViewport?.addEventListener('resize', updateBrowserTopInset);
+  window.visualViewport?.addEventListener('scroll', updateBrowserTopInset);
+  window.addEventListener('scroll', updateBrowserTopInset, { passive: true });
+  window.addEventListener('orientationchange', updateBrowserTopInset);
 </script>

@@ -2,7 +2,8 @@
 
 :root {
   --site-header-height: 75px;
-  --site-header-total-height: var(--site-header-height);
+  --site-browser-top-inset: 0px;
+  --site-header-total-height: calc(var(--site-header-height) + var(--site-browser-top-inset));
 }
 
 /* Smooth scrolling for anchor links */
@@ -18,16 +19,17 @@ html {
 }
 
 .site-header {
-  height: var(--site-header-total-height);
+  top: var(--site-browser-top-inset);
+  height: var(--site-header-height);
 }
 
 .site-header::before {
   content: '';
   position: absolute;
-  top: -180px;
+  top: calc(var(--site-browser-top-inset) * -1);
   right: 0;
   left: 0;
-  height: 180px;
+  height: var(--site-browser-top-inset);
   background-color: var(--color-primary);
   pointer-events: none;
 }
@@ -37,7 +39,7 @@ html {
 }
 
 .main-offset-header {
-  padding-top: var(--site-header-total-height);
+  padding-top: var(--site-header-height);
 }
 
 /* AreaNormal Font Family */
