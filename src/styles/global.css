@@ -19,7 +19,6 @@ html {
 .site-header {
   height: var(--site-header-total-height);
   padding-top: var(--site-header-safe-top);
-  transform: translateZ(0);
 }
 
 .site-header::before {
