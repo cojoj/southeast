@@ -2,8 +2,7 @@
 
 :root {
   --site-header-height: 75px;
-  --site-header-safe-top: env(safe-area-inset-top, 0px);
-  --site-header-total-height: calc(var(--site-header-height) + var(--site-header-safe-top));
+  --site-header-total-height: var(--site-header-height);
 }
 
 /* Smooth scrolling for anchor links */
@@ -18,16 +17,15 @@ html {
 
 .site-header {
   height: var(--site-header-total-height);
-  padding-top: var(--site-header-safe-top);
 }
 
 .site-header::before {
   content: '';
   position: absolute;
-  top: -120px;
+  top: -180px;
   right: 0;
   left: 0;
-  height: 120px;
+  height: 180px;
   background-color: var(--color-primary);
   pointer-events: none;
 }
