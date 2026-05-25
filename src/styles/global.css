@@ -24,20 +24,16 @@ html {
 .site-header::before {
   content: '';
   position: absolute;
-  top: -100vh;
+  top: calc(var(--site-header-height) * -1);
   right: 0;
   left: 0;
-  height: 100vh;
+  height: var(--site-header-height);
   background-color: var(--color-primary);
   pointer-events: none;
 }
 
 .site-header-inner {
   height: var(--site-header-height);
-}
-
-.main-offset-header {
-  padding-top: var(--site-header-total-height);
 }
 
 /* AreaNormal Font Family */
