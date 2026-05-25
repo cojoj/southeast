@@ -38,6 +38,21 @@ html {
   padding-top: var(--site-header-total-height);
 }
 
+.site-footer {
+  position: relative;
+}
+
+.site-footer::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -180px;
+  left: 0;
+  height: 180px;
+  background-color: var(--color-secondary);
+  pointer-events: none;
+}
+
 /* AreaNormal Font Family */
 @font-face {
   font-family: 'AreaNormal';
