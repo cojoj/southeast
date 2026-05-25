@@ -2,8 +2,25 @@
 
 :root {
   --site-header-height: 75px;
-  --site-browser-top-inset: 0px;
+  --site-css-safe-top-inset: env(safe-area-inset-top, 0px);
+  --site-js-top-inset: 0px;
+  --site-viewport-chrome-inset: 0px;
+  --site-browser-top-inset: clamp(
+    0px,
+    max(var(--site-css-safe-top-inset), var(--site-js-top-inset), var(--site-viewport-chrome-inset)),
+    128px
+  );
   --site-header-total-height: calc(var(--site-header-height) + var(--site-browser-top-inset));
+}
+
+:root.instagram-browser {
+  --site-css-safe-top-inset: 0px;
+}
+
+@supports (height: 100dvh) and (height: 100lvh) {
+  :root {
+    --site-viewport-chrome-inset: clamp(0px, calc(100lvh - 100dvh), 128px);
+  }
 }
 
 /* Smooth scrolling for anchor links */
@@ -39,7 +56,7 @@ html {
 }
 
 .main-offset-header {
-  padding-top: var(--site-header-height);
+  padding-top: var(--site-header-total-height);
 }
 
 /* AreaNormal Font Family */

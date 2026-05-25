@@ -145,20 +145,29 @@ function isActiveLink(linkPath: string): boolean {
   const hamburgerIcon = document.getElementById('hamburger-icon');
   const menuItems = mobileMenu?.querySelectorAll('.mobile-menu-item');
   const root = document.documentElement;
+  const isInstagramBrowser = /\bInstagram\b/i.test(navigator.userAgent);
 
   let isMenuOpen = false;
   let visualViewportFrame = 0;
+
+  root.classList.toggle('instagram-browser', isInstagramBrowser);
 
   function updateBrowserTopInset() {
     if (visualViewportFrame) return;
 
     visualViewportFrame = window.requestAnimationFrame(() => {
       visualViewportFrame = 0;
+      const viewport = window.visualViewport;
+      const viewportHeight = viewport?.height ?? window.innerHeight;
+      const instagramChromeInset = isInstagramBrowser
+        ? Math.max(0, (window.screen?.height ?? viewportHeight) - viewportHeight)
+        : 0;
       const viewportTop = Math.max(
-        window.visualViewport?.offsetTop ?? 0,
-        (window.visualViewport?.pageTop ?? window.scrollY) - window.scrollY,
+        viewport?.offsetTop ?? 0,
+        (viewport?.pageTop ?? window.scrollY) - window.scrollY,
+        Math.min(instagramChromeInset, 128),
       );
-      root.style.setProperty('--site-browser-top-inset', `${Math.max(0, viewportTop)}px`);
+      root.style.setProperty('--site-js-top-inset', `${Math.max(0, viewportTop)}px`);
     });
   }
 
