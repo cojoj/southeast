@@ -4,6 +4,9 @@ export const site = {
   name: 'Southeast Jiu-Jitsu',
   url: 'https://southeastjj.pl',
   defaultOgImage: '/og-image.jpg',
+  metaPixel: {
+    id: '1015715761125913',
+  },
   address: {
     street: 'ul. Saska 12F/6U',
     postalCity: '30-720 Kraków',

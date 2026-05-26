@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import SocialMeta from '../components/SocialMeta.astro'
+import { site } from '../data/site'
 import { absoluteUrl, getLanguageSwitchUrl } from '../utils/language'
 
 export interface Props {
@@ -33,6 +34,7 @@ const canonicalHref = canonicalUrl ?? absoluteUrl(currentUrl)
 const alternateHref = absoluteUrl(getLanguageSwitchUrl(currentUrl))
 const hreflangEnHref = hreflangEn ?? (lang === 'en' ? canonicalHref : alternateHref)
 const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateHref)
+const metaPixelId = site.metaPixel.id
 ---
 
 <html lang={lang}>
@@ -70,6 +72,21 @@ const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateH
 			})(window,document,'script','dataLayer','GTM-W9Q5ZDPT');
 		</script>
 		<!-- End Google Tag Manager -->
+
+		<!-- Meta Pixel Code -->
+		<script is:inline define:vars={{ metaPixelId }}>
+			!function(f,b,e,v,n,t,s)
+			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+			n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t,s)}(window, document,'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', metaPixelId);
+			fbq('track', 'PageView');
+		</script>
+		<!-- End Meta Pixel Code -->
 
 		<meta charset="utf-8" />
 
@@ -109,6 +126,12 @@ const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateH
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9Q5ZDPT"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
+
+		<!-- Meta Pixel Code (noscript) -->
+		<noscript><img height="1" width="1" style="display:none"
+			src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`}
+			alt="" /></noscript>
+		<!-- End Meta Pixel Code (noscript) -->
 
 		<Header currentLang={lang} currentUrl={currentUrl} />
 
