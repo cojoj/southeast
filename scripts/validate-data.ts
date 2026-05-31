@@ -52,6 +52,9 @@ for (const locale of locales) {
   assert(content.included.items.length >= 6, `summerCamp.${locale}.included.items should include the core offer`);
   assert(content.schedule.turnuses.length === 2, `summerCamp.${locale}.schedule.turnuses should include exactly two turnuses`);
   assert(content.pricing.cards.length === 2, `summerCamp.${locale}.pricing.cards should include one-turnus and two-turnus prices`);
+  assert(/^\d{4}-\d{2}-\d{2}$/.test(content.pricing.earlyDeadline), `summerCamp.${locale}.pricing.earlyDeadline must use YYYY-MM-DD`);
+  assert(Boolean(content.pricing.expiredIntro), `summerCamp.${locale}.pricing.expiredIntro is empty`);
+  assert(Boolean(content.pricing.currentLabel), `summerCamp.${locale}.pricing.currentLabel is empty`);
   assert(content.trust.points.length >= 3, `summerCamp.${locale}.trust.points should include trust proof`);
 }
 
@@ -83,6 +86,7 @@ for (const image of [
   '/training-session.jpg',
   '/flagens.jpg',
   '/summer-camp-poster.jpg',
+  '/robots.txt',
   '/logos/logo_black.svg',
   '/logos/logo_white_jj.svg',
 ]) {

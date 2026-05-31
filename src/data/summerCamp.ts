@@ -44,8 +44,11 @@ type SummerCampContent = {
   pricing: {
     heading: string;
     intro: string;
+    expiredIntro: string;
+    earlyDeadline: string;
     earlyLabel: string;
     laterLabel: string;
+    currentLabel: string;
     cards: Array<{
       title: string;
       subtitle: string;
@@ -120,8 +123,11 @@ export const summerCamp = {
     pricing: {
       heading: 'Cennik',
       intro: 'Ceny dotyczą jednego dziecka. Wczesna cena obowiązuje przy rezerwacji do 31 maja 2026.',
+      expiredIntro: 'Ceny dotyczą jednego dziecka. Wczesna cena obowiązywała przy rezerwacji do 31 maja 2026.',
+      earlyDeadline: '2026-05-31',
       earlyLabel: 'Do 31.05',
       laterLabel: 'Po 31.05',
+      currentLabel: 'Cena',
       cards: [
         {
           title: 'Jeden turnus',
@@ -205,8 +211,11 @@ export const summerCamp = {
     pricing: {
       heading: 'Pricing',
       intro: 'Prices are per child. Early pricing applies when booking by May 31, 2026.',
+      expiredIntro: 'Prices are per child. Early pricing applied when booking by May 31, 2026.',
+      earlyDeadline: '2026-05-31',
       earlyLabel: 'By May 31',
       laterLabel: 'After May 31',
+      currentLabel: 'Price',
       cards: [
         {
           title: 'One camp week',

@@ -37,6 +37,8 @@ const defaultDescription = lang === 'pl'
 	: 'Southeast Jiu-Jitsu - Brazilian Jiu-Jitsu in Kraków, Poland. Training for all skill levels.';
 
 const finalDescription = description || defaultDescription;
+const ogLocale = lang === 'pl' ? 'pl_PL' : 'en_US';
+const alternateOgLocale = lang === 'pl' ? 'en_US' : 'pl_PL';
 ---
 
 <!-- Open Graph / Facebook -->
@@ -46,6 +48,8 @@ const finalDescription = description || defaultDescription;
 <meta property="og:description" content={finalDescription} />
 <meta property="og:image" content={absoluteImage} />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={alternateOgLocale} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

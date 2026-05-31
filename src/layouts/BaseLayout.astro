@@ -35,10 +35,36 @@ const alternateHref = absoluteUrl(getLanguageSwitchUrl(currentUrl))
 const hreflangEnHref = hreflangEn ?? (lang === 'en' ? canonicalHref : alternateHref)
 const hreflangPlHref = hreflangPl ?? (lang === 'pl' ? canonicalHref : alternateHref)
 const metaPixelId = site.metaPixel.id
+const themeColor = '#BCC6D9'
+const localBusinessSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'SportsActivityLocation',
+	name: site.name,
+	url: site.url,
+	image: absoluteUrl(ogImage),
+	telephone: site.contact.phone,
+	email: site.contact.email,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: site.address.street.replace(/^ul\.\s*/, ''),
+		addressLocality: 'Kraków',
+		postalCode: '30-720',
+		addressCountry: 'PL',
+	},
+	sameAs: site.social.map((item) => item.href),
+	areaServed: {
+		'@type': 'City',
+		name: 'Kraków',
+	},
+}
 ---
 
 <html lang={lang}>
 	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content={themeColor} />
+
 		<!-- DataLayer initialization with language tracking -->
 		<script is:inline define:vars={{ lang }}>
 			window.dataLayer = window.dataLayer || [];
@@ -88,8 +114,6 @@ const metaPixelId = site.metaPixel.id
 		</script>
 		<!-- End Meta Pixel Code -->
 
-		<meta charset="utf-8" />
-
 		<!-- Favicons -->
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -100,7 +124,6 @@ const metaPixelId = site.metaPixel.id
 		<link rel="preload" href="/fonts/AreaNormal-Regular.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/AreaNormal-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -117,6 +140,8 @@ const metaPixelId = site.metaPixel.id
 
 		<link rel="alternate" hreflang="en" href={hreflangEnHref} />
 		<link rel="alternate" hreflang="pl" href={hreflangPlHref} />
+		<link rel="alternate" hreflang="x-default" href={hreflangPlHref} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
 		<!-- Slot for additional head elements -->
 		<slot name="head" />

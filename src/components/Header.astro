@@ -12,6 +12,23 @@ const { currentLang = 'pl', currentUrl = Astro.url.pathname } = Astro.props;
 const homeHref = routes.home[currentLang];
 const polishUrl = currentLang === 'en' ? getLanguageSwitchUrl(currentUrl) : currentUrl;
 const englishUrl = currentLang === 'pl' ? getLanguageSwitchUrl(currentUrl) : currentUrl;
+const headerA11y = {
+  pl: {
+    mainNavigation: 'Główna nawigacja',
+    mobileNavigation: 'Nawigacja mobilna',
+    languageSwitcher: 'Przełącznik języka',
+    openNavigation: 'Otwórz nawigację',
+    closeNavigation: 'Zamknij nawigację',
+  },
+  en: {
+    mainNavigation: 'Main navigation',
+    mobileNavigation: 'Mobile navigation',
+    languageSwitcher: 'Language switcher',
+    openNavigation: 'Open navigation',
+    closeNavigation: 'Close navigation',
+  },
+} as const;
+const a11y = headerA11y[currentLang];
 
 function isActiveLink(linkPath: string): boolean {
   const normalizedCurrentUrl = currentUrl.endsWith('/') ? currentUrl : `${currentUrl}/`;
@@ -29,7 +46,7 @@ function isActiveLink(linkPath: string): boolean {
       </a>
     </div>
 
-    <nav class="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-8" aria-label="Main navigation">
+    <nav class="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-8" aria-label={a11y.mainNavigation}>
       {nav.map((item) => {
         const href = routes[item.page][currentLang];
         const active = isActiveLink(href);
@@ -79,7 +96,7 @@ function isActiveLink(linkPath: string): boolean {
         </a>
       </div>
 
-      <div class="flex items-center space-x-1 text-xs text-secondary xl:text-sm" aria-label="Language switcher">
+      <div class="flex items-center space-x-1 text-xs text-secondary xl:text-sm" aria-label={a11y.languageSwitcher}>
         <a href={polishUrl} class={`focus-ring transition-all duration-200 hover:underline ${currentLang === 'pl' ? 'font-semibold underline' : 'font-normal'}`}>
           PL
         </a>
@@ -93,9 +110,11 @@ function isActiveLink(linkPath: string): boolean {
         class="focus-ring lg:hidden text-secondary hover:text-gray-700 transition-colors duration-200 ml-1 flex size-11 items-center justify-center"
         id="mobile-menu-button"
         type="button"
-        aria-label="Open navigation"
+        aria-label={a11y.openNavigation}
         aria-controls="mobile-menu"
         aria-expanded="false"
+        data-open-label={a11y.openNavigation}
+        data-close-label={a11y.closeNavigation}
       >
         <div class="hamburger-icon" id="hamburger-icon" aria-hidden="true">
           <span></span>
@@ -107,7 +126,7 @@ function isActiveLink(linkPath: string): boolean {
   </div>
 
   <div class="lg:hidden bg-primary fixed left-0 right-0 bottom-0 mobile-menu-container z-40 overflow-y-auto" id="mobile-menu" aria-hidden="true" inert>
-    <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu" aria-label="Mobile navigation">
+    <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu" aria-label={a11y.mobileNavigation}>
       {nav.map((item) => (
         <div>
           <a href={routes[item.page][currentLang]} class={`focus-ring mobile-menu-item block hover:underline transition-all duration-200 text-base tracking-wide py-3 ${item.seasonal ? 'mb-2 border border-secondary bg-secondary px-4 font-semibold text-primary hover:no-underline' : `border-b border-secondary/20 text-secondary ${isActiveLink(routes[item.page][currentLang]) ? 'font-semibold underline' : 'font-normal'}`}`}>
@@ -152,7 +171,9 @@ function isActiveLink(linkPath: string): boolean {
     hamburgerIcon?.classList.toggle('open', open);
     mobileMenu?.classList.toggle('open', open);
     mobileMenuButton?.setAttribute('aria-expanded', String(open));
-    mobileMenuButton?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    const openLabel = mobileMenuButton?.dataset.openLabel || 'Open navigation';
+    const closeLabel = mobileMenuButton?.dataset.closeLabel || 'Close navigation';
+    mobileMenuButton?.setAttribute('aria-label', open ? closeLabel : openLabel);
     mobileMenu?.setAttribute('aria-hidden', String(!open));
     if (open) {
       mobileMenu?.removeAttribute('inert');

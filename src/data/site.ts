@@ -22,7 +22,7 @@ export const site = {
     registration: 'https://southeastjiujitsu.wod.guru/rejestracja',
     memberships: 'https://southeastjiujitsu.wod.guru/wizytowka',
     shop: 'https://southeastjiujitsu.wod.guru/produkty',
-    schedule: 'https://southeastjiujitsu.wod.guru/grafik',
+    schedule: 'https://southeastjiujitsu.wod.guru/classes',
     account: 'https://southeastjiujitsu.wod.guru/user/login',
     subdomain: 'southeastjiujitsu',
   },

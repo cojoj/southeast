@@ -27,6 +27,19 @@ const { locale } = Astro.props;
 const meta = pageMeta.summerCamp[locale];
 const content = summerCamp[locale];
 const mapHref = `https://maps.google.com/?q=${site.address.mapQuery}`;
+const warsawDateParts = new Intl.DateTimeFormat('en', {
+  day: '2-digit',
+  month: '2-digit',
+  timeZone: 'Europe/Warsaw',
+  year: 'numeric',
+}).formatToParts(new Date());
+const warsawDate = {
+  day: warsawDateParts.find((part) => part.type === 'day')?.value ?? '01',
+  month: warsawDateParts.find((part) => part.type === 'month')?.value ?? '01',
+  year: warsawDateParts.find((part) => part.type === 'year')?.value ?? '1970',
+};
+const currentWarsawDateKey = `${warsawDate.year}-${warsawDate.month}-${warsawDate.day}`;
+const earlyPricingActive = currentWarsawDateKey <= content.pricing.earlyDeadline;
 const includedIconComponents = {
   CalendarClock,
   Dumbbell,
@@ -225,7 +238,7 @@ const includedIconComponents = {
             {content.pricing.heading}
           </h2>
           <p class="mt-4 text-base leading-relaxed text-secondary/75">
-            {content.pricing.intro}
+            {earlyPricingActive ? content.pricing.intro : content.pricing.expiredIntro}
           </p>
         </div>
 
@@ -245,8 +258,8 @@ const includedIconComponents = {
                 <thead>
                   <tr class="text-sm uppercase tracking-wide text-secondary/65">
                     <th scope="col" class="pb-3 font-semibold"> </th>
-                    <th scope="col" class="pb-3 font-semibold">{content.pricing.earlyLabel}</th>
-                    <th scope="col" class="pb-3 font-semibold">{content.pricing.laterLabel}</th>
+                    {earlyPricingActive && <th scope="col" class="pb-3 font-semibold">{content.pricing.earlyLabel}</th>}
+                    <th scope="col" class="pb-3 font-semibold">{earlyPricingActive ? content.pricing.laterLabel : content.pricing.currentLabel}</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-primary">
@@ -255,9 +268,9 @@ const includedIconComponents = {
                       <th scope="row" class="py-4 pr-3 text-sm font-semibold text-secondary">
                         {row.audience}
                       </th>
-                      <td class="py-4 pr-3 text-lg font-semibold text-secondary">
+                      {earlyPricingActive && <td class="py-4 pr-3 text-lg font-semibold text-secondary">
                         {row.early}
-                      </td>
+                      </td>}
                       <td class="py-4 text-lg text-secondary">
                         {row.later}
                       </td>
