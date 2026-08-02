@@ -5,12 +5,12 @@ Static Astro site for Southeast Jiu-Jitsu in Krakow. The site is bilingual, with
 ## Commands
 
 ```sh
-npm install
-npm run dev
-npm run validate
+pnpm install
+pnpm dev
+pnpm validate
 ```
 
-Use `npm run check` for Astro diagnostics, `npm run build` for the static bundle, and `npm run preview` to smoke-test the generated site.
+Use `pnpm check` for Astro diagnostics, `pnpm build` for the static bundle, and `pnpm preview` to smoke-test the generated site.
 
 ## Structure
 
@@ -26,4 +26,4 @@ Generated output lives in `dist/` and should not be edited.
 
 ## Validation
 
-`npm run validate:data` checks the route table, localized page metadata, nav references, class IDs, class copy, gear labels, and required public assets. `npm run validate` runs data validation, Astro Check, and a production build.
+`pnpm validate:data` checks the route table, localized page metadata, nav references, class IDs, class copy, gear labels, and required public assets. `pnpm validate` runs data validation, Astro Check, and a production build.
