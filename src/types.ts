@@ -10,6 +10,7 @@ export type GearItem =
   | 'sports-shirt'
   | 'shorts-no-pockets'
   | 'mouthguard'
+  | 'boxing-gloves'
   | 'gloves-8oz'
   | 'gloves-14oz'
   | 'shin-guards';

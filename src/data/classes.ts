@@ -5,6 +5,7 @@ export const gearLabels = {
     'sports-shirt': 'Koszulka sportowa',
     'shorts-no-pockets': 'Spodenki bez kieszeni',
     mouthguard: 'Szczęka',
+    'boxing-gloves': 'Rękawice bokserskie',
     'gloves-8oz': 'Rękawice 8oz',
     'gloves-14oz': 'Rękawice min. 14 oz',
     'shin-guards': 'Ochraniacze na piszczele',
@@ -13,6 +14,7 @@ export const gearLabels = {
     'sports-shirt': 'Sports shirt',
     'shorts-no-pockets': 'Shorts without pockets',
     mouthguard: 'Mouthguard',
+    'boxing-gloves': 'Boxing gloves',
     'gloves-8oz': '8oz gloves',
     'gloves-14oz': '14 oz+ gloves',
     'shin-guards': 'Shin guards',
@@ -137,6 +139,35 @@ export const classes = [
     },
   },
   {
+    id: 'boks-podstawy',
+    level: 'podstawy',
+    durationMin: 60,
+    gear: ['sports-shirt', 'shorts-no-pockets', 'mouthguard', 'gloves-14oz'],
+    icons: { type: 'Footprints', duration: 'Clock', gear: 'Package' },
+    copy: {
+      pl: {
+        name: 'Boks Podstawy',
+        teaser: 'Nie masz żadnego doświadczenia z boksem, a chciałbyś zacząć trenować? To idealna grupa na Twój pierwszy trening!',
+        description: 'Podstawy boksu: postawa, praca nóg, poruszanie się, podstawowe ciosy, kombinacje oraz obrona. Możesz dołączyć w każdej chwili.',
+        forWhom: [
+          'Osoby początkujące, które chcą nauczyć się boksu od podstaw',
+          'Bardziej zaawansowani trenujący, którzy chcą poprawić swoje podstawy',
+        ],
+        gearNote: 'Na pierwsze treningi nie potrzebujesz żadnego sprzętu - pożyczymy Ci go na miejscu :)',
+      },
+      en: {
+        name: 'Boxing Fundamentals',
+        teaser: 'Have no boxing experience but want to start training? This is the perfect group for your first session!',
+        description: 'Boxing fundamentals: stance, footwork, movement, basic punches, combinations, and defense. You can join at any time.',
+        forWhom: [
+          'Beginners who want to learn boxing from the ground up',
+          'More experienced practitioners who want to improve their fundamentals',
+        ],
+        gearNote: "You don't need any equipment for your first sessions - we'll lend it to you on site :)",
+      },
+    },
+  },
+  {
     id: 'kickboxing-podstawy',
     level: 'podstawy',
     durationMin: 60,
@@ -198,9 +229,9 @@ export const classes = [
     icons: { type: 'Baby', duration: 'Clock', gear: 'Shirt' },
     copy: {
       pl: {
-        name: 'Gry i zabawy z elementami sportów walki',
+        name: 'Gry i zabawy z elementami sportów walki - dzieci 3-5 lat',
         teaser: 'Zajęcia stworzone specjalnie dla najmłodszych wojowników.',
-        description: '40 minut zabawy rozwijającej koordynację, równowagę i pewność siebie. Bezpieczne gry z elementami sportów walki.',
+        description: '40 minut zabawy rozwijającej koordynację, równowagę i pewność siebie. Bezpieczne gry z elementami sportów walki. Można dołączyć do grupy w każdej chwili.',
         forWhom: [
           'Dzieci w wieku 3-5 lat',
           'Idealne jako pierwszy krok do aktywności fizycznej',
@@ -208,9 +239,9 @@ export const classes = [
         gearNote: '',
       },
       en: {
-        name: 'Games and Play with Martial Arts Elements',
+        name: 'Games and Play with Martial Arts Elements - Ages 3-5',
         teaser: 'Classes created especially for our youngest warriors.',
-        description: '40 minutes of fun developing coordination, balance, and confidence. Safe games with basic martial arts elements.',
+        description: '40 minutes of fun developing coordination, balance, and confidence. Safe games with basic martial arts elements. Children can join the group at any time.',
         forWhom: [
           'Children aged 3-5 years who are ready for their first martial arts experience',
           'Perfect as an introduction to structured physical activity and martial arts',
@@ -227,20 +258,76 @@ export const classes = [
     icons: { type: 'Baby', duration: 'Clock', gear: 'Shirt' },
     copy: {
       pl: {
-        name: 'Jiu-Jitsu dla dzieci',
+        name: 'Jiu-Jitsu dzieci 6-9 lat',
         teaser: 'Treningi zaprojektowane z myślą o młodych wojownikach, którzy chcą uczyć się dyscypliny, szacunku i pewności siebie.',
-        description: 'Techniki Jiu-Jitsu dostosowane do wieku, koordynacja, współpraca z partnerem. Bezpieczna i wspierająca atmosfera.',
-        forWhom: ['Dzieci w wieku 6-12 lat'],
+        description: 'Techniki Jiu-Jitsu dostosowane do wieku, koordynacja, współpraca z partnerem. Bezpieczna i wspierająca atmosfera. Grupa jest odpowiednia zarówno dla dzieci, które dopiero zaczynają, jak i tych, które mają już doświadczenie. Można dołączyć do grupy w każdej chwili.',
+        forWhom: ['Dzieci w wieku 6-9 lat'],
         gearNote: '',
       },
       en: {
-        name: 'Jiu-Jitsu for Kids',
+        name: 'Jiu-Jitsu for Kids Ages 6-9',
         teaser: 'Training designed for young warriors who want to learn discipline, respect, and confidence.',
-        description: 'Age-appropriate Jiu-Jitsu techniques, partner cooperation, discipline and respect. Safe and supportive environment.',
+        description: 'Age-appropriate Jiu-Jitsu techniques, coordination, and partner work. A safe and supportive atmosphere. The group is suitable for both children who are just starting and those who already have experience. Children can join the group at any time.',
+        forWhom: ['Children aged 6-9'],
+        gearNote: '',
+      },
+    },
+  },
+  {
+    id: 'bjj-junior-10-13',
+    level: 'dzieci',
+    durationMin: 55,
+    gear: ['sports-shirt', 'shorts-no-pockets'],
+    icons: { type: 'Users', duration: 'Clock', gear: 'Shirt' },
+    copy: {
+      pl: {
+        name: 'Jiu-Jitsu Junior',
+        teaser: 'Treningi stworzone z myślą o młodych zawodnikach, którzy chcą rozwijać swoje umiejętności, sprawność i pewność siebie.',
+        description: 'Techniki Jiu-Jitsu dostosowane do wieku, rozwój koordynacji, współpraca z partnerem oraz nauka poprzez ruch i sparingi. Bezpieczna i wspierająca atmosfera. Grupa jest odpowiednia zarówno dla osób, które dopiero zaczynają, jak i tych, które mają już doświadczenie. Można dołączyć do grupy w każdej chwili.',
         forWhom: [
-          'Children aged 6-12 years who are ready to learn structured martial arts techniques and discipline',
+          'Dzieci w wieku 10-13 lat',
+          'Początkujący oraz bardziej zaawansowani',
         ],
         gearNote: '',
+      },
+      en: {
+        name: 'Jiu-Jitsu Junior',
+        teaser: 'Training designed for young athletes who want to develop their skills, fitness, and confidence.',
+        description: 'Age-appropriate Jiu-Jitsu techniques, coordination development, partner work, and learning through movement and sparring. A safe and supportive atmosphere. The group is suitable for both beginners and those who already have experience. Children can join the group at any time.',
+        forWhom: [
+          'Children aged 10-13',
+          'Beginners and more experienced practitioners',
+        ],
+        gearNote: '',
+      },
+    },
+  },
+  {
+    id: 'kickboxing-dzieci-6-13',
+    level: 'dzieci',
+    durationMin: 55,
+    gear: ['sports-shirt', 'shorts-no-pockets', 'boxing-gloves', 'shin-guards'],
+    icons: { type: 'Zap', duration: 'Clock', gear: 'Package' },
+    copy: {
+      pl: {
+        name: 'Kickboxing dla dzieci',
+        teaser: 'Treningi stworzone z myślą o dzieciach, które chcą rozwijać sprawność, koordynację i pewność siebie poprzez kickboxing.',
+        description: 'Podstawy kickboxingu dostosowane do wieku, nauka poruszania się, ciosów i kopnięć oraz ćwiczenia z partnerem. Treningi prowadzone są w bezpiecznej i kontrolowanej formie - bez ciosów w głowę i bez sparingów. Zajęcia są odpowiednie zarówno dla dzieci, które dopiero zaczynają, jak i tych, które mają już doświadczenie. Można dołączyć do grupy w każdej chwili.',
+        forWhom: [
+          'Dzieci w wieku 6-13 lat',
+          'Początkujący oraz bardziej zaawansowani',
+        ],
+        gearNote: 'Na pierwsze treningi nie potrzebujesz żadnego sprzętu - pożyczymy Ci go na miejscu :)',
+      },
+      en: {
+        name: 'Kickboxing for Kids',
+        teaser: 'Training designed for children who want to develop fitness, coordination, and confidence through kickboxing.',
+        description: 'Age-appropriate kickboxing fundamentals: movement, punches, kicks, and partner exercises. Training is conducted in a safe and controlled format - with no strikes to the head and no sparring. The class is suitable for both children who are just starting and those who already have experience. Children can join the group at any time.',
+        forWhom: [
+          'Children aged 6-13',
+          'Beginners and more experienced participants',
+        ],
+        gearNote: "You don't need any equipment for your first sessions - we'll lend it to you on site :)",
       },
     },
   },

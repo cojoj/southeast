@@ -84,6 +84,26 @@ for (const item of classes) {
   }
 }
 
+const boxing = classes.find((item) => item.id === 'boks-podstawy');
+const kickboxing = classes.find((item) => item.id === 'kickboxing-podstawy');
+const mma = classes.find((item) => item.id === 'mma-podstawy');
+const juniorJiuJitsu = classes.find((item) => item.id === 'bjj-junior-10-13');
+const kidsKickboxing = classes.find((item) => item.id === 'kickboxing-dzieci-6-13');
+const hasGear = (item: (typeof classes)[number] | undefined, gear: GearItem) =>
+  (item?.gear as readonly GearItem[] | undefined)?.includes(gear) ?? false;
+
+assert(boxing?.durationMin === 60, 'Boxing fundamentals must last 60 minutes');
+assert(hasGear(boxing, 'gloves-14oz'), 'Boxing fundamentals must require 14 oz+ gloves');
+assert(hasGear(kickboxing, 'gloves-14oz'), 'Kickboxing fundamentals must require 14 oz+ gloves');
+assert(hasGear(mma, 'gloves-8oz'), 'MMA fundamentals must require 8 oz gloves');
+assert(!hasGear(mma, 'gloves-14oz'), 'MMA fundamentals must not require 14 oz+ gloves');
+assert(juniorJiuJitsu?.durationMin === 55, 'Junior Jiu-Jitsu must last 55 minutes');
+assert(kidsKickboxing?.durationMin === 55, 'Kids Kickboxing must last 55 minutes');
+assert(hasGear(kidsKickboxing, 'boxing-gloves'), 'Kids Kickboxing must require boxing gloves');
+assert(hasGear(kidsKickboxing, 'shin-guards'), 'Kids Kickboxing must require shin guards');
+assert(!hasGear(kidsKickboxing, 'gloves-8oz'), 'Kids Kickboxing must not set an 8 oz glove minimum');
+assert(!hasGear(kidsKickboxing, 'gloves-14oz'), 'Kids Kickboxing must not set a 14 oz glove minimum');
+
 const publicDir = join(process.cwd(), 'public');
 for (const image of [
   site.defaultOgImage,
