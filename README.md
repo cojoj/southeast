@@ -4,13 +4,18 @@ Static Astro site for Southeast Jiu-Jitsu in Krakow. The site is bilingual, with
 
 ## Commands
 
+Install [mise](https://mise.jdx.dev/) and run the project through its checked-in toolchain:
+
 ```sh
-pnpm install
-pnpm dev
-pnpm validate
+mise trust
+mise install
+mise run dev
+mise run validate
 ```
 
-Use `pnpm check` for Astro diagnostics, `pnpm build` for the static bundle, and `pnpm preview` to smoke-test the generated site.
+`mise.toml` selects the current Node.js LTS and latest pnpm release, while `mise.lock` preserves the exact versions used on macOS ARM64 and Linux x64. Use `mise run check` for Astro diagnostics and `mise run build` for the static bundle. Direct pnpm commands remain available inside the mise environment.
+
+Cloudflare Pages must use `pnpm validate` as its build command, output `dist`, and mirror the resolved versions from `mise.lock` in the `NODE_VERSION` and `PNPM_VERSION` build variables for both preview and production. The toolchain validation fails a build when either value drifts, so an outdated mirror cannot be deployed silently.
 
 ## Structure
 
@@ -26,4 +31,4 @@ Generated output lives in `dist/` and should not be edited.
 
 ## Validation
 
-`pnpm validate:data` checks the route table, localized page metadata, nav references, class IDs, class copy, gear labels, and required public assets. `pnpm validate` runs data validation, Astro Check, and a production build.
+`pnpm validate:toolchain` checks the active Node.js and pnpm versions and prevents Cloudflare build variables from silently drifting. `pnpm validate:data` checks the route table, localized page metadata, nav references, class IDs, class copy, gear labels, and required public assets. `mise run validate` runs both validations, Astro Check, and a production build.

@@ -1,0 +1,40 @@
+[tools]
+node = "lts"
+pnpm = "latest"
+
+[settings]
+idiomatic_version_file_disable_files = ["pnpm:package.json"]
+lockfile = true
+lockfile_platforms = ["linux-x64", "macos-arm64"]
+
+[tool_config]
+locked = true
+
+[tasks.install]
+description = "Install dependencies from the lockfile"
+run = "pnpm install --frozen-lockfile"
+
+[tasks.dev]
+description = "Start the local development server"
+depends = ["install"]
+run = "pnpm dev"
+
+[tasks.check]
+description = "Run Astro diagnostics"
+depends = ["install"]
+run = "pnpm check"
+
+[tasks.build]
+description = "Build the production site"
+depends = ["install"]
+run = "pnpm build"
+
+[tasks.validate]
+description = "Run the complete validation suite"
+depends = ["install"]
+run = "pnpm validate"
+
+[tasks.ci]
+description = "Install, validate, and build as CI does"
+depends = ["install"]
+run = "pnpm validate"
