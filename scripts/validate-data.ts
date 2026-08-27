@@ -33,12 +33,19 @@ const allRoutes = Object.values(routes).flatMap((route) => locales.map((locale) 
 assert(new Set(allRoutes).size === allRoutes.length, 'Route table contains duplicate paths');
 
 for (const item of nav) {
-  assert(Boolean(routes[item.page]), `nav item references unknown page ${item.page}`);
-  assertLocalized(item.label, `nav.${item.page}.label`);
+  const itemKey = 'page' in item ? item.page : item.href;
+  assertLocalized(item.label, `nav.${itemKey}.label`);
 
-  for (const child of item.children ?? []) {
-    assertLocalized(child.href, `nav.${item.page}.child.href`);
-    assertLocalized(child.label, `nav.${item.page}.child.label`);
+  if ('page' in item) {
+    assert(Boolean(routes[item.page]), `nav item references unknown page ${item.page}`);
+  } else {
+    assert(item.href.startsWith('https://'), `nav external link must be https: ${item.href}`);
+  }
+
+  const children = 'children' in item ? item.children : undefined;
+  for (const child of children ?? []) {
+    assertLocalized(child.href, `nav.${itemKey}.child.href`);
+    assertLocalized(child.label, `nav.${itemKey}.child.label`);
   }
 }
 
