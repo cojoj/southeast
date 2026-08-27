@@ -92,12 +92,12 @@ export const pageMeta = {
   training: {
     pl: {
       title: 'Treningi - Southeast Jiu-Jitsu',
-      description: 'Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, Kickboxing. Zajęcia dla wszystkich poziomów - od podstaw po zaawansowane. Zapisz się na darmowy trening próbny.',
+      description: 'Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, boks i Kickboxing. Zajęcia dla wszystkich poziomów - od podstaw po zaawansowane. Zapisz się na darmowy trening próbny.',
       bodyClass: 'bg-se',
     },
     en: {
       title: 'Training - Southeast Jiu-Jitsu',
-      description: 'Discover our complete training offering: Jiu-Jitsu, MMA, Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial.',
+      description: 'Discover our complete training offering: Jiu-Jitsu, MMA, Boxing, and Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial.',
       bodyClass: 'bg-se',
     },
   },
