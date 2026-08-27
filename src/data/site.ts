@@ -20,7 +20,7 @@ export const site = {
   },
   wodGuru: {
     registration: 'https://southeastjiujitsu.wod.guru/rejestracja',
-    memberships: 'https://southeastjiujitsu.wod.guru/wizytowka',
+    memberships: 'https://southeastjiujitsu.wod.guru/karnety',
     shop: 'https://southeastjiujitsu.wod.guru/produkty',
     schedule: 'https://southeastjiujitsu.wod.guru/classes',
     account: 'https://southeastjiujitsu.wod.guru/user/login',
@@ -120,12 +120,16 @@ export const pageMeta = {
   ogImage?: string;
 }>>;
 
-export const nav = [
-  {
-    page: 'summerCamp',
-    label: { pl: 'PÓŁKOLONIE', en: 'SUMMER CAMP' },
-    seasonal: true,
-  },
+type NavItem = {
+  page: Exclude<PageKey, 'home'>;
+  label: Localized<string>;
+  children?: Array<{ href: Localized<string>; label: Localized<string> }>;
+} | {
+  href: string;
+  label: Localized<string>;
+};
+
+export const nav: NavItem[] = [
   {
     page: 'about',
     label: { pl: 'O NAS', en: 'ABOUT' },
@@ -148,18 +152,14 @@ export const nav = [
     page: 'schedule',
     label: { pl: 'HARMONOGRAM', en: 'SCHEDULE' },
   },
-] satisfies Array<{
-  page: Exclude<PageKey, 'home'>;
-  label: Localized<string>;
-  children?: Array<{ href: Localized<string>; label: Localized<string> }>;
-  seasonal?: boolean;
-}>;
-
-export const externalNav = [
   { href: site.wodGuru.memberships, label: { pl: 'KARNETY', en: 'MEMBERSHIPS' } },
+  {
+    page: 'summerCamp',
+    label: { pl: 'PÓŁKOLONIE', en: 'SUMMER CAMP' },
+  },
   { href: site.wodGuru.shop, label: { pl: 'SKLEP', en: 'SHOP' } },
   { href: site.wodGuru.account, label: { pl: 'MOJE KONTO', en: 'MY ACCOUNT' } },
-] satisfies Array<{ href: string; label: Localized<string> }>;
+];
 
 export const homeHero = {
   pl: {

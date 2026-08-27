@@ -1,5 +1,5 @@
 ---
-import { externalNav, nav, routes, site } from '../data/site';
+import { nav, routes, site } from '../data/site';
 import { getLanguageSwitchUrl } from '../utils/language';
 
 export interface Props {
@@ -48,11 +48,10 @@ function isActiveLink(linkPath: string): boolean {
 
     <nav class="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-8" aria-label={a11y.mainNavigation}>
       {nav.map((item) => {
-        const href = routes[item.page][currentLang];
-        const active = isActiveLink(href);
-        const linkClass = item.seasonal
-          ? `focus-ring inline-flex min-h-10 items-center border border-secondary bg-secondary px-3 py-2 text-xs font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-secondary/90 hover:no-underline xl:text-sm 2xl:text-base ${active ? 'bg-secondary/90' : ''}`
-          : `focus-ring text-secondary hover:underline transition-all duration-200 text-xs xl:text-sm 2xl:text-base tracking-wide font-normal ${active ? 'underline' : ''}`;
+        const href = 'page' in item ? routes[item.page][currentLang] : item.href;
+        const active = 'page' in item && isActiveLink(href);
+        const children = 'children' in item ? item.children : undefined;
+        const linkClass = `focus-ring text-secondary hover:underline transition-all duration-200 text-xs xl:text-sm 2xl:text-base tracking-wide font-normal ${active ? 'underline' : ''}`;
 
         return (
           <div class="relative group">
@@ -60,9 +59,9 @@ function isActiveLink(linkPath: string): boolean {
               {item.label[currentLang]}
             </a>
 
-            {item.children && (
+            {children && (
               <div class="absolute top-full left-0 mt-2 py-2 bg-primary shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 min-w-[180px] z-50">
-                {item.children.map((child) => (
+                {children.map((child) => (
                   <a href={child.href[currentLang]} class="focus-ring block px-4 py-2 text-secondary hover:underline text-sm transition-all duration-200">
                     {child.label[currentLang]}
                   </a>
@@ -73,11 +72,6 @@ function isActiveLink(linkPath: string): boolean {
         );
       })}
 
-      {externalNav.map((item) => (
-        <a href={item.href} class="focus-ring text-secondary hover:underline transition-all duration-200 text-xs font-normal tracking-wide xl:text-sm 2xl:text-base">
-          {item.label[currentLang]}
-        </a>
-      ))}
     </nav>
 
     <div class="flex items-center space-x-3">
@@ -127,25 +121,25 @@ function isActiveLink(linkPath: string): boolean {
 
   <div class="lg:hidden bg-primary fixed left-0 right-0 bottom-0 mobile-menu-container z-40 overflow-y-auto" id="mobile-menu" aria-hidden="true" inert>
     <nav class="container mx-auto px-4 py-6 space-y-3 mobile-menu" aria-label={a11y.mobileNavigation}>
-      {nav.map((item) => (
-        <div>
-          <a href={routes[item.page][currentLang]} class={`focus-ring mobile-menu-item block hover:underline transition-all duration-200 text-base tracking-wide py-3 ${item.seasonal ? 'mb-2 border border-secondary bg-secondary px-4 font-semibold text-primary hover:no-underline' : `border-b border-secondary/20 text-secondary ${isActiveLink(routes[item.page][currentLang]) ? 'font-semibold underline' : 'font-normal'}`}`}>
-            {item.label[currentLang]}
-          </a>
+      {nav.map((item) => {
+        const href = 'page' in item ? routes[item.page][currentLang] : item.href;
+        const active = 'page' in item && isActiveLink(href);
+        const children = 'children' in item ? item.children : undefined;
 
-          {item.children?.map((child) => (
-            <a href={child.href[currentLang]} class="focus-ring mobile-menu-item block text-secondary hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-secondary/20 font-normal">
-              <span aria-hidden="true">-&nbsp;</span>{child.label[currentLang]}
+        return (
+          <div>
+            <a href={href} class={`focus-ring mobile-menu-item block border-b border-secondary/20 py-3 text-base font-normal tracking-wide text-secondary transition-all duration-200 hover:underline ${active ? 'font-semibold underline' : ''}`}>
+              {item.label[currentLang]}
             </a>
-          ))}
-        </div>
-      ))}
 
-      {externalNav.map((item) => (
-        <a href={item.href} class="focus-ring mobile-menu-item block text-secondary hover:underline transition-all duration-200 text-base font-normal tracking-wide py-3 border-b border-secondary/20">
-          {item.label[currentLang]}
-        </a>
-      ))}
+            {children?.map((child) => (
+              <a href={child.href[currentLang]} class="focus-ring mobile-menu-item block text-secondary hover:underline transition-all duration-200 text-sm tracking-wide py-2 pl-4 border-b border-secondary/20 font-normal">
+                <span aria-hidden="true">-&nbsp;</span>{child.label[currentLang]}
+              </a>
+            ))}
+          </div>
+        );
+      })}
 
       <div class="mobile-menu-item flex items-center gap-5 pt-4 text-secondary">
         {site.social.map((item) => (

@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MarketingOverview from '../MarketingOverview.astro';
-import { CalendarClock } from '@lucide/astro';
 import { homeHero, pageMeta, routes, site } from '../../data/site';
-import { summerCamp } from '../../data/summerCamp';
 import type { Locale } from '../../types';
 
 export interface Props {
@@ -13,7 +11,6 @@ export interface Props {
 const { locale } = Astro.props;
 const meta = pageMeta.home[locale];
 const hero = homeHero[locale];
-const campPromo = summerCamp[locale].promoChip;
 ---
 
 <BaseLayout
@@ -77,14 +74,6 @@ const campPromo = summerCamp[locale].promoChip;
           <p class="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
             {hero.description}
           </p>
-
-          <a
-            href={routes.summerCamp[locale]}
-            class="focus-ring-on-dark mb-4 inline-flex w-full max-w-2xl items-center justify-center gap-3 border border-white/50 bg-primary px-6 py-4 text-base font-normal uppercase leading-tight tracking-wide text-secondary transition-colors hover:bg-primary/90 sm:w-auto sm:min-w-[360px] sm:px-8"
-          >
-            <CalendarClock class="size-4 flex-shrink-0" aria-hidden="true" />
-            <span>{campPromo}</span>
-          </a>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <a

@@ -6,7 +6,7 @@ export const gearLabels = {
     'shorts-no-pockets': 'Spodenki bez kieszeni',
     mouthguard: 'Szczęka',
     'gloves-8oz': 'Rękawice 8oz',
-    'gloves-10oz': 'Rękawice min. 10oz',
+    'gloves-14oz': 'Rękawice min. 14 oz',
     'shin-guards': 'Ochraniacze na piszczele',
   },
   en: {
@@ -14,7 +14,7 @@ export const gearLabels = {
     'shorts-no-pockets': 'Shorts without pockets',
     mouthguard: 'Mouthguard',
     'gloves-8oz': '8oz gloves',
-    'gloves-10oz': '10oz+ gloves',
+    'gloves-14oz': '14 oz+ gloves',
     'shin-guards': 'Shin guards',
   },
 } satisfies Record<Locale, Record<GearItem, string>>;
@@ -52,7 +52,7 @@ export const classes = [
   {
     id: 'bjj-wszystkie',
     level: 'wszystkie',
-    durationLabel: '60-90 min',
+    durationLabel: '60-75 min',
     gear: ['sports-shirt', 'shorts-no-pockets'],
     icons: { type: 'Users', duration: 'Clock', gear: 'Shirt' },
     copy: {
@@ -81,7 +81,7 @@ export const classes = [
   {
     id: 'bjj-grupa-zawodnicza',
     level: 'zaawansowani',
-    durationMin: 120,
+    durationMin: 90,
     gear: ['sports-shirt', 'shorts-no-pockets'],
     icons: { type: 'Brain', duration: 'Clock', gear: 'Shirt' },
     copy: {
@@ -140,7 +140,7 @@ export const classes = [
     id: 'kickboxing-podstawy',
     level: 'podstawy',
     durationMin: 60,
-    gear: ['sports-shirt', 'shorts-no-pockets', 'mouthguard', 'gloves-10oz', 'shin-guards'],
+    gear: ['sports-shirt', 'shorts-no-pockets', 'mouthguard', 'gloves-14oz', 'shin-guards'],
     icons: { type: 'Zap', duration: 'Clock', gear: 'Package' },
     copy: {
       pl: {
@@ -168,7 +168,7 @@ export const classes = [
   {
     id: 'wolna-mata',
     level: 'mieszane',
-    durationMin: 120,
+    durationMin: 30,
     gear: [],
     icons: { type: 'CalendarClock', duration: 'Clock', gear: 'Shirt' },
     copy: {

@@ -11,7 +11,7 @@ export type GearItem =
   | 'shorts-no-pockets'
   | 'mouthguard'
   | 'gloves-8oz'
-  | 'gloves-10oz'
+  | 'gloves-14oz'
   | 'shin-guards';
 
 export type ClassIcon =
