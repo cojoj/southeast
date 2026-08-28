@@ -22,11 +22,13 @@ const copy = privateTraining[currentLang];
             <ResponsiveImage
               src="/flagens.jpg"
               avifSrc="/flagens.avif"
-              alt="Private training with professional instructor"
+              alt={currentLang === 'pl'
+                ? 'Mateusz Flaga prowadzący trening personalny Southeast Jiu-Jitsu'
+                : 'Mateusz Flaga leading a Southeast Jiu-Jitsu personal training session'}
               width={900}
               height={1200}
               sizes="(min-width: 768px) 552px, calc(100vw - 32px)"
-              imgClass="w-full h-auto shadow-lg object-cover"
+              imgClass="w-full h-auto object-cover grayscale contrast-125 brightness-90 shadow-lg"
               loading="lazy"
             />
           </div>

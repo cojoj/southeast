@@ -31,9 +31,10 @@ const subtitle = {
   lang={locale}
   currentUrl={routes.training[locale]}
   bodyClass={meta.bodyClass}
+  ogImage={meta.ogImage}
 >
   <Fragment slot="head">
-    <link rel="preload" as="image" href="/hero.avif" type="image/avif" />
+    <link rel="preload" as="image" href="/training-current.avif" type="image/avif" />
   </Fragment>
 
   <main class="relative min-h-screen">
@@ -41,6 +42,10 @@ const subtitle = {
       currentLang={locale}
       title={title}
       subtitle={subtitle}
+      backgroundImage="/training-current.jpg"
+      backgroundAvif="/training-current.avif"
+      backgroundWidth={1800}
+      backgroundHeight={1013}
     />
 
     <section class="py-16 md:py-20">

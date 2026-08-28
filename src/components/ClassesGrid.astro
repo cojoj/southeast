@@ -1,7 +1,9 @@
 ---
 import type { ClassItem, Locale } from '../types';
 import { classSectionLabels } from '../data/classes';
+import { routes, site } from '../data/site';
 import ClassCard from './ClassCard.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 export interface Props {
   classes: ClassItem[];
@@ -34,11 +36,50 @@ const kidsClasses = classes.filter(c => c.level === 'dzieci');
   
   {/* Kids Classes Section */}
   {kidsClasses.length > 0 && (
-    <div id="kids-training">
-      <h2 class="text-2xl font-semibold text-se-ink mb-6 text-center">
-        {labels.kids}
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+    <div id="kids-training" class="scroll-mt-24">
+      <div class="mx-auto mb-8 grid max-w-6xl overflow-hidden bg-secondary shadow-xl lg:grid-cols-2">
+        <ResponsiveImage
+          src="/kids-training.jpg"
+          avifSrc="/kids-training.avif"
+          alt={labels.kidsImageAlt}
+          width={1120}
+          height={1400}
+          sizes="(min-width: 1024px) 576px, calc(100vw - 32px)"
+          class="block h-full"
+          imgClass="h-full w-full object-cover grayscale contrast-125 brightness-90"
+          loading="lazy"
+        />
+
+        <div class="flex flex-col justify-center px-6 py-10 text-additional sm:px-10 lg:px-12">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            {labels.kidsEyebrow}
+          </p>
+          <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
+            {labels.kids}
+          </h2>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-additional/80 md:text-lg">
+            {labels.kidsDescription}
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={routes.schedule[locale]}
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors hover:bg-primary/90"
+            >
+              {labels.kidsScheduleCta}
+            </a>
+            <a
+              href={site.wodGuru.registration}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center border border-additional/45 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-additional transition-colors hover:bg-additional/10"
+            >
+              {labels.kidsTrialCta}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
         {kidsClasses.map((item) => (
           <ClassCard item={item} locale={locale} />
         ))}

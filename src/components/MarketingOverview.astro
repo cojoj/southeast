@@ -18,13 +18,15 @@ const currentContent = marketingOverview[currentLang];
         <!-- Clean image container -->
         <div class="px-4">
           <ResponsiveImage
-            src="/training-session.jpg"
-            avifSrc="/training-session.avif"
-            alt="Southeast Jiu-Jitsu training session showing practitioners on the mat"
-            width={800}
-            height={1200}
+            src="/community-training.jpg"
+            avifSrc="/community-training.avif"
+            alt={currentLang === 'pl'
+              ? 'Seminarium Southeast Jiu-Jitsu na obecnej macie treningowej'
+              : 'Southeast Jiu-Jitsu seminar on the current training mat'}
+            width={1066}
+            height={1600}
             sizes="(min-width: 1024px) 544px, calc(100vw - 64px)"
-            imgClass="w-full h-auto shadow-2xl"
+            imgClass="w-full h-auto grayscale contrast-125 brightness-90 shadow-2xl"
             loading="lazy"
           />
         </div>

@@ -11,15 +11,21 @@ export interface Props {
     pl: string;
     en: string;
   };
-  backgroundImage?: string;
-  backgroundAvif?: string;
+  backgroundImage: string;
+  backgroundAvif: string;
+  backgroundWidth: number;
+  backgroundHeight: number;
 }
 
-const { currentLang, title, subtitle, backgroundImage = "/hero.jpg", backgroundAvif } = Astro.props;
-const resolvedAvif = backgroundAvif ?? (backgroundImage === '/team.jpg' ? '/team-hero.avif' : '/hero.avif');
-const imageDimensions = backgroundImage === '/team.jpg'
-  ? { width: 1800, height: 832 }
-  : { width: 1280, height: 1920 };
+const {
+  currentLang,
+  title,
+  subtitle,
+  backgroundImage,
+  backgroundAvif,
+  backgroundWidth,
+  backgroundHeight,
+} = Astro.props;
 
 const currentContent = {
   title: title ? title[currentLang] : heroContent.about[currentLang].title,
@@ -29,13 +35,13 @@ const currentContent = {
 
 <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden">
   <picture class="absolute inset-0 block h-full w-full">
-    <source srcset={resolvedAvif} type="image/avif" />
+    <source srcset={backgroundAvif} type="image/avif" />
     <img
       src={backgroundImage}
       alt=""
-      width={imageDimensions.width}
-      height={imageDimensions.height}
-      class="h-full w-full object-cover object-center saturate-[0.75] contrast-[1.05] brightness-[0.82]"
+      width={backgroundWidth}
+      height={backgroundHeight}
+      class="h-full w-full object-cover object-center grayscale contrast-125 brightness-90"
       loading="eager"
       fetchpriority="high"
       decoding="async"

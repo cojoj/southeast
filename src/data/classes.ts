@@ -337,9 +337,27 @@ export const classSectionLabels = {
   pl: {
     adults: 'Treningi dla dorosłych',
     kids: 'Treningi dla dzieci',
+    kidsEyebrow: 'Dla dzieci od 3 do 13 lat',
+    kidsDescription: 'Małe grupy, dużo ruchu i zajęcia dopasowane do wieku. Dzieci uczą się Jiu-Jitsu i kickboxingu w bezpiecznej, wspierającej atmosferze.',
+    kidsScheduleCta: 'Sprawdź harmonogram',
+    kidsTrialCta: 'Pierwszy darmowy trening',
+    kidsImageAlt: 'Trenerka i troje dzieci w koszulkach Southeast Jiu-Jitsu, widziani od tyłu',
   },
   en: {
     adults: 'Adult Training',
     kids: 'Kids Training',
+    kidsEyebrow: 'For children ages 3 to 13',
+    kidsDescription: 'Small groups, plenty of movement, and age-appropriate sessions. Children learn Jiu-Jitsu and kickboxing in a safe, supportive atmosphere.',
+    kidsScheduleCta: 'Check the schedule',
+    kidsTrialCta: 'First free training',
+    kidsImageAlt: 'A coach and three children in Southeast Jiu-Jitsu shirts, seen from behind',
   },
-} satisfies Localized<{ adults: string; kids: string }>;
+} satisfies Localized<{
+  adults: string;
+  kids: string;
+  kidsEyebrow: string;
+  kidsDescription: string;
+  kidsScheduleCta: string;
+  kidsTrialCta: string;
+  kidsImageAlt: string;
+}>;

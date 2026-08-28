@@ -59,13 +59,15 @@ const currentContent = aboutIntro[currentLang];
         <!-- Clean image container -->
         <div class="relative z-10 px-4">
           <ResponsiveImage
-            src="/training.jpg"
-            avifSrc="/training.avif"
-            alt="Southeast Jiu-Jitsu training session showing practitioners on the mat"
-            width={900}
-            height={1350}
+            src="/about-training.jpg"
+            avifSrc="/about-training.avif"
+            alt={currentLang === 'pl'
+              ? 'Zawodnicy Southeast Jiu-Jitsu trenujący na obecnej macie'
+              : 'Southeast Jiu-Jitsu practitioners training on the current mat'}
+            width={1066}
+            height={1600}
             sizes="(min-width: 1024px) 544px, calc(100vw - 64px)"
-            imgClass="w-full h-auto shadow-2xl"
+            imgClass="w-full h-auto grayscale contrast-125 brightness-90 shadow-2xl"
             loading="lazy"
           />
         </div>

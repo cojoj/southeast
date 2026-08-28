@@ -78,13 +78,13 @@ export const pageMeta = {
       title: 'O nas - Southeast Jiu-Jitsu | Krakow',
       description: 'Poznaj Southeast Jiu-Jitsu w Krakowie - naszych trenerów, innowacyjne metody treningowe i społeczność pasjonatów sportów walki. Treningi dla wszystkich poziomów zaawansowania.',
       bodyClass: 'bg-additional',
-      ogImage: '/training-session.jpg',
+      ogImage: '/team-current.jpg',
     },
     en: {
       title: 'About Us - Southeast Jiu-Jitsu | Krakow',
       description: 'Learn about Southeast Jiu-Jitsu in Krakow - our trainers, innovative training methods, and community of martial arts enthusiasts. Training for all skill levels.',
       bodyClass: 'bg-additional',
-      ogImage: '/training-session.jpg',
+      ogImage: '/team-current.jpg',
     },
   },
   training: {
@@ -92,11 +92,13 @@ export const pageMeta = {
       title: 'Treningi - Southeast Jiu-Jitsu',
       description: 'Poznaj naszą pełną ofertę treningów: Jiu-Jitsu, MMA, boks i Kickboxing. Zajęcia dla wszystkich poziomów - od podstaw po zaawansowane. Zapisz się na darmowy trening próbny.',
       bodyClass: 'bg-se',
+      ogImage: '/training-current.jpg',
     },
     en: {
       title: 'Training - Southeast Jiu-Jitsu',
       description: 'Discover our complete training offering: Jiu-Jitsu, MMA, Boxing, and Kickboxing. Classes for all levels - from fundamentals to advanced. Sign up for a free trial.',
       bodyClass: 'bg-se',
+      ogImage: '/training-current.jpg',
     },
   },
   schedule: {
