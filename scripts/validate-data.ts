@@ -112,6 +112,7 @@ for (const image of [
   '/training.jpg',
   '/training-session.jpg',
   '/flagens.jpg',
+  '/day-camps-winter-hero.jpg',
   '/robots.txt',
   '/_redirects',
   '/logos/logo_black.svg',

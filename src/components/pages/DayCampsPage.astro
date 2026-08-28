@@ -40,12 +40,31 @@ const previewIconComponents = {
   currentUrl={routes.dayCamps[locale]}
   bodyClass={meta.bodyClass}
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/day-camps-winter-hero.jpg" />
+  </Fragment>
+
   <main>
-    <section class="relative overflow-hidden bg-secondary text-additional">
+    <section class="relative min-h-[80vh] overflow-hidden bg-secondary text-additional">
+      <picture class="absolute inset-0 block h-full w-full">
+        <img
+          src="/day-camps-winter-hero.jpg"
+          alt=""
+          width="1080"
+          height="810"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="h-full w-full object-cover object-[center_38%] grayscale contrast-125 brightness-90 md:scale-110"
+        />
+      </picture>
+      <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-secondary/35" aria-hidden="true"></div>
+
       <Snowflake class="absolute -right-16 -top-16 size-64 text-additional/[0.035] md:size-80" aria-hidden="true" />
       <Snowflake class="absolute -bottom-20 -left-16 size-56 rotate-12 text-primary/[0.06] md:size-72" aria-hidden="true" />
 
-      <div class="container relative mx-auto px-4 py-16 md:py-24 lg:py-28">
+      <div class="container relative z-10 mx-auto px-4 py-16 md:py-24 lg:py-28">
         <div class="mx-auto max-w-4xl text-center">
           <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
             {content.hero.eyebrow}
@@ -81,7 +100,7 @@ const previewIconComponents = {
 
         <dl class="mx-auto mt-14 grid max-w-5xl gap-px overflow-hidden border border-additional/20 bg-additional/20 md:grid-cols-2 xl:grid-cols-4">
           {content.facts.map((fact) => (
-            <div class="bg-secondary p-5 text-center">
+            <div class="bg-secondary/85 p-5 text-center backdrop-blur-sm">
               <dt class="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
                 {fact.label}
               </dt>
