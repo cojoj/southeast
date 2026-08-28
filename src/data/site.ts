@@ -42,7 +42,7 @@ export const site = {
 
 export const routes = {
   home: { pl: '/', en: '/en/' },
-  summerCamp: { pl: '/polkolonie/', en: '/en/summer-camp/' },
+  dayCamps: { pl: '/polkolonie/', en: '/en/day-camps/' },
   about: { pl: '/o-nas/', en: '/en/about/' },
   training: { pl: '/treningi/', en: '/en/training/' },
   schedule: { pl: '/harmonogram/', en: '/en/schedule/' },
@@ -61,18 +61,16 @@ export const pageMeta = {
       bodyClass: 'bg-additional',
     },
   },
-  summerCamp: {
+  dayCamps: {
     pl: {
-      title: 'Półkolonie sportowe dla dzieci - Southeast Jiu-Jitsu',
-      description: 'Aktywne półkolonie sportowe dla dzieci 5-13 lat w Krakowie. Treningi Jiu-Jitsu, codzienne atrakcje, wyżywienie i opieka 8:00-16:00.',
+      title: 'Zimowe półkolonie dla dzieci 2027 - Southeast Jiu-Jitsu',
+      description: 'Zimowe półkolonie sportowe dla dzieci w Krakowie już w przygotowaniu. Ruch, Jiu-Jitsu, zabawa i nowe atrakcje. Szczegóły wkrótce.',
       bodyClass: 'bg-additional',
-      ogImage: '/summer-camp-poster.jpg',
     },
     en: {
-      title: 'Summer Day Camp for Kids - Southeast Jiu-Jitsu',
-      description: 'Active sports summer day camp for children ages 5-13 in Krakow. Jiu-Jitsu training, daily activities, meals and care from 8:00 to 16:00.',
+      title: 'Winter Day Camp for Kids 2027 - Southeast Jiu-Jitsu',
+      description: 'Our winter day camp for children in Krakow is in the works. Movement, Jiu-Jitsu, play, and new activities. Details coming soon.',
       bodyClass: 'bg-additional',
-      ogImage: '/summer-camp-poster.jpg',
     },
   },
   about: {
@@ -152,11 +150,11 @@ export const nav: NavItem[] = [
     page: 'schedule',
     label: { pl: 'HARMONOGRAM', en: 'SCHEDULE' },
   },
-  { href: site.wodGuru.memberships, label: { pl: 'KARNETY', en: 'MEMBERSHIPS' } },
   {
-    page: 'summerCamp',
-    label: { pl: 'PÓŁKOLONIE', en: 'SUMMER CAMP' },
+    page: 'dayCamps',
+    label: { pl: 'PÓŁKOLONIE', en: 'DAY CAMPS' },
   },
+  { href: site.wodGuru.memberships, label: { pl: 'KARNETY', en: 'MEMBERSHIPS' } },
   { href: site.wodGuru.shop, label: { pl: 'SKLEP', en: 'SHOP' } },
   { href: site.wodGuru.account, label: { pl: 'MOJE KONTO', en: 'MY ACCOUNT' } },
 ];

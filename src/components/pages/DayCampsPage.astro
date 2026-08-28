@@ -1,0 +1,172 @@
+---
+import {
+  CalendarClock,
+  Dumbbell,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Snowflake,
+  Sparkles,
+  Users,
+} from '@lucide/astro';
+import { dayCamps } from '../../data/dayCamps';
+import { pageMeta, routes, site } from '../../data/site';
+import type { Locale } from '../../types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const meta = pageMeta.dayCamps[locale];
+const content = dayCamps[locale];
+const mapHref = `https://maps.google.com/?q=${site.address.mapQuery}`;
+const emailSubject = locale === 'pl' ? 'Półkolonie zimowe 2027' : 'Winter day camp 2027';
+const emailHref = `${site.contact.emailHref}?subject=${encodeURIComponent(emailSubject)}`;
+const previewIconComponents = {
+  Dumbbell,
+  ShieldCheck,
+  Sparkles,
+  Users,
+};
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  lang={locale}
+  currentUrl={routes.dayCamps[locale]}
+  bodyClass={meta.bodyClass}
+>
+  <main>
+    <section class="relative overflow-hidden bg-secondary text-additional">
+      <Snowflake class="absolute -right-16 -top-16 size-64 text-additional/[0.035] md:size-80" aria-hidden="true" />
+      <Snowflake class="absolute -bottom-20 -left-16 size-56 rotate-12 text-primary/[0.06] md:size-72" aria-hidden="true" />
+
+      <div class="container relative mx-auto px-4 py-16 md:py-24 lg:py-28">
+        <div class="mx-auto max-w-4xl text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            {content.hero.eyebrow}
+          </p>
+          <div class="mt-6 inline-flex items-center gap-2 border border-additional/25 bg-additional/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-additional/85">
+            <Snowflake class="size-4 text-primary" aria-hidden="true" />
+            {content.hero.status}
+          </div>
+          <h1 class="mt-7 text-4xl font-semibold uppercase leading-tight md:text-6xl lg:text-7xl">
+            {content.hero.title}
+          </h1>
+          <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-additional/80 md:text-xl">
+            {content.hero.lead}
+          </p>
+
+          <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href={emailHref}
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center gap-2 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors hover:bg-primary/90"
+            >
+              <Mail class="size-4" aria-hidden="true" />
+              {content.updates.emailCta}
+            </a>
+            <a
+              href={site.contact.phoneHref}
+              class="focus-ring-on-dark inline-flex min-h-12 items-center justify-center gap-2 border border-additional/35 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-additional transition-colors hover:bg-additional/10"
+            >
+              <Phone class="size-4" aria-hidden="true" />
+              {content.updates.phoneCta}
+            </a>
+          </div>
+        </div>
+
+        <dl class="mx-auto mt-14 grid max-w-5xl gap-px overflow-hidden border border-additional/20 bg-additional/20 md:grid-cols-2 xl:grid-cols-4">
+          {content.facts.map((fact) => (
+            <div class="bg-secondary p-5 text-center">
+              <dt class="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                {fact.label}
+              </dt>
+              <dd class="mt-2 text-base leading-snug text-additional">
+                {fact.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="bg-additional py-16 md:py-24">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-3xl text-center">
+          <CalendarClock class="mx-auto size-10 text-secondary" aria-hidden="true" />
+          <h2 class="mt-5 text-3xl font-semibold uppercase tracking-wide text-secondary md:text-4xl">
+            {content.preview.heading}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-secondary/75 md:text-lg">
+            {content.preview.intro}
+          </p>
+        </div>
+
+        <div class="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
+          {content.preview.items.map((item) => {
+            const Icon = previewIconComponents[item.icon];
+
+            return (
+              <article class="border border-primary bg-white p-6 shadow-sm md:p-7">
+                <div class="inline-flex size-12 items-center justify-center bg-primary text-secondary">
+                  <Icon class="size-6" aria-hidden="true" />
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-secondary">
+                  {item.title}
+                </h3>
+                <p class="mt-2 leading-relaxed text-secondary/75">
+                  {item.description}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-primary py-16 md:py-20">
+      <div class="container mx-auto grid gap-10 px-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-secondary/65">
+            {content.updates.eyebrow}
+          </p>
+          <h2 class="mt-4 max-w-3xl text-3xl font-semibold uppercase leading-tight text-secondary md:text-4xl">
+            {content.updates.heading}
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-secondary/75 md:text-lg">
+            {content.updates.body}
+          </p>
+        </div>
+
+        <aside class="border border-secondary/15 bg-additional/45 p-6 md:p-7">
+          <div class="space-y-5 text-secondary">
+            <a href={emailHref} class="focus-ring flex gap-3 transition-opacity hover:opacity-70">
+              <Mail class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span class="break-all">{site.contact.email}</span>
+            </a>
+            <a href={site.contact.phoneHref} class="focus-ring flex gap-3 transition-opacity hover:opacity-70">
+              <Phone class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span>{site.contact.phone}</span>
+            </a>
+            <a
+              href={mapHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring flex gap-3 transition-opacity hover:opacity-70"
+            >
+              <MapPin class="mt-0.5 size-5 flex-shrink-0" aria-hidden="true" />
+              <span>
+                {site.address.street}<br />
+                {site.address.postalCity}
+              </span>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

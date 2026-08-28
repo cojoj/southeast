@@ -1,5 +1,23 @@
 ---
-import SummerCampPage from '../../components/pages/SummerCampPage.astro';
+import { absoluteUrl } from '../../utils/language';
+
+const destination = '/en/day-camps/';
 ---
 
-<SummerCampPage locale="en" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <link rel="canonical" href={absoluteUrl(destination)} />
+    <title>Day Camps - Southeast Jiu-Jitsu</title>
+    <script is:inline define:vars={{ destination }}>
+      window.location.replace(destination);
+    </script>
+  </head>
+  <body>
+    <p>This page has moved to <a href={destination}>Day Camps</a>.</p>
+  </body>
+</html>

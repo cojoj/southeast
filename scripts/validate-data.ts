@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { classes, gearLabels } from '../src/data/classes.ts';
 import { nav, pageMeta, routes, site } from '../src/data/site.ts';
-import { summerCamp, summerCampSignupUrl } from '../src/data/summerCamp.ts';
+import { dayCamps } from '../src/data/dayCamps.ts';
 import type { GearItem, Locale, PageKey } from '../src/types.ts';
 
 const locales = ['pl', 'en'] satisfies Locale[];
@@ -31,6 +31,7 @@ for (const page of Object.keys(routes) as PageKey[]) {
 
 const allRoutes = Object.values(routes).flatMap((route) => locales.map((locale) => route[locale]));
 assert(new Set(allRoutes).size === allRoutes.length, 'Route table contains duplicate paths');
+assert(routes.dayCamps.en === '/en/day-camps/', 'English day-camps route must remain season-neutral');
 
 for (const item of nav) {
   const itemKey = 'page' in item ? item.page : item.href;
@@ -49,20 +50,19 @@ for (const item of nav) {
   }
 }
 
-assert(summerCampSignupUrl.startsWith('https://docs.google.com/forms/'), 'Summer camp signup URL must point to Google Forms');
-assertLocalized(summerCamp, 'summerCamp');
+const scheduleNavIndex = nav.findIndex((item) => 'page' in item && item.page === 'schedule');
+const dayCampsNavIndex = nav.findIndex((item) => 'page' in item && item.page === 'dayCamps');
+assert(dayCampsNavIndex === scheduleNavIndex + 1, 'Day Camps must appear directly after Schedule in navigation');
+
+assertLocalized(dayCamps, 'dayCamps');
 
 for (const locale of locales) {
-  const content = summerCamp[locale];
-  assert(Boolean(content.hero.title), `summerCamp.${locale}.hero.title is empty`);
-  assert(content.facts.length >= 4, `summerCamp.${locale}.facts should include key parent facts`);
-  assert(content.included.items.length >= 6, `summerCamp.${locale}.included.items should include the core offer`);
-  assert(content.schedule.turnuses.length === 2, `summerCamp.${locale}.schedule.turnuses should include exactly two turnuses`);
-  assert(content.pricing.cards.length === 2, `summerCamp.${locale}.pricing.cards should include one-turnus and two-turnus prices`);
-  assert(/^\d{4}-\d{2}-\d{2}$/.test(content.pricing.earlyDeadline), `summerCamp.${locale}.pricing.earlyDeadline must use YYYY-MM-DD`);
-  assert(Boolean(content.pricing.expiredIntro), `summerCamp.${locale}.pricing.expiredIntro is empty`);
-  assert(Boolean(content.pricing.currentLabel), `summerCamp.${locale}.pricing.currentLabel is empty`);
-  assert(content.trust.points.length >= 3, `summerCamp.${locale}.trust.points should include trust proof`);
+  const content = dayCamps[locale];
+  assert(Boolean(content.hero.title), `dayCamps.${locale}.hero.title is empty`);
+  assert(Boolean(content.hero.status), `dayCamps.${locale}.hero.status is empty`);
+  assert(content.facts.length === 4, `dayCamps.${locale}.facts should include exactly four teaser facts`);
+  assert(content.preview.items.length === 4, `dayCamps.${locale}.preview.items should include exactly four program signals`);
+  assert(Boolean(content.updates.heading), `dayCamps.${locale}.updates.heading is empty`);
 }
 
 const classIds = new Set<string>();
@@ -112,8 +112,8 @@ for (const image of [
   '/training.jpg',
   '/training-session.jpg',
   '/flagens.jpg',
-  '/summer-camp-poster.jpg',
   '/robots.txt',
+  '/_redirects',
   '/logos/logo_black.svg',
   '/logos/logo_white_jj.svg',
 ]) {
