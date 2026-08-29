@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { classes, gearLabels } from '../src/data/classes.ts';
 import { nav, pageMeta, routes, site } from '../src/data/site.ts';
@@ -107,10 +107,10 @@ assert(!hasGear(kidsKickboxing, 'gloves-14oz'), 'Kids Kickboxing must not set a 
 const publicDir = join(process.cwd(), 'public');
 for (const image of [
   site.defaultOgImage,
-  '/hero.avif',
-  '/hero-poster.jpg',
-  '/hero-loop-mobile.mp4',
-  '/hero-loop-desktop.mp4',
+  '/home-club-training-poster.avif',
+  '/home-club-training-poster.jpg',
+  '/home-hero-loop-720.mp4',
+  '/home-hero-loop-1080.mp4',
   '/team-current.jpg',
   '/team-current.avif',
   '/training-current.jpg',
@@ -130,6 +130,16 @@ for (const image of [
   '/logos/logo_white_jj.svg',
 ]) {
   assert(existsSync(join(publicDir, image.slice(1))), `Missing public asset ${image}`);
+}
+
+for (const [asset, maxBytes] of [
+  ['/home-hero-loop-720.mp4', 6_000_000],
+  ['/home-hero-loop-1080.mp4', 8_500_000],
+] as const) {
+  const assetPath = join(publicDir, asset.slice(1));
+  if (existsSync(assetPath)) {
+    assert(statSync(assetPath).size <= maxBytes, `${asset} exceeds its ${maxBytes}-byte budget`);
+  }
 }
 
 for (const social of site.social) {

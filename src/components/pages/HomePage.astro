@@ -21,19 +21,22 @@ const hero = homeHero[locale];
   bodyClass={meta.bodyClass}
 >
   <Fragment slot="head">
-    <link rel="preload" as="image" href="/hero.avif" type="image/avif" />
+    <link rel="preload" as="image" href="/home-club-training-poster.avif" type="image/avif" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/training-current.avif" type="image/avif" media="(min-width: 768px)" fetchpriority="high" />
     <link rel="preload" as="image" href="/logos/logo_white_jj.svg" />
   </Fragment>
 
   <main class="relative min-h-screen">
     <section class="relative min-h-screen overflow-hidden">
       <picture class="absolute inset-0 block h-full w-full">
-        <source srcset="/hero.avif" type="image/avif" />
+        <source media="(min-width: 768px)" srcset="/training-current.avif" type="image/avif" />
+        <source media="(min-width: 768px)" srcset="/training-current.jpg" type="image/jpeg" />
+        <source srcset="/home-club-training-poster.avif" type="image/avif" />
         <img
-          src="/hero-poster.jpg"
+          src="/home-club-training-poster.jpg"
           alt=""
-          width="960"
-          height="1706"
+          width="1200"
+          height="1800"
           class="h-full w-full object-cover object-[center_35%] grayscale contrast-125 brightness-90"
           loading="eager"
           fetchpriority="high"
@@ -43,13 +46,11 @@ const hero = homeHero[locale];
 
       <video
         id="hero-video"
-        class="absolute inset-0 hidden h-full w-full object-cover object-[center_35%] grayscale contrast-125 brightness-90 md:block"
-        autoplay
+        class="absolute inset-0 hidden h-full w-full object-cover object-[center_35%] opacity-0 grayscale contrast-125 brightness-90 transition-opacity duration-500 md:block"
         muted
         loop
         playsinline
         preload="none"
-        poster="/hero-poster.jpg"
         aria-hidden="true"
       >
       </video>
@@ -124,26 +125,59 @@ const hero = homeHero[locale];
       if (!video) return;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const shouldLoadVideo = window.matchMedia('(min-width: 768px)').matches && !prefersReducedMotion;
+      const connection = navigator.connection;
+      const effectiveConnection = connection?.effectiveType ?? '';
+      const prefersReducedData = Boolean(
+        connection && (connection.saveData || effectiveConnection.includes('2g'))
+      );
+      const hasVideoViewport = window.matchMedia('(min-width: 768px)').matches;
 
-      if (shouldLoadVideo) {
-        const source = document.createElement('source');
-        source.src = window.matchMedia('(max-width: 1023px)').matches
-          ? '/hero-loop-mobile.mp4'
-          : '/hero-loop-desktop.mp4';
-        source.type = 'video/mp4';
-        video.appendChild(source);
-        video.load();
+      if (!hasVideoViewport || prefersReducedMotion || prefersReducedData) return;
+
+      const hasFastConnection = !effectiveConnection || effectiveConnection === '4g';
+      const useHighQualityVideo = hasFastConnection && (
+        window.innerWidth >= 1280
+        || (window.innerWidth >= 1024 && window.devicePixelRatio >= 1.5)
+      );
+      const source = document.createElement('source');
+      source.src = useHighQualityVideo
+        ? '/home-hero-loop-1080.mp4'
+        : '/home-hero-loop-720.mp4';
+      source.type = 'video/mp4';
+      video.appendChild(source);
+
+      video.addEventListener('playing', function() {
+        video.classList.add('opacity-100');
+      }, { once: true });
+
+      const playVideo = function() {
         video.play().catch(function() {
-          video.style.display = 'none';
+          video.classList.remove('opacity-100');
         });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+          const entry = entries[0];
+          if (!entry) return;
+
+          if (entry.isIntersecting) {
+            playVideo();
+          } else {
+            video.pause();
+          }
+        }, { threshold: 0.1 });
+
+        observer.observe(video);
       } else {
-        video.style.display = 'none';
+        playVideo();
       }
 
       video.addEventListener('error', function() {
-        video.style.display = 'none';
+        video.classList.remove('opacity-100');
       });
+
+      video.load();
     });
   </script>
 </BaseLayout>
